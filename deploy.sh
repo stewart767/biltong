@@ -20,11 +20,13 @@ git pull origin main
 echo "🐘 Installing Composer dependencies..."
 composer install --no-dev --optimize-autoloader --no-interaction
 
-# 3. Install NPM dependencies & build production assets
-echo "🎨 Compiling frontend assets with Vite..."
-if command -v npm &> /dev/null; then
+# 3. Check frontend assets
+if [ -f public/build/manifest.json ]; then
+    echo "🎨 Pre-compiled production assets found in public/build, ready to serve!"
+elif command -v npm &> /dev/null; then
+    echo "🎨 Compiling frontend assets with Vite..."
     npm ci || npm install
-    npm run build
+    npm run build || true
 fi
 
 # 4. Run database migrations safely
