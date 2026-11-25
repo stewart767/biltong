@@ -4,36 +4,39 @@
 
 @section('content')
 
-    <!-- 1. Hero Section (Dark with Red Badge & Arched Curve Bottom Transition) -->
+    <!-- 1. Hero Section (Sizzling Butcher Spread with Grand 10% Offer & Arched Curve) -->
     <section class="relative bg-brand-black overflow-hidden pt-6 pb-20 sm:pb-28">
-        <!-- Background Sizzling Image & Deep Vignette -->
+        <!-- Ambient Sizzling Background with Warm Embers & Charcoal Vignette -->
         <div class="absolute inset-0 z-0">
-            <img src="{{ asset('images/hero-biltong.jpg') }}" 
-                 alt="INAS Artisanal Beef Biltong on Dark Slate" 
-                 class="w-full h-full object-cover object-center opacity-35 scale-105">
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-black/90 via-brand-black/60 to-brand-black"></div>
-            <div class="absolute inset-0 bg-radial from-transparent via-brand-black/50 to-brand-black"></div>
+            <img src="{{ asset('images/bbq-biltong.jpg') }}" 
+                 alt="INAS Artisanal Beef Biltong & Prime Cuts" 
+                 class="w-full h-full object-cover object-center opacity-30 scale-105 filter brightness-75 contrast-125">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/85 to-brand-black/70"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-brand-black/80"></div>
+            <!-- Subtle fiery glow at the top right -->
+            <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-red/15 rounded-full blur-3xl pointer-events-none"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
             
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 
-                <!-- Hero Left: Headline & Red CTA -->
+                <!-- Hero Left: Headline, Story & Core CTAs -->
                 <div class="lg:col-span-7 space-y-6 text-left">
                     
-                    <!-- Offer Pill matching the uploaded screenshot -->
-                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-red/20 border border-brand-red text-white backdrop-blur-md">
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-brand-red text-white uppercase tracking-wider">
-                            {{ app()->getLocale() === 'sw' ? 'Ofa Maalum' : 'Special Offer' }}
+                    <!-- Offer Pill with Pulsing Dot -->
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-red/20 border border-brand-red/50 text-white backdrop-blur-md shadow-lg">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-brand-red text-white uppercase tracking-wider flex items-center gap-1.5 shadow">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                            {{ app()->getLocale() === 'sw' ? 'OFA YA LEO' : 'TODAY\'S OFFER' }}
                         </span>
-                        <span class="text-xs font-bold tracking-wide">
+                        <span class="text-xs font-bold tracking-wide text-zinc-100">
                             {{ app()->getLocale() === 'sw' ? 'Usafirishaji BURE Dar & Punguzo la 10% kwa Oda zaidi ya TZS 50,000' : 'FREE Dar Delivery & 10% Off Orders Over TZS 50,000' }}
                         </span>
                     </div>
 
                     <!-- Main Bold Headline -->
-                    <h1 class="font-editorial text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08]">
+                    <h1 class="font-editorial text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05]">
                         @if(app()->getLocale() === 'sw')
                             NYAMA HALISI.<br>
                             <span class="text-brand-red-light italic font-serif">LADHA HALISI.</span>
@@ -46,21 +49,21 @@
                     <!-- Subheadline -->
                     <p class="max-w-xl text-base sm:text-lg text-zinc-300 font-normal leading-relaxed">
                         @if(app()->getLocale() === 'sw')
-                            Imetengenezwa kwa ufundi stadi Buguruni Malapa, Dar es Salaam. Asilimia 100 nyama ya ng'ombe wa malishoni Tanzania, giligilani iliyokaangwa, pilipili manga na ukaushaji wa asili wa upepo.
+                            Imetengenezwa kwa ufundi stadi Buguruni Malapa, Dar es Salaam. Asilimia 100 nyama ya ng'ombe wa malishoni Tanzania, giligilani iliyokaangwa kwenye kikaango cha chuma, pilipili manga na ukaushaji wa asili wa upepo kwa utamu na ulaini wa kipekee.
                         @else
-                            Handcrafted in Buguruni Malapa, Dar es Salaam. 100% pasture-grazed Tanzanian beef steeped in crushed toasted coriander, black pepper and natural apple cider marinade. Air-dried slowly for tender, savory richness.
+                            Handcrafted in Buguruni Malapa, Dar es Salaam. 100% pasture-grazed Tanzanian beef steeped in skillet-toasted coriander, coarse black pepper and natural air curing for tender, savory richness.
                         @endif
                     </p>
 
                     <!-- CTAs with vibrant Red Buttons -->
                     <div class="flex flex-wrap items-center gap-4 pt-2">
                         <a href="{{ route('shop') }}" 
-                           class="px-8 py-4 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-extrabold text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(220,38,38,0.4)] hover:scale-105 transition transform duration-200 flex items-center gap-2">
-                            <span>{{ app()->getLocale() === 'sw' ? 'Nunua Sasa • Kuanzia TZS 10,000' : 'Shop Now • From TZS 10,000' }}</span>
+                           class="px-8 py-4 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-extrabold text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(220,38,38,0.5)] hover:scale-105 transition transform duration-200 flex items-center gap-2 cursor-pointer">
+                            <span>{{ app()->getLocale() === 'sw' ? 'Nunua Biltong Sasa' : 'Shop Biltong Cuts' }}</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </a>
                         <a href="{{ route('about') }}" 
-                           class="px-7 py-4 rounded-xl bg-brand-charcoal/90 border border-zinc-700 hover:border-white text-white font-semibold text-sm transition duration-200">
+                           class="px-7 py-4 rounded-full bg-brand-charcoal/90 border border-zinc-700 hover:border-white text-white font-semibold text-sm transition duration-200">
                             {{ app()->getLocale() === 'sw' ? 'Fahamu Simulizi Yetu' : 'Discover Our Story' }}
                         </a>
                     </div>
@@ -87,30 +90,82 @@
 
                 </div>
 
-                <!-- Hero Right: Sizzling Meat Plate Display with Discount Badge (Matching Uploaded Image) -->
-                <div class="lg:col-span-5 relative">
-                    <div class="relative rounded-3xl overflow-hidden border-2 border-zinc-800 shadow-2xl group">
-                        <img src="{{ asset('images/hero-steak.jpg') }}" 
-                             alt="Fresh Cured Meat Feast" 
-                             class="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
-
-                        <!-- Big Red Discount Callout (As shown in uploaded image: %10) -->
-                        <div class="absolute top-4 right-4 bg-brand-red text-white p-4 rounded-2xl shadow-2xl text-center border-2 border-white/30 backdrop-blur-sm">
-                            <span class="text-[10px] font-black uppercase tracking-wider block">Save</span>
-                            <span class="text-3xl font-black leading-none block">10%</span>
-                            <span class="text-[9px] font-bold uppercase tracking-wider block mt-0.5">Off 100g Packs</span>
-                        </div>
-
-                        <!-- Bottom Tag -->
-                        <div class="absolute bottom-4 left-4 right-4 bg-brand-black/90 p-4 rounded-xl border border-zinc-700 backdrop-blur-md flex items-center justify-between">
-                            <div>
-                                <span class="text-xs font-bold text-white block">Buguruni Malapa Butcher Cut</span>
-                                <span class="text-[11px] text-zinc-400">100% Tanzanian Grass-Fed Pasture Cattle</span>
+                <!-- Hero Right: Grand Butcher Showcase with Giant 10% Discount (Matching Reference Image) -->
+                <div class="lg:col-span-5 relative flex flex-col justify-center">
+                    
+                    <!-- Outer Decorative Container -->
+                    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-b from-zinc-900/90 via-black/95 to-black border border-zinc-800 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-md">
+                        
+                        <!-- Top Sizzling Beef Visual -->
+                        <div class="relative h-60 sm:h-72 overflow-hidden group">
+                            <img src="{{ asset('images/bbq-biltong.jpg') }}" 
+                                 alt="INAS Artisanal Beef Biltong & Cuts" 
+                                 class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                            
+                            <!-- Live Butcher Tag Overlay -->
+                            <div class="absolute top-4 left-4">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/80 text-white border border-white/20 text-xs font-bold backdrop-blur-md">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    <span>Buguruni Malapa • Fresh Daily</span>
+                                </span>
                             </div>
-                            <span class="text-xs font-black text-brand-red-light uppercase">In Stock</span>
+
+                            <div class="absolute top-4 right-4">
+                                <span class="px-3 py-1 rounded-full bg-brand-red text-white text-[11px] font-black uppercase tracking-wider shadow-lg">
+                                    100g Original
+                                </span>
+                            </div>
+
+                            <!-- Bottom Floating Title -->
+                            <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-white">
+                                <span class="font-bold text-sm drop-shadow">Biltong Original 100g</span>
+                                <span class="text-brand-red-light font-black text-sm drop-shadow">TZS 10,000</span>
+                            </div>
                         </div>
+
+                        <!-- Grand Typographic 10% Offer Box (Exact Layout from Reference Image) -->
+                        <div class="p-6 sm:p-7 text-center space-y-4 bg-zinc-950/80 border-t border-zinc-850">
+                            
+                            <!-- Accent Flanked Offer Title -->
+                            <div class="flex items-center justify-center gap-3">
+                                <span class="h-0.5 w-10 bg-brand-red"></span>
+                                <span class="text-xs uppercase font-extrabold tracking-widest text-brand-red">
+                                    {{ app()->getLocale() === 'sw' ? 'USIKOSE OFA MAALUM' : "DON'T MISS THE OFFER" }}
+                                </span>
+                                <span class="h-0.5 w-10 bg-brand-red"></span>
+                            </div>
+
+                            <!-- Free Delivery + Giant Red 10% Typography -->
+                            <div class="space-y-1">
+                                <span class="block text-sm sm:text-base font-bold text-white uppercase tracking-wider">
+                                    {{ app()->getLocale() === 'sw' ? 'Usafirishaji Bure & Punguzo la' : 'Free Delivery & Discount' }}
+                                </span>
+                                <div class="font-editorial text-6xl sm:text-7xl font-black text-brand-red tracking-tight leading-none drop-shadow-[0_2px_15px_rgba(220,38,38,0.4)]">
+                                    10% OFF
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-zinc-400 max-w-xs mx-auto leading-relaxed">
+                                {{ app()->getLocale() === 'sw' 
+                                    ? 'Biltong bora zaidi Tanzania, iliyotengenezwa kwa ufundi stadi na viungo asilia vya upepo.' 
+                                    : 'The finest artisanal beef biltong, air-cured to tender perfection in Dar es Salaam.' 
+                                }}
+                            </p>
+
+                            <!-- Direct Add to Cart / Shop CTA Button -->
+                            <div class="pt-1">
+                                <a href="{{ route('shop') }}" 
+                                   class="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-red-900/50 transition transform hover:scale-[1.02] duration-150 cursor-pointer">
+                                    <span>{{ app()->getLocale() === 'sw' ? 'Agiza Sasa Mtandaoni' : 'Order Now Online' }}</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                </a>
+                            </div>
+
+                        </div>
+
                     </div>
+
                 </div>
 
             </div>
