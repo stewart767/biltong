@@ -5,10 +5,30 @@
 
     RewriteEngine On
 
-    # Prevent direct access to sensitive files
-    RewriteRule ^(\.env|\.git|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|artisan) - [F,L,NC]
+    # Prevent direct access to sensitive files and directories
+    RewriteRule ^(\.env|\.git|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|artisan|storage/logs) - [F,L,NC]
 
-    # Rewrite all requests to the public/ folder if DocumentRoot is pointing to the project root
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Rewrite public static assets directly to public/
     RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(build|images|storage|favicon\.ico|robots\.txt)(.*)$ public/$1$2 [L,NC]
+
+    # If the requested file or folder exists inside public/, serve it directly
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -f [OR]
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -d
     RewriteRule ^(.*)$ public/$1 [L]
+
+    # Send all other requests to Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
 </IfModule>
