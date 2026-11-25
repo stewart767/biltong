@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use App\Models\ContactMessage;
+use App\Models\NewsletterSubscriber;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
@@ -136,6 +138,56 @@ class AdminTest extends TestCase
         $this->assertDatabaseHas('site_settings', [
             'key' => 'hero_headline',
             'value' => 'REAL BEEF. REAL FLAVOUR. REAL TANZANIA.',
+        ]);
+    }
+
+    public function test_admin_can_manage_contact_messages(): void
+    {
+        $msg = ContactMessage::create([
+            'name' => 'John Doe',
+            'phone' => '+255 700 123 456',
+            'email' => 'john@example.com',
+            'subject' => 'Product Shelf Life',
+            'message' => 'How long does the droewors last?',
+            'status' => 'unread',
+        ]);
+
+        $response = $this->actingAs($this->adminUser)->get('/admin/messages');
+        $response->assertStatus(200);
+        $response->assertSee('John Doe');
+        $response->assertSee('Product Shelf Life');
+
+        $showResponse = $this->actingAs($this->adminUser)->get("/admin/messages/{$msg->id}");
+        $showResponse->assertStatus(200);
+        $showResponse->assertSee('How long does the droewors last?');
+
+        $updateResponse = $this->actingAs($this->adminUser)->post("/admin/messages/{$msg->id}/status", [
+            'status' => 'replied',
+            'admin_notes' => 'Answered via WhatsApp.',
+        ]);
+        $updateResponse->assertSessionHas('success');
+
+        $msg->refresh();
+        $this->assertEquals('replied', $msg->status);
+        $this->assertEquals('Answered via WhatsApp.', $msg->admin_notes);
+    }
+
+    public function test_admin_can_manage_newsletter_subscribers(): void
+    {
+        $sub = NewsletterSubscriber::create([
+            'email' => 'subscriber@test.com',
+            'status' => 'subscribed',
+        ]);
+
+        $response = $this->actingAs($this->adminUser)->get('/admin/subscribers');
+        $response->assertStatus(200);
+        $response->assertSee('subscriber@test.com');
+
+        $deleteResponse = $this->actingAs($this->adminUser)->delete("/admin/subscribers/{$sub->id}");
+        $deleteResponse->assertSessionHas('success');
+
+        $this->assertDatabaseMissing('newsletter_subscribers', [
+            'id' => $sub->id,
         ]);
     }
 }

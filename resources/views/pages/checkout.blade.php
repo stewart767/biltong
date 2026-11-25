@@ -216,7 +216,7 @@
                                             <span class="block text-sm font-bold text-zinc-900">Vodacom M-Pesa (Lipa Namba / Till)</span>
                                             <span class="text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 px-2 py-0.5 rounded">Popular</span>
                                         </div>
-                                        <span class="text-xs text-zinc-500">Direct mobile prompt / till transfer upon confirmation</span>
+                                        <span class="text-xs text-zinc-500 block">Lipa Namba: <strong class="text-red-600">{{ \App\Models\SiteSetting::get('mpesa_till', '5544321 - INAS COMPANY') }}</strong></span>
                                     </div>
                                 </div>
                             </label>
@@ -228,7 +228,7 @@
                                     <input type="radio" name="payment_method" value="tigopesa" x-model="paymentMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                     <div>
                                         <span class="block text-sm font-bold text-zinc-900">Tigo Pesa (Mixx by Yas)</span>
-                                        <span class="text-xs text-zinc-500">Fast Tigo mobile money merchant payment</span>
+                                        <span class="text-xs text-zinc-500 block">Lipa Namba: <strong class="text-blue-600">{{ \App\Models\SiteSetting::get('tigopesa_till', '6677889 - INAS BILTONG') }}</strong></span>
                                     </div>
                                 </div>
                             </label>
@@ -240,7 +240,7 @@
                                     <input type="radio" name="payment_method" value="airtel" x-model="paymentMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                     <div>
                                         <span class="block text-sm font-bold text-zinc-900">Airtel Money</span>
-                                        <span class="text-xs text-zinc-500">Airtel merchant wallet transfer</span>
+                                        <span class="text-xs text-zinc-500 block">Lipa Namba: <strong class="text-red-500">{{ \App\Models\SiteSetting::get('airtel_till', '3322110 - INAS BILTONG') }}</strong></span>
                                     </div>
                                 </div>
                             </label>
@@ -252,7 +252,7 @@
                                     <input type="radio" name="payment_method" value="halopesa" x-model="paymentMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                     <div>
                                         <span class="block text-sm font-bold text-zinc-900">Halopesa</span>
-                                        <span class="text-xs text-zinc-500">Halotel mobile money transfer</span>
+                                        <span class="text-xs text-zinc-500 block">Lipa Namba: <strong class="text-amber-500">{{ \App\Models\SiteSetting::get('halopesa_till', '8899001 - INAS BILTONG') }}</strong></span>
                                     </div>
                                 </div>
                             </label>

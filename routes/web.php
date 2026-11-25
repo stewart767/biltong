@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminSettingsController;
+use App\Http\Controllers\Admin\AdminSubscriberController;
 use App\Http\Controllers\Admin\AdminWholesaleController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -87,6 +89,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.status');
 
     Route::resource('wholesale', AdminWholesaleController::class)->only(['index', 'show', 'update']);
+
+    Route::resource('messages', AdminContactController::class)->only(['index', 'show', 'destroy']);
+    Route::post('/messages/{message}/status', [AdminContactController::class, 'updateStatus'])->name('messages.status');
+
+    Route::resource('subscribers', AdminSubscriberController::class)->only(['index', 'destroy']);
 
     Route::get('/settings', [AdminSettingsController::class, 'index'])->name('settings.index');
     Route::post('/settings', [AdminSettingsController::class, 'update'])->name('settings.update');

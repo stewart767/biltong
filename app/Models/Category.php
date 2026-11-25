@@ -31,4 +31,24 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getImageUrlAttribute(): string
+    {
+        if ($this->image) {
+            if (str_starts_with($this->image, 'http') || str_starts_with($this->image, '/')) {
+                return $this->image;
+            }
+            return asset($this->image);
+        }
+
+        $map = [
+            'traditional-biltong' => 'images/biltong-original-1.jpg',
+            'chilli-bites' => 'images/chilli-biltong.jpg',
+            'droewors' => 'images/droewors.jpg',
+            'carvers-slab' => 'images/carvers-slab.jpg',
+            'wholesale' => 'images/wholesale-box.jpg',
+        ];
+
+        return asset($map[$this->slug] ?? 'images/biltong-original-1.jpg');
+    }
 }

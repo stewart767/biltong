@@ -17,6 +17,15 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
+        if ($featuredProducts->count() < 5) {
+            $extra = Product::with(['category', 'images'])
+                ->where('is_active', true)
+                ->whereNotIn('id', $featuredProducts->pluck('id'))
+                ->take(5 - $featuredProducts->count())
+                ->get();
+            $featuredProducts = $featuredProducts->concat($extra);
+        }
+
         $originalProduct = Product::where('slug', 'biltong-original-100g')->first() 
             ?? Product::where('is_active', true)->first();
 
