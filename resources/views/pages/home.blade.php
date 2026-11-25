@@ -151,55 +151,57 @@
 
             </div>
 
-            <!-- Hero Right: Food Photography Showcase with Floating Dish Card -->
-            <div class="lg:col-span-5 relative flex items-center justify-center">
+            <!-- Hero Right: Full Food Photography Showcase with Floating Dish Card (Exact TasteHouse Layout) -->
+            <div class="lg:col-span-5 relative">
                 
-                <!-- Circular Dish Container with Warm Ambient Glow -->
-                <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full p-3 bg-gradient-to-tr from-red-100/60 via-white to-stone-100 shadow-2xl flex items-center justify-center">
+                <!-- Full Food Slider Container -->
+                <div class="relative w-full h-[320px] sm:h-[380px] lg:h-[430px] rounded-3xl overflow-hidden shadow-2xl border border-stone-200/90 bg-stone-100 group">
                     
-                    <!-- Pre-rendered Slides (Always visible, smoothly transitioned by Alpine) -->
+                    <!-- Pre-rendered Full Slides -->
                     @foreach($heroSlides as $idx => $s)
-                        <div class="absolute inset-4 rounded-full overflow-hidden transition-all duration-700 ease-in-out"
+                        <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out"
                              :class="activeSlide === {{ $idx }} ? 'opacity-100 scale-100 z-10 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none z-0'"
                              @if($idx === 0) style="opacity: 1;" @else style="opacity: 0;" @endif>
                             <img src="{{ $s['image'] }}" 
                                  alt="{{ $s['dishName'] }}" 
-                                 class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
+                                 class="w-full h-full object-cover transform hover:scale-105 transition duration-700">
+                            <!-- Subtle bottom gradient for tag & button readability -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none"></div>
                         </div>
                     @endforeach
 
                     <!-- Floating Dish Card (Exact TasteHouse dish price tag) -->
-                    <div class="absolute -bottom-2 -left-2 sm:bottom-4 sm:left-0 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 border border-stone-200 shadow-xl max-w-[200px] text-left">
+                    <div class="absolute bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 border border-stone-200/80 shadow-2xl max-w-[210px] text-left">
                         <div class="text-[10px] font-black uppercase tracking-wider text-red-600" x-text="slides[activeSlide]?.tag">{{ $heroSlides[0]['tag'] }}</div>
-                        <h4 class="font-bold text-xs text-zinc-900 truncate" x-text="slides[activeSlide]?.dishName">{{ $heroSlides[0]['dishName'] }}</h4>
-                        <p class="text-[10px] text-zinc-500 truncate" x-text="slides[activeSlide]?.dishSub">{{ $heroSlides[0]['dishSub'] }}</p>
-                        <div class="mt-1 font-black text-xs text-red-600" x-text="slides[activeSlide]?.dishPrice">{{ $heroSlides[0]['dishPrice'] }}</div>
+                        <h4 class="font-extrabold text-xs sm:text-sm text-zinc-900 truncate" x-text="slides[activeSlide]?.dishName">{{ $heroSlides[0]['dishName'] }}</h4>
+                        <p class="text-[10px] sm:text-[11px] text-zinc-500 truncate" x-text="slides[activeSlide]?.dishSub">{{ $heroSlides[0]['dishSub'] }}</p>
+                        <div class="mt-1.5 font-black text-xs sm:text-sm text-red-600" x-text="slides[activeSlide]?.dishPrice">{{ $heroSlides[0]['dishPrice'] }}</div>
                     </div>
 
-                </div>
+                    <!-- Carousel Navigation Buttons (< >) on Bottom Right Inside Slider -->
+                    <div class="absolute bottom-4 right-4 flex items-center gap-2 z-20 bg-white/90 backdrop-blur-md rounded-full px-2.5 py-1.5 shadow-lg border border-stone-200/70">
+                        <button @click="prev()" 
+                                class="w-7 h-7 rounded-full bg-white hover:bg-red-600 hover:text-white text-zinc-700 flex items-center justify-center shadow-sm transition cursor-pointer"
+                                aria-label="Previous">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                        </button>
+                        
+                        <!-- Progress Dots -->
+                        <div class="flex items-center gap-1.5 px-1">
+                            @foreach($heroSlides as $i => $s)
+                                <span class="rounded-full transition-all duration-300"
+                                      :class="activeSlide === {{ $i }} ? 'w-4 h-1.5 bg-red-600' : 'w-1.5 h-1.5 bg-stone-300'"
+                                      @if($i === 0) style="width: 1rem; background-color: #dc2626;" @endif></span>
+                            @endforeach
+                        </div>
 
-                <!-- Carousel Navigation Buttons (< >) on Bottom Right -->
-                <div class="absolute bottom-0 right-0 flex items-center gap-2 z-20">
-                    <button @click="prev()" 
-                            class="w-8 h-8 rounded-full bg-white hover:bg-red-600 hover:text-white text-zinc-700 border border-stone-200 flex items-center justify-center shadow-md transition cursor-pointer"
-                            aria-label="Previous">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
-                    </button>
-                    
-                    <!-- Progress Dots -->
-                    <div class="flex items-center gap-1.5 px-2">
-                        @foreach($heroSlides as $i => $s)
-                            <span class="rounded-full transition-all duration-300"
-                                  :class="activeSlide === {{ $i }} ? 'w-4 h-1.5 bg-red-600' : 'w-1.5 h-1.5 bg-stone-300'"
-                                  @if($i === 0) style="width: 1rem; background-color: #dc2626;" @endif></span>
-                        @endforeach
+                        <button @click="next()" 
+                                class="w-7 h-7 rounded-full bg-white hover:bg-red-600 hover:text-white text-zinc-700 flex items-center justify-center shadow-sm transition cursor-pointer"
+                                aria-label="Next">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                        </button>
                     </div>
 
-                    <button @click="next()" 
-                            class="w-8 h-8 rounded-full bg-white hover:bg-red-600 hover:text-white text-zinc-700 border border-stone-200 flex items-center justify-center shadow-md transition cursor-pointer"
-                            aria-label="Next">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                    </button>
                 </div>
 
             </div>
