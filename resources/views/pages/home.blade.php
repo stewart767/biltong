@@ -10,25 +10,38 @@
                  activeSlide: 0,
                  timer: null,
                  slides: [
-                     @forelse($featuredProducts as $fp)
                      {
-                         image: '{{ $fp->image_url }}',
-                         tag: '{{ $fp->pack_size ?? '100G PACK' }}',
-                         dishName: '{{ addslashes($fp->name) }}',
-                         dishSub: '{{ addslashes($fp->short_description ?? ($fp->category ? $fp->category->name : 'Prime Pasture Beef')) }}',
-                         dishPrice: '{{ $fp->formatted_price }}',
-                         dishLink: '{{ route('product.show', $fp->slug) }}'
-                     }{{ !$loop->last ? ',' : '' }}
-                     @empty
+                         image: '{{ asset(\App\Models\SiteSetting::get('hero_slide_1_image', 'images/bbq-biltong.jpg')) }}',
+                         tag: '{{ \App\Models\SiteSetting::get('hero_slide_1_tag', 'SIGNATURE 100G') }}',
+                         dishName: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_1_title', 'Biltong Original 100g')) }}',
+                         dishSub: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_1_sub', '100% pasture-grazed Tanzanian beef')) }}',
+                         dishPrice: '{{ \App\Models\SiteSetting::get('hero_slide_1_price', 'TZS 10,000') }}',
+                         dishLink: '{{ \App\Models\SiteSetting::get('hero_slide_1_link', route('shop')) }}'
+                     },
                      {
-                         image: '{{ asset('images/bbq-biltong.jpg') }}',
-                         tag: 'SIGNATURE 100G',
-                         dishName: 'Biltong Original 100g',
-                         dishSub: 'Pasture-grazed Tanzanian beef',
-                         dishPrice: 'TZS 10,000',
-                         dishLink: '{{ route('shop') }}'
+                         image: '{{ asset(\App\Models\SiteSetting::get('hero_slide_2_image', 'images/chilli-biltong.jpg')) }}',
+                         tag: '{{ \App\Models\SiteSetting::get('hero_slide_2_tag', 'SPICY PERI-PERI') }}',
+                         dishName: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_2_title', 'Chilli Biltong Bites')) }}',
+                         dishSub: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_2_sub', 'Warm lingering spice kick')) }}',
+                         dishPrice: '{{ \App\Models\SiteSetting::get('hero_slide_2_price', 'TZS 11,000') }}',
+                         dishLink: '{{ \App\Models\SiteSetting::get('hero_slide_2_link', route('shop')) }}'
+                     },
+                     {
+                         image: '{{ asset(\App\Models\SiteSetting::get('hero_slide_3_image', 'images/droewors.jpg')) }}',
+                         tag: '{{ \App\Models\SiteSetting::get('hero_slide_3_tag', 'AIR-DRIED SAUSAGE') }}',
+                         dishName: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_3_title', 'Traditional Droëwors')) }}',
+                         dishSub: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_3_sub', 'Spiced beef & roasted coriander')) }}',
+                         dishPrice: '{{ \App\Models\SiteSetting::get('hero_slide_3_price', 'TZS 12,000') }}',
+                         dishLink: '{{ \App\Models\SiteSetting::get('hero_slide_3_link', route('shop')) }}'
+                     },
+                     {
+                         image: '{{ asset(\App\Models\SiteSetting::get('hero_slide_4_image', 'images/carvers-slab.jpg')) }}',
+                         tag: '{{ \App\Models\SiteSetting::get('hero_slide_4_tag', 'CHEF\'S SPECIAL') }}',
+                         dishName: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_4_title', 'Carver\'s Whole Slab')) }}',
+                         dishSub: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_4_sub', 'Prime dry-aged whole beef slab')) }}',
+                         dishPrice: '{{ \App\Models\SiteSetting::get('hero_slide_4_price', 'TZS 24,000') }}',
+                         dishLink: '{{ \App\Models\SiteSetting::get('hero_slide_4_link', route('shop')) }}'
                      }
-                     @endforelse
                  ],
                  next() {
                      this.activeSlide = (this.activeSlide + 1) % this.slides.length;

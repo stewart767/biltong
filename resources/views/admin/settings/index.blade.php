@@ -9,10 +9,10 @@
         
         <div>
             <h2 class="font-editorial text-2xl font-bold text-brand-cream">INAS System & Storefront Configuration</h2>
-            <span class="text-xs text-brand-muted">Control company info, homepage hero, feature badges, promo banners, delivery fees, Lipa Namba payments and social links</span>
+            <span class="text-xs text-brand-muted">Control company info, hero carousel images, feature badges, promo banners, delivery fees, and Lipa Namba payments</span>
         </div>
 
-        <form action="{{ route('admin.settings.update') }}" method="POST" class="space-y-8">
+        <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
             @csrf
 
             <!-- 1. Company & Contact Information -->
@@ -71,11 +71,230 @@
                 </div>
             </div>
 
-            <!-- 2. Homepage Hero & Announcements -->
+            <!-- 2. Hero Rotating Dish Carousel & Images (Upload Any Images!) -->
+            <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 shadow-xl">
+                <div class="flex items-center justify-between pb-3 border-b border-brand-border/60">
+                    <div class="flex items-center gap-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
+                        <h3 class="font-editorial text-xl font-bold text-brand-cream">2. Hero Section Rotating Dishes & Images</h3>
+                    </div>
+                    <span class="text-xs text-brand-red font-semibold">Upload custom food or plate photos</span>
+                </div>
+
+                <p class="text-xs text-brand-muted">
+                    These 4 rotating dishes appear in the large circular plate on your homepage hero section. You can upload any image, set its badge tag, dish name, price tag, and button link.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Slide 1 -->
+                    <div class="p-5 rounded-2xl bg-brand-dark/70 border border-brand-border space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-brand-red uppercase">Hero Slide 1 (Primary)</span>
+                            @php $img1 = $settings['hero_slide_1_image'] ?? 'images/bbq-biltong.jpg'; @endphp
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-brand-red/60 shadow-lg flex-shrink-0 bg-brand-dark">
+                                <img src="{{ asset($img1) }}" alt="Slide 1" class="w-full h-full object-cover">
+                            </div>
+                            <div class="space-y-1 flex-1">
+                                <label class="block text-[11px] font-semibold text-brand-cream">Upload New Slide 1 Image</label>
+                                <input type="file" name="hero_slide_1_image" accept="image/*"
+                                       class="w-full text-xs text-brand-muted file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-red file:text-white hover:file:bg-brand-red-dark cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="space-y-1">
+                                <label class="block text-[10px] uppercase font-bold text-brand-muted">Badge Tag</label>
+                                <input type="text" name="hero_slide_1_tag" value="{{ $settings['hero_slide_1_tag'] ?? 'SIGNATURE 100G' }}"
+                                       class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="block text-[10px] uppercase font-bold text-brand-muted">Price Tag</label>
+                                <input type="text" name="hero_slide_1_price" value="{{ $settings['hero_slide_1_price'] ?? 'TZS 10,000' }}"
+                                       class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Dish / Cut Name</label>
+                            <input type="text" name="hero_slide_1_title" value="{{ $settings['hero_slide_1_title'] ?? 'Biltong Original 100g' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Subtitle / Cut Details</label>
+                            <input type="text" name="hero_slide_1_sub" value="{{ $settings['hero_slide_1_sub'] ?? '100% pasture-grazed Tanzanian beef' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Button Link</label>
+                            <input type="text" name="hero_slide_1_link" value="{{ $settings['hero_slide_1_link'] ?? '/shop' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="p-5 rounded-2xl bg-brand-dark/70 border border-brand-border space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-brand-red uppercase">Hero Slide 2</span>
+                            @php $img2 = $settings['hero_slide_2_image'] ?? 'images/chilli-biltong.jpg'; @endphp
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-brand-red/60 shadow-lg flex-shrink-0 bg-brand-dark">
+                                <img src="{{ asset($img2) }}" alt="Slide 2" class="w-full h-full object-cover">
+                            </div>
+                            <div class="space-y-1 flex-1">
+                                <label class="block text-[11px] font-semibold text-brand-cream">Upload New Slide 2 Image</label>
+                                <input type="file" name="hero_slide_2_image" accept="image/*"
+                                       class="w-full text-xs text-brand-muted file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-red file:text-white hover:file:bg-brand-red-dark cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="space-y-1">
+                                <label class="block text-[10px] uppercase font-bold text-brand-muted">Badge Tag</label>
+                                <input type="text" name="hero_slide_2_tag" value="{{ $settings['hero_slide_2_tag'] ?? 'SPICY PERI-PERI' }}"
+                                       class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="block text-[10px] uppercase font-bold text-brand-muted">Price Tag</label>
+                                <input type="text" name="hero_slide_2_price" value="{{ $settings['hero_slide_2_price'] ?? 'TZS 11,000' }}"
+                                       class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Dish / Cut Name</label>
+                            <input type="text" name="hero_slide_2_title" value="{{ $settings['hero_slide_2_title'] ?? 'Chilli Biltong Bites' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Subtitle / Cut Details</label>
+                            <input type="text" name="hero_slide_2_sub" value="{{ $settings['hero_slide_2_sub'] ?? 'Warm lingering spice kick' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Button Link</label>
+                            <input type="text" name="hero_slide_2_link" value="{{ $settings['hero_slide_2_link'] ?? '/shop' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="p-5 rounded-2xl bg-brand-dark/70 border border-brand-border space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-brand-red uppercase">Hero Slide 3</span>
+                            @php $img3 = $settings['hero_slide_3_image'] ?? 'images/droewors.jpg'; @endphp
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-brand-red/60 shadow-lg flex-shrink-0 bg-brand-dark">
+                                <img src="{{ asset($img3) }}" alt="Slide 3" class="w-full h-full object-cover">
+                            </div>
+                            <div class="space-y-1 flex-1">
+                                <label class="block text-[11px] font-semibold text-brand-cream">Upload New Slide 3 Image</label>
+                                <input type="file" name="hero_slide_3_image" accept="image/*"
+                                       class="w-full text-xs text-brand-muted file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-red file:text-white hover:file:bg-brand-red-dark cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="space-y-1">
+                                <label class="block text-[10px] uppercase font-bold text-brand-muted">Badge Tag</label>
+                                <input type="text" name="hero_slide_3_tag" value="{{ $settings['hero_slide_3_tag'] ?? 'AIR-DRIED SAUSAGE' }}"
+                                       class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="block text-[10px] uppercase font-bold text-brand-muted">Price Tag</label>
+                                <input type="text" name="hero_slide_3_price" value="{{ $settings['hero_slide_3_price'] ?? 'TZS 12,000' }}"
+                                       class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Dish / Cut Name</label>
+                            <input type="text" name="hero_slide_3_title" value="{{ $settings['hero_slide_3_title'] ?? 'Traditional Droëwors' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Subtitle / Cut Details</label>
+                            <input type="text" name="hero_slide_3_sub" value="{{ $settings['hero_slide_3_sub'] ?? 'Spiced beef & roasted coriander' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Button Link</label>
+                            <input type="text" name="hero_slide_3_link" value="{{ $settings['hero_slide_3_link'] ?? '/shop' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="p-5 rounded-2xl bg-brand-dark/70 border border-brand-border space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-brand-red uppercase">Hero Slide 4</span>
+                            @php $img4 = $settings['hero_slide_4_image'] ?? 'images/carvers-slab.jpg'; @endphp
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-brand-red/60 shadow-lg flex-shrink-0 bg-brand-dark">
+                                <img src="{{ asset($img4) }}" alt="Slide 4" class="w-full h-full object-cover">
+                            </div>
+                            <div class="space-y-1 flex-1">
+                                <label class="block text-[11px] font-semibold text-brand-cream">Upload New Slide 4 Image</label>
+                                <input type="file" name="hero_slide_4_image" accept="image/*"
+                                       class="w-full text-xs text-brand-muted file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-red file:text-white hover:file:bg-brand-red-dark cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="space-y-1">
+                                <label class="block text-[10px] uppercase font-bold text-brand-muted">Badge Tag</label>
+                                <input type="text" name="hero_slide_4_tag" value="{{ $settings['hero_slide_4_tag'] ?? 'CHEF\'S SPECIAL' }}"
+                                       class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="block text-[10px] uppercase font-bold text-brand-muted">Price Tag</label>
+                                <input type="text" name="hero_slide_4_price" value="{{ $settings['hero_slide_4_price'] ?? 'TZS 24,000' }}"
+                                       class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Dish / Cut Name</label>
+                            <input type="text" name="hero_slide_4_title" value="{{ $settings['hero_slide_4_title'] ?? 'Carver\'s Whole Slab' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Subtitle / Cut Details</label>
+                            <input type="text" name="hero_slide_4_sub" value="{{ $settings['hero_slide_4_sub'] ?? 'Prime dry-aged whole beef slab' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[10px] uppercase font-bold text-brand-muted">Button Link</label>
+                            <input type="text" name="hero_slide_4_link" value="{{ $settings['hero_slide_4_link'] ?? '/shop' }}"
+                                   class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 3. Homepage Headlines & Announcements -->
             <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 shadow-xl">
                 <div class="flex items-center gap-3 pb-3 border-b border-brand-border/60">
                     <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
-                    <h3 class="font-editorial text-xl font-bold text-brand-cream">2. Homepage Hero & Announcement Bar</h3>
+                    <h3 class="font-editorial text-xl font-bold text-brand-cream">3. Homepage Headlines & Typography</h3>
                 </div>
 
                 <div class="space-y-1.5">
@@ -111,15 +330,14 @@
                 </div>
             </div>
 
-            <!-- 3. Four Feature Badges Strip -->
+            <!-- 4. Four Feature Badges Strip -->
             <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 shadow-xl">
                 <div class="flex items-center gap-3 pb-3 border-b border-brand-border/60">
                     <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
-                    <h3 class="font-editorial text-xl font-bold text-brand-cream">3. Homepage 4 Feature Badges Strip</h3>
+                    <h3 class="font-editorial text-xl font-bold text-brand-cream">4. Homepage 4 Feature Badges Strip</h3>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <!-- Badge 1 -->
                     <div class="p-4 rounded-xl bg-brand-dark/70 border border-brand-border space-y-2">
                         <span class="text-[10px] font-bold text-brand-red uppercase">Badge 1: Delivery</span>
                         <input type="text" name="badge_1_title" value="{{ $settings['badge_1_title'] ?? 'Free Delivery' }}" placeholder="Title"
@@ -128,7 +346,6 @@
                                class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-[11px] text-brand-muted focus:border-brand-red focus:outline-none">
                     </div>
 
-                    <!-- Badge 2 -->
                     <div class="p-4 rounded-xl bg-brand-dark/70 border border-brand-border space-y-2">
                         <span class="text-[10px] font-bold text-emerald-400 uppercase">Badge 2: Quality & Halal</span>
                         <input type="text" name="badge_2_title" value="{{ $settings['badge_2_title'] ?? '100% Halal & Pure' }}" placeholder="Title"
@@ -137,7 +354,6 @@
                                class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-[11px] text-brand-muted focus:border-brand-red focus:outline-none">
                     </div>
 
-                    <!-- Badge 3 -->
                     <div class="p-4 rounded-xl bg-brand-dark/70 border border-brand-border space-y-2">
                         <span class="text-[10px] font-bold text-blue-400 uppercase">Badge 3: Payment</span>
                         <input type="text" name="badge_3_title" value="{{ $settings['badge_3_title'] ?? 'Secure Payment' }}" placeholder="Title"
@@ -146,7 +362,6 @@
                                class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-[11px] text-brand-muted focus:border-brand-red focus:outline-none">
                     </div>
 
-                    <!-- Badge 4 -->
                     <div class="p-4 rounded-xl bg-brand-dark/70 border border-brand-border space-y-2">
                         <span class="text-[10px] font-bold text-purple-400 uppercase">Badge 4: Support</span>
                         <input type="text" name="badge_4_title" value="{{ $settings['badge_4_title'] ?? '24/7 Support' }}" placeholder="Title"
@@ -157,19 +372,35 @@
                 </div>
             </div>
 
-            <!-- 4. Dual Promotional Banners (Offers) -->
+            <!-- 5. Dual Promotional Banners & Sidebar Promo -->
             <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 shadow-xl">
                 <div class="flex items-center gap-3 pb-3 border-b border-brand-border/60">
                     <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
-                    <h3 class="font-editorial text-xl font-bold text-brand-cream">4. Homepage Promotional Offers & Special Banners</h3>
+                    <h3 class="font-editorial text-xl font-bold text-brand-cream">5. Promotional Banners & Left Sidebar Card</h3>
+                </div>
+
+                <!-- Left Sidebar Special Promo Image -->
+                <div class="p-5 rounded-2xl bg-brand-dark/70 border border-brand-border space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-brand-cream uppercase">Left Sidebar "Special Promo" Circular Image</span>
+                        @php $sideImg = $settings['sidebar_promo_image'] ?? 'images/bbq-biltong.jpg'; @endphp
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-red shadow flex-shrink-0 bg-brand-dark">
+                            <img src="{{ asset($sideImg) }}" alt="Sidebar Promo" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-1 flex-1">
+                            <label class="block text-xs text-brand-cream font-medium">Upload New Sidebar Promo Photo</label>
+                            <input type="file" name="sidebar_promo_image" accept="image/*"
+                                   class="w-full text-xs text-brand-muted file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-red file:text-white hover:file:bg-brand-red-dark cursor-pointer">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Promo 1 -->
                     <div class="p-5 rounded-xl bg-brand-dark/70 border border-brand-border space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-brand-red uppercase">Promo Banner 1</span>
-                        </div>
+                        <span class="text-xs font-bold text-brand-red uppercase">Promo Banner 1</span>
                         <div class="space-y-1">
                             <label class="block text-[11px] text-brand-muted">Tag</label>
                             <input type="text" name="promo_1_tag" value="{{ $settings['promo_1_tag'] ?? 'Limited Time Offer' }}"
@@ -199,9 +430,7 @@
 
                     <!-- Promo 2 -->
                     <div class="p-5 rounded-xl bg-brand-dark/70 border border-brand-border space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-amber-400 uppercase">Promo Banner 2</span>
-                        </div>
+                        <span class="text-xs font-bold text-amber-400 uppercase">Promo Banner 2</span>
                         <div class="space-y-1">
                             <label class="block text-[11px] text-brand-muted">Tag</label>
                             <input type="text" name="promo_2_tag" value="{{ $settings['promo_2_tag'] ?? 'Weekend Special' }}"
@@ -226,11 +455,11 @@
                 </div>
             </div>
 
-            <!-- 5. Delivery Rates & Free Thresholds -->
+            <!-- 6. Delivery Rates & Free Thresholds -->
             <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 shadow-xl">
                 <div class="flex items-center gap-3 pb-3 border-b border-brand-border/60">
                     <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
-                    <h3 class="font-editorial text-xl font-bold text-brand-cream">5. Delivery Fees & Free Delivery Thresholds</h3>
+                    <h3 class="font-editorial text-xl font-bold text-brand-cream">6. Delivery Fees & Free Delivery Thresholds</h3>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -254,11 +483,11 @@
                 </div>
             </div>
 
-            <!-- 6. Tanzanian Mobile Money & Lipa Namba Details -->
+            <!-- 7. Tanzanian Mobile Money & Lipa Namba Details -->
             <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 shadow-xl">
                 <div class="flex items-center gap-3 pb-3 border-b border-brand-border/60">
                     <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
-                    <h3 class="font-editorial text-xl font-bold text-brand-cream">6. Storefront Mobile Money & Lipa Namba Numbers</h3>
+                    <h3 class="font-editorial text-xl font-bold text-brand-cream">7. Storefront Mobile Money & Lipa Namba Numbers</h3>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -294,11 +523,11 @@
                 </div>
             </div>
 
-            <!-- 7. Social Media Handles & SEO Meta -->
+            <!-- 8. Social Media Handles & SEO Meta -->
             <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 shadow-xl">
                 <div class="flex items-center gap-3 pb-3 border-b border-brand-border/60">
                     <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
-                    <h3 class="font-editorial text-xl font-bold text-brand-cream">7. Social Media Channels & SEO Meta</h3>
+                    <h3 class="font-editorial text-xl font-bold text-brand-cream">8. Social Media Channels & SEO Meta</h3>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -330,9 +559,9 @@
 
             <!-- Save Button Sticky Bar -->
             <div class="flex items-center justify-between p-6 rounded-2xl bg-brand-card border border-brand-border sticky bottom-4 shadow-2xl z-20">
-                <span class="text-xs text-brand-muted">All changes apply instantly to the live storefront and customer checkout.</span>
+                <span class="text-xs text-brand-muted">All uploaded images and headlines apply instantly to your live homepage.</span>
                 <button type="submit" class="px-8 py-4 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm uppercase tracking-wider hover:shadow-xl transition cursor-pointer">
-                    Save All Settings
+                    Save All Settings & Images
                 </button>
             </div>
         </form>

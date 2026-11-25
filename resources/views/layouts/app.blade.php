@@ -287,7 +287,7 @@
                         Get 10% OFF<br><span class="text-xs font-normal text-zinc-600">on your first order</span>
                     </h5>
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden shadow-md border-2 border-white">
-                        <img src="{{ asset('images/biltong-original-1.jpg') }}" alt="Biltong Promo" class="w-full h-full object-cover">
+                        <img src="{{ asset(\App\Models\SiteSetting::get('sidebar_promo_image', 'images/bbq-biltong.jpg')) }}" alt="Biltong Promo" class="w-full h-full object-cover">
                     </div>
                     <a href="{{ route('shop') }}" 
                        class="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md transition transform hover:scale-[1.02]">
