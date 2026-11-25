@@ -4,45 +4,49 @@
 
 @section('content')
 
+    @php
+        $heroSlides = [
+            [
+                'image' => asset(\App\Models\SiteSetting::get('hero_slide_1_image', 'images/hero-biltong.jpg')),
+                'tag' => \App\Models\SiteSetting::get('hero_slide_1_tag', 'SIGNATURE 100G'),
+                'dishName' => \App\Models\SiteSetting::get('hero_slide_1_title', 'Biltong Original 100g'),
+                'dishSub' => \App\Models\SiteSetting::get('hero_slide_1_sub', '100% pasture-grazed Tanzanian beef'),
+                'dishPrice' => \App\Models\SiteSetting::get('hero_slide_1_price', 'TZS 10,000'),
+                'dishLink' => \App\Models\SiteSetting::get('hero_slide_1_link', route('shop')),
+            ],
+            [
+                'image' => asset(\App\Models\SiteSetting::get('hero_slide_2_image', 'images/chilli-biltong.jpg')),
+                'tag' => \App\Models\SiteSetting::get('hero_slide_2_tag', 'SPICY PERI-PERI'),
+                'dishName' => \App\Models\SiteSetting::get('hero_slide_2_title', 'Chilli Biltong Bites'),
+                'dishSub' => \App\Models\SiteSetting::get('hero_slide_2_sub', 'Warm lingering spice kick'),
+                'dishPrice' => \App\Models\SiteSetting::get('hero_slide_2_price', 'TZS 11,000'),
+                'dishLink' => \App\Models\SiteSetting::get('hero_slide_2_link', route('shop')),
+            ],
+            [
+                'image' => asset(\App\Models\SiteSetting::get('hero_slide_3_image', 'images/droewors.jpg')),
+                'tag' => \App\Models\SiteSetting::get('hero_slide_3_tag', 'AIR-DRIED SAUSAGE'),
+                'dishName' => \App\Models\SiteSetting::get('hero_slide_3_title', 'Traditional Droëwors'),
+                'dishSub' => \App\Models\SiteSetting::get('hero_slide_3_sub', 'Spiced beef & roasted coriander'),
+                'dishPrice' => \App\Models\SiteSetting::get('hero_slide_3_price', 'TZS 12,000'),
+                'dishLink' => \App\Models\SiteSetting::get('hero_slide_3_link', route('shop')),
+            ],
+            [
+                'image' => asset(\App\Models\SiteSetting::get('hero_slide_4_image', 'images/carvers-slab.jpg')),
+                'tag' => \App\Models\SiteSetting::get('hero_slide_4_tag', "CHEF'S SPECIAL"),
+                'dishName' => \App\Models\SiteSetting::get('hero_slide_4_title', "Carver's Whole Slab"),
+                'dishSub' => \App\Models\SiteSetting::get('hero_slide_4_sub', 'Prime dry-aged whole beef slab'),
+                'dishPrice' => \App\Models\SiteSetting::get('hero_slide_4_price', 'TZS 24,000'),
+                'dishLink' => \App\Models\SiteSetting::get('hero_slide_4_link', route('shop')),
+            ],
+        ];
+    @endphp
+
     <!-- 1. HERO SECTION (Exact TasteHouse Layout: Warm Cream Card + Dish Carousel + Floating Tag) -->
     <section class="rounded-3xl bg-white border border-stone-200/90 p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-sm"
              x-data="{
                  activeSlide: 0,
                  timer: null,
-                 slides: [
-                     {
-                         image: '{{ asset(\App\Models\SiteSetting::get('hero_slide_1_image', 'images/bbq-biltong.jpg')) }}',
-                         tag: '{{ \App\Models\SiteSetting::get('hero_slide_1_tag', 'SIGNATURE 100G') }}',
-                         dishName: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_1_title', 'Biltong Original 100g')) }}',
-                         dishSub: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_1_sub', '100% pasture-grazed Tanzanian beef')) }}',
-                         dishPrice: '{{ \App\Models\SiteSetting::get('hero_slide_1_price', 'TZS 10,000') }}',
-                         dishLink: '{{ \App\Models\SiteSetting::get('hero_slide_1_link', route('shop')) }}'
-                     },
-                     {
-                         image: '{{ asset(\App\Models\SiteSetting::get('hero_slide_2_image', 'images/chilli-biltong.jpg')) }}',
-                         tag: '{{ \App\Models\SiteSetting::get('hero_slide_2_tag', 'SPICY PERI-PERI') }}',
-                         dishName: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_2_title', 'Chilli Biltong Bites')) }}',
-                         dishSub: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_2_sub', 'Warm lingering spice kick')) }}',
-                         dishPrice: '{{ \App\Models\SiteSetting::get('hero_slide_2_price', 'TZS 11,000') }}',
-                         dishLink: '{{ \App\Models\SiteSetting::get('hero_slide_2_link', route('shop')) }}'
-                     },
-                     {
-                         image: '{{ asset(\App\Models\SiteSetting::get('hero_slide_3_image', 'images/droewors.jpg')) }}',
-                         tag: '{{ \App\Models\SiteSetting::get('hero_slide_3_tag', 'AIR-DRIED SAUSAGE') }}',
-                         dishName: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_3_title', 'Traditional Droëwors')) }}',
-                         dishSub: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_3_sub', 'Spiced beef & roasted coriander')) }}',
-                         dishPrice: '{{ \App\Models\SiteSetting::get('hero_slide_3_price', 'TZS 12,000') }}',
-                         dishLink: '{{ \App\Models\SiteSetting::get('hero_slide_3_link', route('shop')) }}'
-                     },
-                     {
-                         image: '{{ asset(\App\Models\SiteSetting::get('hero_slide_4_image', 'images/carvers-slab.jpg')) }}',
-                         tag: '{{ \App\Models\SiteSetting::get('hero_slide_4_tag', 'CHEF\'S SPECIAL') }}',
-                         dishName: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_4_title', 'Carver\'s Whole Slab')) }}',
-                         dishSub: '{{ addslashes(\App\Models\SiteSetting::get('hero_slide_4_sub', 'Prime dry-aged whole beef slab')) }}',
-                         dishPrice: '{{ \App\Models\SiteSetting::get('hero_slide_4_price', 'TZS 24,000') }}',
-                         dishLink: '{{ \App\Models\SiteSetting::get('hero_slide_4_link', route('shop')) }}'
-                     }
-                 ],
+                 slides: {{ \Illuminate\Support\Js::from($heroSlides) }},
                  next() {
                      this.activeSlide = (this.activeSlide + 1) % this.slides.length;
                  },
@@ -153,22 +157,23 @@
                 <!-- Circular Dish Container with Warm Ambient Glow -->
                 <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full p-3 bg-gradient-to-tr from-red-100/60 via-white to-stone-100 shadow-2xl flex items-center justify-center">
                     
-                    <!-- Sliding Image -->
-                    <template x-for="(slide, index) in slides" :key="index">
-                        <div class="absolute inset-4 rounded-full overflow-hidden transition-opacity duration-700 ease-in-out"
-                             :class="activeSlide === index ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-95 pointer-events-none z-0'">
-                            <img :src="slide.image" 
-                                 :alt="slide.dishName" 
+                    <!-- Pre-rendered Slides (Always visible, smoothly transitioned by Alpine) -->
+                    @foreach($heroSlides as $idx => $s)
+                        <div class="absolute inset-4 rounded-full overflow-hidden transition-all duration-700 ease-in-out"
+                             :class="activeSlide === {{ $idx }} ? 'opacity-100 scale-100 z-10 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none z-0'"
+                             @if($idx === 0) style="opacity: 1;" @else style="opacity: 0;" @endif>
+                            <img src="{{ $s['image'] }}" 
+                                 alt="{{ $s['dishName'] }}" 
                                  class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
                         </div>
-                    </template>
+                    @endforeach
 
                     <!-- Floating Dish Card (Exact TasteHouse dish price tag) -->
                     <div class="absolute -bottom-2 -left-2 sm:bottom-4 sm:left-0 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 border border-stone-200 shadow-xl max-w-[200px] text-left">
-                        <div class="text-[10px] font-black uppercase tracking-wider text-red-600" x-text="slides[activeSlide]?.tag"></div>
-                        <h4 class="font-bold text-xs text-zinc-900 truncate" x-text="slides[activeSlide]?.dishName"></h4>
-                        <p class="text-[10px] text-zinc-500 truncate" x-text="slides[activeSlide]?.dishSub"></p>
-                        <div class="mt-1 font-black text-xs text-red-600" x-text="slides[activeSlide]?.dishPrice"></div>
+                        <div class="text-[10px] font-black uppercase tracking-wider text-red-600" x-text="slides[activeSlide]?.tag">{{ $heroSlides[0]['tag'] }}</div>
+                        <h4 class="font-bold text-xs text-zinc-900 truncate" x-text="slides[activeSlide]?.dishName">{{ $heroSlides[0]['dishName'] }}</h4>
+                        <p class="text-[10px] text-zinc-500 truncate" x-text="slides[activeSlide]?.dishSub">{{ $heroSlides[0]['dishSub'] }}</p>
+                        <div class="mt-1 font-black text-xs text-red-600" x-text="slides[activeSlide]?.dishPrice">{{ $heroSlides[0]['dishPrice'] }}</div>
                     </div>
 
                 </div>
@@ -183,10 +188,11 @@
                     
                     <!-- Progress Dots -->
                     <div class="flex items-center gap-1.5 px-2">
-                        <template x-for="(slide, i) in slides" :key="i">
+                        @foreach($heroSlides as $i => $s)
                             <span class="rounded-full transition-all duration-300"
-                                  :class="activeSlide === i ? 'w-4 h-1.5 bg-red-600' : 'w-1.5 h-1.5 bg-stone-300'"></span>
-                        </template>
+                                  :class="activeSlide === {{ $i }} ? 'w-4 h-1.5 bg-red-600' : 'w-1.5 h-1.5 bg-stone-300'"
+                                  @if($i === 0) style="width: 1rem; background-color: #dc2626;" @endif></span>
+                        @endforeach
                     </div>
 
                     <button @click="next()" 
