@@ -11,7 +11,7 @@
             <a href="{{ route('admin.categories.index') }}" class="text-xs text-brand-muted hover:text-white">&larr; Back to Categories</a>
         </div>
 
-        <form action="{{ route('admin.categories.store') }}" method="POST" class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-4">
+        <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data" class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-5 shadow-xl">
             @csrf
 
             <div class="space-y-1.5">
@@ -20,9 +20,17 @@
                        class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-brand-border text-sm text-brand-cream focus:border-brand-red focus:outline-none">
             </div>
 
+            <!-- Category Photo / Dish Cut Image -->
             <div class="space-y-1.5">
-                <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted">Description</label>
-                <textarea name="description" rows="3" placeholder="Brief category description..."
+                <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted">Category Photo / Cut Image</label>
+                <input type="file" name="image" accept="image/*"
+                       class="w-full text-xs text-brand-muted file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-red file:text-white hover:file:bg-brand-red-dark cursor-pointer">
+                <p class="text-[11px] text-brand-muted">This circular dish picture will appear in "Explore by Cut & Craft" on the homepage.</p>
+            </div>
+
+            <div class="space-y-1.5">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted">Description / Subtitle</label>
+                <textarea name="description" rows="3" placeholder="Brief subtitle shown on the homepage card (e.g. 100g & 250g Cuts)..."
                           class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-brand-border text-sm text-brand-cream focus:border-brand-red focus:outline-none"></textarea>
             </div>
 
@@ -35,14 +43,14 @@
                 <div class="flex items-center gap-2 pt-6">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" name="is_active" value="1" checked class="text-brand-red focus:ring-brand-red rounded">
-                        <span class="text-xs text-brand-cream font-medium">Active</span>
+                        <span class="text-xs text-brand-cream font-medium">Active on Storefront</span>
                     </label>
                 </div>
             </div>
 
             <div class="pt-4 border-t border-brand-border/60 flex items-center justify-end gap-3">
                 <a href="{{ route('admin.categories.index') }}" class="px-5 py-2.5 rounded-xl bg-brand-dark text-brand-muted text-xs font-semibold">Cancel</a>
-                <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-bold text-xs font-bold uppercase tracking-wider">Save Category</button>
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-bold text-xs uppercase tracking-wider">Save Category</button>
             </div>
         </form>
     </div>

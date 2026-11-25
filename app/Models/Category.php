@@ -42,13 +42,16 @@ class Category extends Model
         }
 
         $map = [
-            'traditional-biltong' => 'images/biltong-original-1.jpg',
+            'traditional-biltong' => 'images/bbq-biltong.jpg',
+            'spiced-chilli-biltong' => 'images/chilli-biltong.jpg',
             'chilli-bites' => 'images/chilli-biltong.jpg',
+            'droewors-dried-sausage' => 'images/droewors.jpg',
             'droewors' => 'images/droewors.jpg',
             'carvers-slab' => 'images/carvers-slab.jpg',
+            'wholesale-bundles' => 'images/wholesale-box.jpg',
             'wholesale' => 'images/wholesale-box.jpg',
         ];
 
-        return asset($map[$this->slug] ?? 'images/biltong-original-1.jpg');
+        return asset($map[$this->slug] ?? 'images/bbq-biltong.jpg');
     }
 }

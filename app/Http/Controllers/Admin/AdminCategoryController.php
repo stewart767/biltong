@@ -29,7 +29,15 @@ class AdminCategoryController extends Controller
             'description' => 'nullable|string',
             'sort_order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
+            'image' => 'nullable|image|max:3072',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $request->file('image')->getClientOriginalName());
+            $request->file('image')->move(public_path('images/categories'), $filename);
+            $imagePath = 'images/categories/' . $filename;
+        }
 
         Category::create([
             'name' => $validated['name'],
@@ -37,6 +45,7 @@ class AdminCategoryController extends Controller
             'description' => $validated['description'] ?? null,
             'sort_order' => $validated['sort_order'] ?? 0,
             'is_active' => $request->boolean('is_active', true),
+            'image' => $imagePath,
         ]);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
@@ -54,16 +63,25 @@ class AdminCategoryController extends Controller
             'description' => 'nullable|string',
             'sort_order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
+            'image' => 'nullable|image|max:3072',
         ]);
+
+        $imagePath = $category->image;
+        if ($request->hasFile('image')) {
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $request->file('image')->getClientOriginalName());
+            $request->file('image')->move(public_path('images/categories'), $filename);
+            $imagePath = 'images/categories/' . $filename;
+        }
 
         $category->update([
             'name' => $validated['name'],
             'description' => $validated['description'] ?? null,
             'sort_order' => $validated['sort_order'] ?? 0,
             'is_active' => $request->boolean('is_active'),
+            'image' => $imagePath,
         ]);
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('admin.categories.index')->with('success', 'Category photo and details updated successfully.');
     }
 
     public function destroy(Category $category): RedirectResponse
