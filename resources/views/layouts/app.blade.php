@@ -209,11 +209,8 @@
 
             <a href="{{ route('home') }}" class="block px-3 py-2 rounded-xl text-sm font-bold {{ request()->routeIs('home') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Home</a>
             <a href="{{ route('shop') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('shop*') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Menu / Shop Cuts</a>
-            <a href="{{ route('craft') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('craft') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Air-Cure Craft</a>
-            <a href="{{ route('wholesale') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('wholesale*') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Wholesale & Bulk</a>
             <a href="{{ route('track') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('track') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Track Order</a>
             <a href="{{ route('about') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('about') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">About Us</a>
-            <a href="{{ route('contact') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('contact') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Reviews & Contact</a>
             
             <div class="pt-2">
                 <a href="https://wa.me/255682869629" target="_blank" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-bold text-xs">
@@ -251,15 +248,6 @@
                         <span>Menu</span>
                     </a>
 
-                    <!-- Categories / Craft -->
-                    <a href="{{ route('craft') }}" 
-                       class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition {{ request()->routeIs('craft') ? 'bg-red-600 text-white shadow-md shadow-red-600/30' : 'text-zinc-600 hover:bg-white hover:text-red-600' }}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-                        </svg>
-                        <span>Categories</span>
-                    </a>
-
                     <!-- Offers / Specials -->
                     <a href="{{ route('shop') }}" 
                        class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition text-zinc-600 hover:bg-white hover:text-red-600">
@@ -269,15 +257,6 @@
                         <span>Offers</span>
                     </a>
 
-                    <!-- Reservations / Wholesale -->
-                    <a href="{{ route('wholesale') }}" 
-                       class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition {{ request()->routeIs('wholesale*') ? 'bg-red-600 text-white shadow-md shadow-red-600/30' : 'text-zinc-600 hover:bg-white hover:text-red-600' }}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                        <span>Reservations</span>
-                    </a>
-
                     <!-- Orders / Track Order -->
                     <a href="{{ route('track') }}" 
                        class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition {{ request()->routeIs('track') ? 'bg-red-600 text-white shadow-md shadow-red-600/30' : 'text-zinc-600 hover:bg-white hover:text-red-600' }}">
@@ -285,15 +264,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                         </svg>
                         <span>Orders</span>
-                    </a>
-
-                    <!-- Reviews & Contact -->
-                    <a href="{{ route('contact') }}" 
-                       class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition {{ request()->routeIs('contact') ? 'bg-red-600 text-white shadow-md shadow-red-600/30' : 'text-zinc-600 hover:bg-white hover:text-red-600' }}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                        </svg>
-                        <span>Reviews</span>
                     </a>
 
                     <!-- Support -->
@@ -309,7 +279,7 @@
                 </nav>
 
                 <!-- Bottom Promo Mini-Card Widget (Exact TasteHouse mini-card) -->
-                <div class="rounded-3xl bg-gradient-to-br from-[#FFF0E2] to-[#FEDDC7] border border-red-200/80 p-5 text-center space-y-3 relative overflow-hidden shadow-sm">
+                <div class="rounded-3xl bg-white border border-red-200/80 p-5 text-center space-y-3 relative overflow-hidden shadow-sm">
                     <span class="text-[10px] font-black uppercase tracking-wider text-red-700 bg-red-100/90 px-2.5 py-0.5 rounded-full inline-block">
                         Special Promo
                     </span>
