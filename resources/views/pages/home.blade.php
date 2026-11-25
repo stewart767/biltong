@@ -5,7 +5,7 @@
 @section('content')
 
     <!-- 1. HERO SECTION (Exact TasteHouse Layout: Warm Cream Card + Dish Carousel + Floating Tag) -->
-    <section class="rounded-3xl bg-gradient-to-r from-[#FFF5EC] via-[#FFF8F2] to-[#FEF3EA] border border-orange-100/80 p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-sm"
+    <section class="rounded-3xl bg-white border border-stone-200/90 p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-sm"
              x-data="{
                  activeSlide: 0,
                  timer: null,
@@ -70,15 +70,15 @@
             <div class="lg:col-span-7 space-y-5 text-left">
                 
                 <!-- Pill Tag -->
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-orange-200 text-orange-600 text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-red-200 text-red-600 text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
                     <span>{{ app()->getLocale() === 'sw' ? 'NYAMA HALISI • DAR ES SALAAM' : 'GOOD FOOD, GOOD MOOD' }}</span>
                 </div>
 
                 <!-- Main Bold Headline (Exact TasteHouse styling) -->
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-900 tracking-tight leading-[1.08]">
                     <span>{{ app()->getLocale() === 'sw' ? 'NYAMA HALISI.' : 'REAL BEEF.' }}</span><br>
-                    <span class="text-orange-600">{{ app()->getLocale() === 'sw' ? 'LADHA HALISI.' : 'REAL FLAVOUR.' }}</span>
+                    <span class="text-red-600">{{ app()->getLocale() === 'sw' ? 'LADHA HALISI.' : 'REAL FLAVOUR.' }}</span>
                 </h1>
 
                 <!-- Subtitle -->
@@ -92,14 +92,14 @@
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap items-center gap-4 pt-2">
                     <a href="{{ route('shop') }}" 
-                       class="px-8 py-3.5 rounded-full bg-orange-600 hover:bg-orange-700 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-orange-600/30 hover:scale-105 transition transform duration-200 flex items-center gap-2 cursor-pointer">
+                       class="px-8 py-3.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-red-600/30 hover:scale-105 transition transform duration-200 flex items-center gap-2 cursor-pointer">
                         <span>{{ app()->getLocale() === 'sw' ? 'Duka la Biltong' : 'Order Now' }}</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
 
                     <a href="{{ route('craft') }}" 
-                       class="px-6 py-3.5 rounded-full bg-white hover:bg-stone-50 text-zinc-800 font-bold text-xs uppercase tracking-wider border border-stone-200/90 hover:border-orange-300 transition shadow-sm flex items-center gap-2">
-                        <svg class="w-4 h-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                       class="px-6 py-3.5 rounded-full bg-white hover:bg-stone-50 text-zinc-800 font-bold text-xs uppercase tracking-wider border border-stone-200/90 hover:border-red-300 transition shadow-sm flex items-center gap-2">
+                        <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <span>{{ app()->getLocale() === 'sw' ? 'Fahamu Ukaushaji' : 'Explore Menu' }}</span>
                     </a>
                 </div>
@@ -110,7 +110,7 @@
                         <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="{{ asset('images/biltong-original-1.jpg') }}" alt="User">
                         <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="{{ asset('images/chilli-biltong.jpg') }}" alt="User">
                         <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="{{ asset('images/droewors.jpg') }}" alt="User">
-                        <div class="h-8 w-8 rounded-full bg-orange-600 text-white font-bold text-[10px] flex items-center justify-center ring-2 ring-white">
+                        <div class="h-8 w-8 rounded-full bg-red-600 text-white font-bold text-[10px] flex items-center justify-center ring-2 ring-white">
                             +1k
                         </div>
                     </div>
@@ -129,7 +129,7 @@
             <div class="lg:col-span-5 relative flex items-center justify-center">
                 
                 <!-- Circular Dish Container with Warm Ambient Glow -->
-                <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full p-3 bg-gradient-to-tr from-orange-200/50 via-white/80 to-orange-100/60 shadow-2xl flex items-center justify-center">
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full p-3 bg-gradient-to-tr from-red-100/60 via-white to-stone-100 shadow-2xl flex items-center justify-center">
                     
                     <!-- Sliding Image -->
                     <template x-for="(slide, index) in slides" :key="index">
@@ -143,10 +143,10 @@
 
                     <!-- Floating Dish Card (Exact TasteHouse dish price tag) -->
                     <div class="absolute -bottom-2 -left-2 sm:bottom-4 sm:left-0 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 border border-stone-200 shadow-xl max-w-[200px] text-left">
-                        <div class="text-[10px] font-black uppercase tracking-wider text-orange-600" x-text="slides[activeSlide].tag"></div>
+                        <div class="text-[10px] font-black uppercase tracking-wider text-red-600" x-text="slides[activeSlide].tag"></div>
                         <h4 class="font-bold text-xs text-zinc-900 truncate" x-text="slides[activeSlide].dishName"></h4>
                         <p class="text-[10px] text-zinc-500 truncate" x-text="slides[activeSlide].dishSub"></p>
-                        <div class="mt-1 font-black text-xs text-orange-600" x-text="slides[activeSlide].dishPrice"></div>
+                        <div class="mt-1 font-black text-xs text-red-600" x-text="slides[activeSlide].dishPrice"></div>
                     </div>
 
                 </div>
@@ -154,7 +154,7 @@
                 <!-- Carousel Navigation Buttons (< >) on Bottom Right -->
                 <div class="absolute bottom-0 right-0 flex items-center gap-2 z-20">
                     <button @click="prev()" 
-                            class="w-8 h-8 rounded-full bg-white hover:bg-orange-600 hover:text-white text-zinc-700 border border-stone-200 flex items-center justify-center shadow-md transition cursor-pointer"
+                            class="w-8 h-8 rounded-full bg-white hover:bg-red-600 hover:text-white text-zinc-700 border border-stone-200 flex items-center justify-center shadow-md transition cursor-pointer"
                             aria-label="Previous">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                     </button>
@@ -163,12 +163,12 @@
                     <div class="flex items-center gap-1.5 px-2">
                         <template x-for="(slide, i) in slides" :key="i">
                             <span class="rounded-full transition-all duration-300"
-                                  :class="activeSlide === i ? 'w-4 h-1.5 bg-orange-600' : 'w-1.5 h-1.5 bg-stone-300'"></span>
+                                  :class="activeSlide === i ? 'w-4 h-1.5 bg-red-600' : 'w-1.5 h-1.5 bg-stone-300'"></span>
                         </template>
                     </div>
 
                     <button @click="next()" 
-                            class="w-8 h-8 rounded-full bg-white hover:bg-orange-600 hover:text-white text-zinc-700 border border-stone-200 flex items-center justify-center shadow-md transition cursor-pointer"
+                            class="w-8 h-8 rounded-full bg-white hover:bg-red-600 hover:text-white text-zinc-700 border border-stone-200 flex items-center justify-center shadow-md transition cursor-pointer"
                             aria-label="Next">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                     </button>
@@ -187,7 +187,7 @@
             
             <!-- Badge 1: Free Delivery -->
             <div class="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200/70 shadow-sm flex items-center gap-3.5 hover:shadow-md transition">
-                <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
                 </div>
                 <div>
@@ -244,7 +244,7 @@
                     {{ app()->getLocale() === 'sw' ? 'Vyakula bora vya nyama iliyokaushwa kwa asili' : 'Hand-curated prime pasture cuts and artisanal specialties' }}
                 </p>
             </div>
-            <a href="{{ route('shop') }}" class="inline-flex items-center gap-1 text-xs font-bold text-orange-600 hover:text-orange-700 transition">
+            <a href="{{ route('shop') }}" class="inline-flex items-center gap-1 text-xs font-bold text-red-600 hover:text-red-700 transition">
                 <span>View All</span>
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
             </a>
@@ -253,7 +253,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             
             <!-- Category 1: Traditional Biltong (Light Mint) -->
-            <a href="{{ route('shop') }}" class="group bg-[#EAF7EE] hover:bg-[#DDF3E4] rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-emerald-100">
+            <a href="{{ route('shop') }}" class="group bg-white hover:bg-red-50/40 border border-stone-200 hover:border-red-300 shadow-sm rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-emerald-100">
                 <div class="w-24 h-24 rounded-full overflow-hidden shadow-md group-hover:scale-105 transition transform duration-300 border-2 border-white">
                     <img src="{{ asset('images/biltong-original-1.jpg') }}" alt="Traditional Biltong" class="w-full h-full object-cover">
                 </div>
@@ -264,18 +264,18 @@
             </a>
 
             <!-- Category 2: Spiced Chilli (Light Peach) -->
-            <a href="{{ route('shop') }}" class="group bg-[#FFF2E5] hover:bg-[#FFE5CD] rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-orange-100">
+            <a href="{{ route('shop') }}" class="group bg-white hover:bg-red-50/40 border border-stone-200 hover:border-red-300 shadow-sm rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-red-100">
                 <div class="w-24 h-24 rounded-full overflow-hidden shadow-md group-hover:scale-105 transition transform duration-300 border-2 border-white">
                     <img src="{{ asset('images/chilli-biltong.jpg') }}" alt="Chilli Biltong Bites" class="w-full h-full object-cover">
                 </div>
                 <div>
-                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-orange-800 transition">Chilli Bites</h4>
+                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-red-800 transition">Chilli Bites</h4>
                     <span class="text-[11px] text-zinc-500 font-medium">Spicy Peri-Peri</span>
                 </div>
             </a>
 
             <!-- Category 3: Droewors (Light Gold) -->
-            <a href="{{ route('shop') }}" class="group bg-[#FEF9E6] hover:bg-[#FDF0CE] rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-amber-100">
+            <a href="{{ route('shop') }}" class="group bg-white hover:bg-red-50/40 border border-stone-200 hover:border-red-300 shadow-sm rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-amber-100">
                 <div class="w-24 h-24 rounded-full overflow-hidden shadow-md group-hover:scale-105 transition transform duration-300 border-2 border-white">
                     <img src="{{ asset('images/droewors.jpg') }}" alt="Droewors" class="w-full h-full object-cover">
                 </div>
@@ -286,7 +286,7 @@
             </a>
 
             <!-- Category 4: Carver's Slab (Light Rose) -->
-            <a href="{{ route('shop') }}" class="group bg-[#FCECEF] hover:bg-[#F9D9E0] rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-rose-100">
+            <a href="{{ route('shop') }}" class="group bg-white hover:bg-red-50/40 border border-stone-200 hover:border-red-300 shadow-sm rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-rose-100">
                 <div class="w-24 h-24 rounded-full overflow-hidden shadow-md group-hover:scale-105 transition transform duration-300 border-2 border-white">
                     <img src="{{ asset('images/carvers-slab.jpg') }}" alt="Carver's Slab" class="w-full h-full object-cover">
                 </div>
@@ -297,7 +297,7 @@
             </a>
 
             <!-- Category 5: Wholesale (Light Lavender) -->
-            <a href="{{ route('wholesale') }}" class="group bg-[#F3E8FF] hover:bg-[#E9D5FF] rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-purple-100">
+            <a href="{{ route('wholesale') }}" class="group bg-white hover:bg-red-50/40 border border-stone-200 hover:border-red-300 shadow-sm rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200 border border-purple-100">
                 <div class="w-24 h-24 rounded-full overflow-hidden shadow-md group-hover:scale-105 transition transform duration-300 border-2 border-white">
                     <img src="{{ asset('images/wholesale-box.jpg') }}" alt="Wholesale Cartons" class="w-full h-full object-cover">
                 </div>
@@ -322,7 +322,7 @@
                     {{ app()->getLocale() === 'sw' ? 'Biltong zilizopendwa zaidi na wateja wetu Dar es Salaam' : 'Our highest-rated artisanal cuts and chef-curated beef biltong packs' }}
                 </p>
             </div>
-            <a href="{{ route('shop') }}" class="inline-flex items-center gap-1 text-xs font-bold text-orange-600 hover:text-orange-700 transition">
+            <a href="{{ route('shop') }}" class="inline-flex items-center gap-1 text-xs font-bold text-red-600 hover:text-red-700 transition">
                 <span>View All</span>
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
             </a>
@@ -349,7 +349,7 @@
 
                 <!-- Title & Meta -->
                 <div class="space-y-1 text-left pt-2">
-                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-orange-600 transition truncate">
+                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-red-600 transition truncate">
                         Biltong Original
                     </h4>
                     <p class="text-[11px] text-zinc-500 truncate">Classic Coriander & Pepper</p>
@@ -365,7 +365,7 @@
                     </div>
 
                     <button @click="$store.cart.add({ id: 1, name: 'Biltong Original', price: 10000, weight: '100g', image: '{{ asset('images/biltong-original-1.jpg') }}', quantity: 1 })"
-                            class="w-8 h-8 rounded-xl bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center shadow-md shadow-orange-600/30 transition transform hover:scale-110 cursor-pointer"
+                            class="w-8 h-8 rounded-xl bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-md shadow-red-600/30 transition transform hover:scale-110 cursor-pointer"
                             aria-label="Add to cart">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                     </button>
@@ -378,7 +378,7 @@
                 
                 <!-- Badge: 10% OFF -->
                 <div class="absolute top-4 left-4 z-10">
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-orange-600 text-white shadow-sm">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-600 text-white shadow-sm">
                         10% OFF
                     </span>
                 </div>
@@ -390,7 +390,7 @@
                 </div>
 
                 <div class="space-y-1 text-left pt-2">
-                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-orange-600 transition truncate">
+                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-red-600 transition truncate">
                         Chilli Biltong Bites
                     </h4>
                     <p class="text-[11px] text-zinc-500 truncate">Spicy Bird's Eye Cayenne</p>
@@ -405,7 +405,7 @@
                     </div>
 
                     <button @click="$store.cart.add({ id: 2, name: 'Chilli Biltong Bites', price: 11000, weight: '100g', image: '{{ asset('images/chilli-biltong.jpg') }}', quantity: 1 })"
-                            class="w-8 h-8 rounded-xl bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center shadow-md shadow-orange-600/30 transition transform hover:scale-110 cursor-pointer"
+                            class="w-8 h-8 rounded-xl bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-md shadow-red-600/30 transition transform hover:scale-110 cursor-pointer"
                             aria-label="Add to cart">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                     </button>
@@ -429,7 +429,7 @@
                 </div>
 
                 <div class="space-y-1 text-left pt-2">
-                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-orange-600 transition truncate">
+                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-red-600 transition truncate">
                         Traditional Droëwors
                     </h4>
                     <p class="text-[11px] text-zinc-500 truncate">Spiced Dried Beef Sausage</p>
@@ -444,7 +444,7 @@
                     </div>
 
                     <button @click="$store.cart.add({ id: 3, name: 'Traditional Droëwors', price: 12000, weight: '100g', image: '{{ asset('images/droewors.jpg') }}', quantity: 1 })"
-                            class="w-8 h-8 rounded-xl bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center shadow-md shadow-orange-600/30 transition transform hover:scale-110 cursor-pointer"
+                            class="w-8 h-8 rounded-xl bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-md shadow-red-600/30 transition transform hover:scale-110 cursor-pointer"
                             aria-label="Add to cart">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                     </button>
@@ -456,7 +456,7 @@
             <div class="bg-white rounded-3xl p-4 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative">
                 
                 <div class="absolute top-4 left-4 z-10">
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-orange-600 text-white shadow-sm">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-600 text-white shadow-sm">
                         Chef's Cut
                     </span>
                 </div>
@@ -468,7 +468,7 @@
                 </div>
 
                 <div class="space-y-1 text-left pt-2">
-                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-orange-600 transition truncate">
+                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-red-600 transition truncate">
                         Carver's Whole Slab
                     </h4>
                     <p class="text-[11px] text-zinc-500 truncate">250g Prime Cured Beef</p>
@@ -483,7 +483,7 @@
                     </div>
 
                     <button @click="$store.cart.add({ id: 4, name: 'Carver's Biltong Slab', price: 24000, weight: '250g', image: '{{ asset('images/carvers-slab.jpg') }}', quantity: 1 })"
-                            class="w-8 h-8 rounded-xl bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center shadow-md shadow-orange-600/30 transition transform hover:scale-110 cursor-pointer"
+                            class="w-8 h-8 rounded-xl bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-md shadow-red-600/30 transition transform hover:scale-110 cursor-pointer"
                             aria-label="Add to cart">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                     </button>
@@ -507,7 +507,7 @@
                 </div>
 
                 <div class="space-y-1 text-left pt-2">
-                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-orange-600 transition truncate">
+                    <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-red-600 transition truncate">
                         Wholesale Carton
                     </h4>
                     <p class="text-[11px] text-zinc-500 truncate">10x 100g Retail Display Box</p>
@@ -522,7 +522,7 @@
                     </div>
 
                     <button @click="$store.cart.add({ id: 5, name: 'Wholesale Starter Carton', price: 85000, weight: '10x 100g', image: '{{ asset('images/wholesale-box.jpg') }}', quantity: 1 })"
-                            class="w-8 h-8 rounded-xl bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center shadow-md shadow-orange-600/30 transition transform hover:scale-110 cursor-pointer"
+                            class="w-8 h-8 rounded-xl bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-md shadow-red-600/30 transition transform hover:scale-110 cursor-pointer"
                             aria-label="Add to cart">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                     </button>
@@ -539,19 +539,19 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <!-- Banner 1: Limited Time Offer (Soft Mint Gradient) -->
-            <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-green-50 border border-emerald-200/80 rounded-3xl p-6 sm:p-8 flex items-center justify-between overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="bg-white border border-red-200 rounded-3xl p-6 sm:p-8 flex items-center justify-between overflow-hidden shadow-sm hover:shadow-md transition">
                 <div class="space-y-3 max-w-xs text-left">
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-600 text-white">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-600 text-white">
                         Limited Time Offer
                     </span>
                     <h3 class="font-extrabold text-xl sm:text-2xl text-zinc-900 leading-tight">
                         Flat 10% OFF<br>On Your First Order!
                     </h3>
                     <p class="text-xs text-zinc-600 leading-relaxed">
-                        Use code <strong class="text-emerald-700">INAS10</strong> at checkout and enjoy real artisanal biltong.
+                        Use code <strong class="text-red-700">INAS10</strong> at checkout and enjoy real artisanal biltong.
                     </p>
                     <a href="{{ route('shop') }}" 
-                       class="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition transform hover:scale-105">
+                       class="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-red-700 hover:bg-red-800 text-white font-bold text-xs shadow-md transition transform hover:scale-105">
                         <span>Order Now</span>
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
@@ -563,9 +563,9 @@
             </div>
 
             <!-- Banner 2: Weekend Special / Family Combos (Soft Orange Gradient) -->
-            <div class="bg-gradient-to-r from-orange-50 via-amber-50 to-orange-100 border border-orange-200/80 rounded-3xl p-6 sm:p-8 flex items-center justify-between overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="bg-white border border-stone-200 rounded-3xl p-6 sm:p-8 flex items-center justify-between overflow-hidden shadow-sm hover:shadow-md transition">
                 <div class="space-y-3 max-w-xs text-left">
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-orange-600 text-white">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-600 text-white">
                         Weekend Special
                     </span>
                     <h3 class="font-extrabold text-xl sm:text-2xl text-zinc-900 leading-tight">
@@ -575,7 +575,7 @@
                         Feed your gathering or stock your bar with our 10-pack cartons.
                     </p>
                     <a href="{{ route('wholesale') }}" 
-                       class="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition transform hover:scale-105">
+                       class="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md transition transform hover:scale-105">
                         <span>Order Now</span>
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
@@ -607,10 +607,10 @@
                     <span class="w-2 h-2 rounded-full bg-red-500"></span> Airtel Money
                 </span>
                 <span class="px-3.5 py-1.5 rounded-xl bg-white border border-stone-200 shadow-sm flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-orange-500"></span> Halopesa
+                    <span class="w-2 h-2 rounded-full bg-red-500"></span> Halopesa
                 </span>
                 <span class="px-3.5 py-1.5 rounded-xl bg-white border border-stone-200 shadow-sm flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span> 100% Halal
+                    <span class="w-2 h-2 rounded-full bg-red-600"></span> 100% Halal
                 </span>
             </div>
         </div>

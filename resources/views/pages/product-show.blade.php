@@ -6,17 +6,17 @@
 @section('content')
 
     <!-- Breadcrumb -->
-    <div class="bg-zinc-900 border-b border-zinc-800 py-3 px-4">
-        <div class="max-w-7xl mx-auto flex items-center gap-2 text-xs text-zinc-400">
-            <a href="{{ route('home') }}" class="hover:text-white">Home</a>
+    <div class="bg-white border-b border-stone-200 py-3 px-4">
+        <div class="max-w-7xl mx-auto flex items-center gap-2 text-xs text-zinc-500">
+            <a href="{{ route('home') }}" class="hover:text-red-600">Home</a>
             <span>/</span>
-            <a href="{{ route('shop') }}" class="hover:text-white">Shop</a>
+            <a href="{{ route('shop') }}" class="hover:text-red-600">Shop</a>
             <span>/</span>
-            <a href="{{ route('shop', ['category' => $product->category->slug]) }}" class="hover:text-white">
+            <a href="{{ route('shop', ['category' => $product->category->slug]) }}" class="hover:text-red-600">
                 {{ $product->category->name }}
             </a>
             <span>/</span>
-            <span class="text-brand-red-light font-bold truncate">{{ $product->name }}</span>
+            <span class="text-red-600 font-bold truncate">{{ $product->name }}</span>
         </div>
     </div>
 
@@ -75,14 +75,14 @@
                         <div class="absolute top-4 left-4 flex flex-wrap gap-2">
                             @if(!empty($product->badges))
                                 @foreach($product->badges as $badge)
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-red text-white shadow-md">
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white shadow-md">
                                         {{ $badge }}
                                     </span>
                                 @endforeach
                             @endif
                         </div>
 
-                        <div class="absolute bottom-4 right-4 bg-brand-black/90 px-3.5 py-1.5 rounded-lg text-xs text-white font-bold">
+                        <div class="absolute bottom-4 right-4 bg-red-600 px-3.5 py-1.5 rounded-lg text-xs text-white font-bold">
                             Buguruni Malapa Cured
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                             <div class="flex items-baseline gap-2">
                                 <span class="text-3xl sm:text-4xl font-black text-brand-red" x-text="singleFormattedPrice"></span>
                                 @if($product->promo_price)
-                                    <span class="text-sm text-zinc-400 line-through">
+                                    <span class="text-sm text-zinc-500 line-through">
                                         TZS {{ number_format($product->price, 0) }}
                                     </span>
                                 @endif
@@ -165,7 +165,7 @@
                                             @click="selectWeight(opt)"
                                             class="p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1"
                                             :class="selectedWeight === opt.weight 
-                                                ? 'bg-brand-red text-white border-brand-red shadow-md font-bold' 
+                                                ? 'bg-red-600 text-white border-brand-red shadow-md font-bold' 
                                                 : 'bg-white border-zinc-300 text-zinc-800 hover:border-zinc-500'">
                                         <span class="text-xs font-bold" x-text="opt.weight"></span>
                                         <span class="text-[11px]" :class="selectedWeight === opt.weight ? 'text-white/90' : 'text-zinc-500'" x-text="'TZS ' + Number(opt.price).toLocaleString()"></span>
@@ -204,7 +204,7 @@
                                         price: currentPrice,
                                         quantity: quantity
                                     })"
-                                    class="flex-1 py-4 px-6 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-black text-sm uppercase tracking-wider hover:shadow-xl transition flex items-center justify-center gap-2">
+                                    class="flex-1 py-4 px-6 rounded-xl bg-red-600 hover:bg-red-600-dark text-white font-black text-sm uppercase tracking-wider hover:shadow-xl transition flex items-center justify-center gap-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                                 <span>Add to Cart &bull; <span x-text="formattedPrice"></span></span>
                             </button>
@@ -243,22 +243,22 @@
                 <div class="flex flex-wrap items-center gap-3 border-b border-zinc-200 pb-4">
                     <button type="button" @click="activeTab = 'nutrition'" 
                             class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition"
-                            :class="activeTab === 'nutrition' ? 'bg-brand-red text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
+                            :class="activeTab === 'nutrition' ? 'bg-red-600 text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
                         Nutritional Facts
                     </button>
                     <button type="button" @click="activeTab = 'ingredients'" 
                             class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition"
-                            :class="activeTab === 'ingredients' ? 'bg-brand-red text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
+                            :class="activeTab === 'ingredients' ? 'bg-red-600 text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
                         Ingredients & Marinade
                     </button>
                     <button type="button" @click="activeTab = 'story'" 
                             class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition"
-                            :class="activeTab === 'story' ? 'bg-brand-red text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
+                            :class="activeTab === 'story' ? 'bg-red-600 text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
                         Butcher’s Description
                     </button>
                     <button type="button" @click="activeTab = 'storage'" 
                             class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition"
-                            :class="activeTab === 'storage' ? 'bg-brand-red text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
+                            :class="activeTab === 'storage' ? 'bg-red-600 text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
                         Storage & Freshness
                     </button>
                 </div>

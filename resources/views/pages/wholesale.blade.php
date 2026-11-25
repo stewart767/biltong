@@ -8,8 +8,8 @@
     <!-- Wholesale Hero Header -->
     <section class="py-16 bg-brand-charcoal border-b border-brand-border text-center relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-4 space-y-3 relative z-10">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-red/20 text-brand-red border border-brand-red/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-600/20 text-red-600 border border-red-600/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
                 Commercial Supply & Distribution
             </span>
             <h1 class="font-editorial text-4xl sm:text-6xl font-bold text-white tracking-wide">
@@ -28,8 +28,8 @@
             <!-- Industry Sectors Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Sector 1 -->
-                <div class="p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-4 hover:border-brand-red transition">
-                    <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-brand-red border border-red-100">
+                <div class="p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-4 hover:border-red-600 transition">
+                    <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-red-600 border border-red-100">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                     </div>
                     <h3 class="font-editorial text-xl font-bold text-zinc-900">Supermarkets & Retailers</h3>
@@ -39,8 +39,8 @@
                 </div>
 
                 <!-- Sector 2 -->
-                <div class="p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-4 hover:border-brand-red transition">
-                    <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-brand-red border border-red-100">
+                <div class="p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-4 hover:border-red-600 transition">
+                    <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-red-600 border border-red-100">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
                     <h3 class="font-editorial text-xl font-bold text-zinc-900">Safari Lodges & Hospitality</h3>
@@ -50,8 +50,8 @@
                 </div>
 
                 <!-- Sector 3 -->
-                <div class="p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-4 hover:border-brand-red transition">
-                    <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-brand-red border border-red-100">
+                <div class="p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-4 hover:border-red-600 transition">
+                    <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-red-600 border border-red-100">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
                     <h3 class="font-editorial text-xl font-bold text-zinc-900">Gyms & Fitness Centres</h3>
@@ -64,24 +64,24 @@
             <!-- Wholesale Value Propositions -->
             <div class="p-8 sm:p-12 rounded-3xl bg-brand-charcoal text-white border border-brand-border space-y-8">
                 <div class="max-w-2xl space-y-2">
-                    <span class="text-xs uppercase tracking-widest text-brand-red font-bold">B2B Advantages</span>
+                    <span class="text-xs uppercase tracking-widest text-red-600 font-bold">B2B Advantages</span>
                     <h2 class="font-editorial text-2xl sm:text-4xl font-bold text-white">Why Distribute INAS Biltong?</h2>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs text-zinc-300">
-                    <div class="space-y-2 border-l-2 border-brand-red pl-4">
+                    <div class="space-y-2 border-l-2 border-red-600 pl-4">
                         <span class="block font-bold text-white text-sm">Competitive Margins</span>
                         <p class="text-zinc-400">Generous wholesale pricing tiers designed to reward volume distributors and retailers.</p>
                     </div>
-                    <div class="space-y-2 border-l-2 border-brand-red pl-4">
+                    <div class="space-y-2 border-l-2 border-red-600 pl-4">
                         <span class="block font-bold text-white text-sm">Consistent Quality</span>
                         <p class="text-zinc-400">Calibrated climate rooms in Buguruni Malapa ensure identical curing and taste year-round.</p>
                     </div>
-                    <div class="space-y-2 border-l-2 border-brand-red pl-4">
+                    <div class="space-y-2 border-l-2 border-red-600 pl-4">
                         <span class="block font-bold text-white text-sm">Tanzania-Wide Dispatch</span>
                         <p class="text-zinc-400">Same-day freight in Dar es Salaam; daily regional air and bus cargo to Arusha, Mwanza, Zanzibar.</p>
                     </div>
-                    <div class="space-y-2 border-l-2 border-brand-red pl-4">
+                    <div class="space-y-2 border-l-2 border-red-600 pl-4">
                         <span class="block font-bold text-white text-sm">Full Certification</span>
                         <p class="text-zinc-400">100% Halal certified slaughter and compliance with Tanzania Bureau of Standards guidelines.</p>
                     </div>
@@ -94,7 +94,7 @@
                 <!-- Left: Info & Contact Callout -->
                 <div class="lg:col-span-5 space-y-6">
                     <div class="p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-6">
-                        <span class="text-xs uppercase tracking-widest text-brand-red font-bold">Direct B2B Desk</span>
+                        <span class="text-xs uppercase tracking-widest text-red-600 font-bold">Direct B2B Desk</span>
                         <h3 class="font-editorial text-3xl font-bold text-zinc-900">
                             Request Wholesale Pricing & Samples
                         </h3>
@@ -104,17 +104,17 @@
 
                         <div class="space-y-4 pt-4 border-t border-zinc-100 text-xs">
                             <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-brand-red border border-red-100">
+                                <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-600 border border-red-100">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                                 </div>
                                 <div>
                                     <span class="block text-zinc-500">Hotline / WhatsApp</span>
-                                    <a href="tel:+255682869629" class="font-bold text-zinc-900 hover:text-brand-red">+255 682 869 629</a>
+                                    <a href="tel:+255682869629" class="font-bold text-zinc-900 hover:text-red-600">+255 682 869 629</a>
                                 </div>
                             </div>
 
                             <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-brand-red border border-red-100">
+                                <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-600 border border-red-100">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
                                 </div>
                                 <div>
@@ -157,14 +157,14 @@
                                 <div class="space-y-1">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Business / Company Name *</label>
                                     <input type="text" name="company_name" required value="{{ old('company_name') }}" placeholder="e.g. Serengeti Safari Camps Ltd"
-                                           class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                           class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                     @error('company_name') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="space-y-1">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Contact Person *</label>
                                     <input type="text" name="contact_name" required value="{{ old('contact_name') }}" placeholder="e.g. David Mrema"
-                                           class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                           class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                     @error('contact_name') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -173,14 +173,14 @@
                                 <div class="space-y-1">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Phone / WhatsApp Number *</label>
                                     <input type="tel" name="phone" required value="{{ old('phone') }}" placeholder="e.g. +255 754 000 000"
-                                           class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                           class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                     @error('phone') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="space-y-1">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Email Address *</label>
                                     <input type="email" name="email" required value="{{ old('email') }}" placeholder="e.g. procurement@serengeti.co.tz"
-                                           class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                           class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                     @error('email') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -188,7 +188,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="space-y-1">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Business Type *</label>
-                                    <select name="business_type" required class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                    <select name="business_type" required class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                         <option value="Supermarkets & Retailers">Supermarkets & Retailers</option>
                                         <option value="Safari Camp / Lodge">Safari Camp / Lodge</option>
                                         <option value="Hotel / Resort">Hotel / Resort</option>
@@ -201,7 +201,7 @@
 
                                 <div class="space-y-1">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Estimated Monthly Volume *</label>
-                                    <select name="estimated_monthly_volume" required class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                    <select name="estimated_monthly_volume" required class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                         <option value="50 - 200 packs / month">50 - 200 packs / month (Starter)</option>
                                         <option value="200 - 500 packs / month">200 - 500 packs / month (Medium)</option>
                                         <option value="500 - 2,000 packs / month">500 - 2,000 packs / month (Large)</option>
@@ -214,17 +214,17 @@
                             <div class="space-y-1">
                                 <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">City / Location *</label>
                                 <input type="text" name="city" required value="{{ old('city') }}" placeholder="e.g. Dar es Salaam, Arusha, Zanzibar, Mwanza"
-                                       class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                       class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                             </div>
 
                             <div class="space-y-1">
                                 <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Additional Requirements / Notes</label>
                                 <textarea name="message" rows="3" placeholder="Tell us about your distribution channels, retail outlets, or specific packaging needs..."
-                                          class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">{{ old('message') }}</textarea>
+                                          class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">{{ old('message') }}</textarea>
                             </div>
 
                             <button type="submit" 
-                                    class="w-full py-4 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                                    class="w-full py-4 rounded-xl bg-red-600 hover:bg-red-600-dark text-white font-bold text-sm shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
                                 <span>Submit Wholesale Application</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                             </button>

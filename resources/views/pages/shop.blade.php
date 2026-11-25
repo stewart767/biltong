@@ -5,20 +5,20 @@
 @section('content')
 
     <!-- Shop Hero Header (Dark with Red Accent) -->
-    <section class="py-16 bg-brand-black border-b border-zinc-800 text-center">
+    <section class="py-16 bg-white border-b border-stone-200 text-center">
         <div class="max-w-4xl mx-auto px-4 space-y-3">
-            <span class="text-xs uppercase tracking-widest text-brand-red font-black">The Butcher’s Range</span>
-            <h1 class="font-editorial text-4xl sm:text-5xl font-black text-white">
+            <span class="text-xs uppercase tracking-widest text-red-600 font-black">The Butcher’s Range</span>
+            <h1 class="font-editorial text-4xl sm:text-5xl font-black text-zinc-900">
                 Artisanal Beef Biltong & Dried Snacks
             </h1>
-            <p class="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto">
+            <p class="text-zinc-600 text-sm sm:text-base max-w-xl mx-auto">
                 Small-batch cured pasture beef, hand-sliced and sealed in Buguruni Malapa. Free delivery in Dar es Salaam on orders over TZS 50,000.
             </p>
         </div>
     </section>
 
     <!-- Catalogue Container (Light Crisp White Area) -->
-    <section class="py-16 bg-zinc-50 text-zinc-900">
+    <section class="py-16 bg-[#FAF6F0] text-zinc-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             
             <!-- Filters Toolbar -->
@@ -27,12 +27,12 @@
                 <!-- Category Tabs (Red Active Pills) -->
                 <div class="flex flex-wrap items-center gap-2">
                     <a href="{{ route('shop') }}" 
-                       class="px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-sm {{ !request('category') ? 'bg-brand-red text-white' : 'bg-white text-zinc-800 hover:bg-zinc-200 border border-zinc-200' }}">
+                       class="px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-sm {{ !request('category') ? 'bg-brand-red text-zinc-900' : 'bg-white text-zinc-800 hover:bg-zinc-200 border border-zinc-200' }}">
                         All Varieties ({{ $products->count() }})
                     </a>
                     @foreach($categories as $category)
                         <a href="{{ route('shop', ['category' => $category->slug]) }}" 
-                           class="px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-sm {{ request('category') === $category->slug ? 'bg-brand-red text-white' : 'bg-white text-zinc-800 hover:bg-zinc-200 border border-zinc-200' }}">
+                           class="px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-sm {{ request('category') === $category->slug ? 'bg-brand-red text-zinc-900' : 'bg-white text-zinc-800 hover:bg-zinc-200 border border-zinc-200' }}">
                             {{ $category->name }} ({{ $category->products_count }})
                         </a>
                     @endforeach
@@ -48,14 +48,14 @@
             @if($products->isEmpty())
                 <div class="text-center py-20 space-y-4">
                     <p class="text-base text-zinc-500">No products found in this category.</p>
-                    <a href="{{ route('shop') }}" class="px-5 py-2.5 rounded-xl bg-brand-red text-white font-bold text-xs inline-block">
+                    <a href="{{ route('shop') }}" class="px-5 py-2.5 rounded-xl bg-brand-red text-zinc-900 font-bold text-xs inline-block">
                         View All Products
                     </a>
                 </div>
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     @foreach($products as $product)
-                        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-brand-red transition duration-300 flex flex-col justify-between group">
+                        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-red-600 transition duration-300 flex flex-col justify-between group">
                             
                             <!-- Top Image with Badges -->
                             <div class="relative h-56 bg-zinc-100 overflow-hidden">
@@ -74,7 +74,7 @@
 
                                 <!-- Pack Size Badge -->
                                 <div class="absolute top-2.5 left-2.5">
-                                    <span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-zinc-900 text-white">
+                                    <span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-zinc-900 text-zinc-900">
                                         {{ $product->pack_size }}
                                     </span>
                                 </div>
@@ -90,7 +90,7 @@
                                         price: {{ $product->effective_price }},
                                         quantity: 1
                                     })"
-                                    class="w-full py-2.5 bg-brand-red hover:bg-brand-red-dark text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition duration-150">
+                                    class="w-full py-2.5 bg-brand-red hover:bg-brand-red-dark text-zinc-900 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition duration-150">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                                 <span>Add to Cart</span>
                             </button>
@@ -107,7 +107,7 @@
                                         {{ $product->formatted_price }}
                                     </span>
                                     @if($product->formatted_original_price)
-                                        <span class="text-xs text-zinc-400 line-through">
+                                        <span class="text-xs text-zinc-600 line-through">
                                             {{ $product->formatted_original_price }}
                                         </span>
                                     @endif

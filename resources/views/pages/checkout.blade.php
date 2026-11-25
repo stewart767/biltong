@@ -7,8 +7,8 @@
     <!-- Header Banner -->
     <section class="py-12 bg-brand-charcoal border-b border-brand-border text-center">
         <div class="max-w-4xl mx-auto px-4 space-y-2">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-red/20 text-brand-red border border-brand-red/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-600/20 text-red-600 border border-red-600/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
                 Secure Checkout & Dispatch
             </span>
             <h1 class="font-editorial text-3xl sm:text-5xl font-bold text-white tracking-wide">
@@ -52,12 +52,12 @@
             
             <!-- If cart is empty -->
             <div x-show="$store.cart.items.length === 0" class="text-center py-20 bg-white rounded-3xl border border-zinc-200 shadow-sm p-8 space-y-4">
-                <div class="w-16 h-16 mx-auto rounded-full bg-red-50 text-brand-red flex items-center justify-center">
+                <div class="w-16 h-16 mx-auto rounded-full bg-red-50 text-red-600 flex items-center justify-center">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                 </div>
                 <h3 class="text-xl font-bold text-zinc-900">Your bag is currently empty</h3>
                 <p class="text-zinc-500 text-sm max-w-sm mx-auto">Select from our freshly cured biltong cuts before proceeding to checkout.</p>
-                <a href="{{ route('shop') }}" class="px-7 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm inline-block shadow-md transition">
+                <a href="{{ route('shop') }}" class="px-7 py-3.5 rounded-full bg-red-600 hover:bg-red-600-dark text-white font-bold text-sm inline-block shadow-md transition">
                     Explore Our Biltong Cuts
                 </a>
             </div>
@@ -77,7 +77,7 @@
                     <!-- 1. Customer Contact Details -->
                     <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-6">
                         <div class="flex items-center gap-3 pb-4 border-b border-zinc-100">
-                            <span class="w-8 h-8 rounded-full bg-brand-red text-white font-bold text-xs flex items-center justify-center shadow">1</span>
+                            <span class="w-8 h-8 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shadow">1</span>
                             <h2 class="font-editorial text-2xl font-bold text-zinc-900">Customer Information</h2>
                         </div>
 
@@ -85,54 +85,54 @@
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Full Name *</label>
                                 <input type="text" name="customer_name" x-model="customerName" required placeholder="e.g. Juma Hamisi"
-                                       class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                       class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                             </div>
 
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Phone / WhatsApp *</label>
                                 <input type="tel" name="customer_phone" x-model="customerPhone" required placeholder="e.g. 0754 000 000"
-                                       class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                       class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                             </div>
                         </div>
 
                         <div class="space-y-1.5">
                             <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Email Address (Optional)</label>
                             <input type="email" name="customer_email" x-model="customerEmail" placeholder="e.g. juma@example.com"
-                                   class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                   class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                         </div>
                     </div>
 
                     <!-- 2. Delivery Method & Destination -->
                     <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-6">
                         <div class="flex items-center gap-3 pb-4 border-b border-zinc-100">
-                            <span class="w-8 h-8 rounded-full bg-brand-red text-white font-bold text-xs flex items-center justify-center shadow">2</span>
+                            <span class="w-8 h-8 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shadow">2</span>
                             <h2 class="font-editorial text-2xl font-bold text-zinc-900">Delivery Method & Location</h2>
                         </div>
 
                         <!-- Method Selector Radio Cards -->
                         <div class="space-y-3">
                             <label class="block p-4 rounded-xl border cursor-pointer transition"
-                                   :class="deliveryMethod === 'dar_express' ? 'bg-red-50/60 border-brand-red ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
+                                   :class="deliveryMethod === 'dar_express' ? 'bg-red-50/60 border-red-600 ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-3">
-                                        <input type="radio" name="delivery_method" value="dar_express" x-model="deliveryMethod" class="text-brand-red focus:ring-brand-red accent-brand-red">
+                                        <input type="radio" name="delivery_method" value="dar_express" x-model="deliveryMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                         <div>
                                             <span class="block text-sm font-bold text-zinc-900">Dar es Salaam Express Delivery</span>
                                             <span class="text-xs text-zinc-500">Fast motorcycle/van delivery right to your doorstep</span>
                                         </div>
                                     </div>
                                     <span class="text-xs font-bold" 
-                                          :class="$store.cart.subtotal >= 50000 ? 'text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full' : 'text-brand-red font-bold'"
+                                          :class="$store.cart.subtotal >= 50000 ? 'text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full' : 'text-red-600 font-bold'"
                                           x-text="$store.cart.subtotal >= 50000 ? 'FREE' : 'TZS 5,000'">
                                     </span>
                                 </div>
                             </label>
 
                             <label class="block p-4 rounded-xl border cursor-pointer transition"
-                                   :class="deliveryMethod === 'pickup' ? 'bg-red-50/60 border-brand-red ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
+                                   :class="deliveryMethod === 'pickup' ? 'bg-red-50/60 border-red-600 ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-3">
-                                        <input type="radio" name="delivery_method" value="pickup" x-model="deliveryMethod" class="text-brand-red focus:ring-brand-red accent-brand-red">
+                                        <input type="radio" name="delivery_method" value="pickup" x-model="deliveryMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                         <div>
                                             <span class="block text-sm font-bold text-zinc-900">Pick-up at Buguruni Malapa</span>
                                             <span class="text-xs text-zinc-500">Collect fresh at our production facility in Dar es Salaam</span>
@@ -143,10 +143,10 @@
                             </label>
 
                             <label class="block p-4 rounded-xl border cursor-pointer transition"
-                                   :class="deliveryMethod === 'upcountry' ? 'bg-red-50/60 border-brand-red ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
+                                   :class="deliveryMethod === 'upcountry' ? 'bg-red-50/60 border-red-600 ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-3">
-                                        <input type="radio" name="delivery_method" value="upcountry" x-model="deliveryMethod" class="text-brand-red focus:ring-brand-red accent-brand-red">
+                                        <input type="radio" name="delivery_method" value="upcountry" x-model="deliveryMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                         <div>
                                             <span class="block text-sm font-bold text-zinc-900">Upcountry Regional Parcel Dispatch</span>
                                             <span class="text-xs text-zinc-500">Arusha, Dodoma, Mwanza, Zanzibar, Mbeya, Morogoro via bus/air</span>
@@ -162,12 +162,12 @@
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">City / Region *</label>
                                 <input type="text" name="delivery_city" value="Dar es Salaam" required
-                                       class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                       class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                             </div>
 
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">District / Area *</label>
-                                <select name="delivery_area" x-model="deliveryArea" class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                <select name="delivery_area" x-model="deliveryArea" class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                     <option value="Buguruni / Malapa">Buguruni / Malapa</option>
                                     <option value="Masaki / Peninsula">Masaki / Peninsula</option>
                                     <option value="Oysterbay">Oysterbay</option>
@@ -188,33 +188,33 @@
                         <div class="space-y-1.5">
                             <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Delivery Address / Landmark *</label>
                             <textarea name="delivery_address" x-model="deliveryAddress" rows="2" required placeholder="e.g. Plot 24, Chole Road near Shoppers Plaza, or House / Office details"
-                                      class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition"></textarea>
+                                      class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition"></textarea>
                         </div>
 
                         <div class="space-y-1.5">
                             <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Delivery Notes / Preferences</label>
                             <input type="text" name="notes" x-model="orderNotes" placeholder="e.g. Call before arrival, leave at reception"
-                                   class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                   class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                         </div>
                     </div>
 
                     <!-- 3. Tanzanian Payment Methods -->
                     <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-6">
                         <div class="flex items-center gap-3 pb-4 border-b border-zinc-100">
-                            <span class="w-8 h-8 rounded-full bg-brand-red text-white font-bold text-xs flex items-center justify-center shadow">3</span>
+                            <span class="w-8 h-8 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shadow">3</span>
                             <h2 class="font-editorial text-2xl font-bold text-zinc-900">Payment Option</h2>
                         </div>
 
                         <div class="space-y-3">
                             <!-- M-Pesa -->
                             <label class="block p-4 rounded-xl border cursor-pointer transition"
-                                   :class="paymentMethod === 'mpesa' ? 'bg-red-50/60 border-brand-red ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
+                                   :class="paymentMethod === 'mpesa' ? 'bg-red-50/60 border-red-600 ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
                                 <div class="flex items-center gap-3">
-                                    <input type="radio" name="payment_method" value="mpesa" x-model="paymentMethod" class="text-brand-red focus:ring-brand-red accent-brand-red">
+                                    <input type="radio" name="payment_method" value="mpesa" x-model="paymentMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                     <div class="flex-1">
                                         <div class="flex items-center justify-between">
                                             <span class="block text-sm font-bold text-zinc-900">Vodacom M-Pesa (Lipa Namba / Till)</span>
-                                            <span class="text-[10px] font-bold uppercase tracking-wider bg-red-100 text-brand-red px-2 py-0.5 rounded">Popular</span>
+                                            <span class="text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 px-2 py-0.5 rounded">Popular</span>
                                         </div>
                                         <span class="text-xs text-zinc-500">Direct mobile prompt / till transfer upon confirmation</span>
                                     </div>
@@ -223,9 +223,9 @@
 
                             <!-- Tigo Pesa -->
                             <label class="block p-4 rounded-xl border cursor-pointer transition"
-                                   :class="paymentMethod === 'tigopesa' ? 'bg-red-50/60 border-brand-red ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
+                                   :class="paymentMethod === 'tigopesa' ? 'bg-red-50/60 border-red-600 ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
                                 <div class="flex items-center gap-3">
-                                    <input type="radio" name="payment_method" value="tigopesa" x-model="paymentMethod" class="text-brand-red focus:ring-brand-red accent-brand-red">
+                                    <input type="radio" name="payment_method" value="tigopesa" x-model="paymentMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                     <div>
                                         <span class="block text-sm font-bold text-zinc-900">Tigo Pesa (Mixx by Yas)</span>
                                         <span class="text-xs text-zinc-500">Fast Tigo mobile money merchant payment</span>
@@ -235,9 +235,9 @@
 
                             <!-- Airtel Money -->
                             <label class="block p-4 rounded-xl border cursor-pointer transition"
-                                   :class="paymentMethod === 'airtel' ? 'bg-red-50/60 border-brand-red ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
+                                   :class="paymentMethod === 'airtel' ? 'bg-red-50/60 border-red-600 ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
                                 <div class="flex items-center gap-3">
-                                    <input type="radio" name="payment_method" value="airtel" x-model="paymentMethod" class="text-brand-red focus:ring-brand-red accent-brand-red">
+                                    <input type="radio" name="payment_method" value="airtel" x-model="paymentMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                     <div>
                                         <span class="block text-sm font-bold text-zinc-900">Airtel Money</span>
                                         <span class="text-xs text-zinc-500">Airtel merchant wallet transfer</span>
@@ -247,9 +247,9 @@
 
                             <!-- Halopesa -->
                             <label class="block p-4 rounded-xl border cursor-pointer transition"
-                                   :class="paymentMethod === 'halopesa' ? 'bg-red-50/60 border-brand-red ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
+                                   :class="paymentMethod === 'halopesa' ? 'bg-red-50/60 border-red-600 ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
                                 <div class="flex items-center gap-3">
-                                    <input type="radio" name="payment_method" value="halopesa" x-model="paymentMethod" class="text-brand-red focus:ring-brand-red accent-brand-red">
+                                    <input type="radio" name="payment_method" value="halopesa" x-model="paymentMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                     <div>
                                         <span class="block text-sm font-bold text-zinc-900">Halopesa</span>
                                         <span class="text-xs text-zinc-500">Halotel mobile money transfer</span>
@@ -259,9 +259,9 @@
 
                             <!-- Cash on Delivery -->
                             <label class="block p-4 rounded-xl border cursor-pointer transition"
-                                   :class="paymentMethod === 'cash_on_delivery' ? 'bg-red-50/60 border-brand-red ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
+                                   :class="paymentMethod === 'cash_on_delivery' ? 'bg-red-50/60 border-red-600 ring-2 ring-brand-red' : 'bg-white border-zinc-200 hover:border-zinc-300'">
                                 <div class="flex items-center gap-3">
-                                    <input type="radio" name="payment_method" value="cash_on_delivery" x-model="paymentMethod" class="text-brand-red focus:ring-brand-red accent-brand-red">
+                                    <input type="radio" name="payment_method" value="cash_on_delivery" x-model="paymentMethod" class="text-red-600 focus:ring-brand-red accent-brand-red">
                                     <div>
                                         <span class="block text-sm font-bold text-zinc-900">Cash on Delivery / Direct Bank Transfer</span>
                                         <span class="text-xs text-zinc-500">Pay courier rider directly upon inspecting sealed pouch</span>
@@ -280,7 +280,7 @@
                             <h3 class="font-editorial text-2xl font-bold text-zinc-900">
                                 Order Summary
                             </h3>
-                            <span class="px-2.5 py-1 rounded-full bg-brand-red text-white text-xs font-bold" x-text="$store.cart.count + ' items'"></span>
+                            <span class="px-2.5 py-1 rounded-full bg-red-600 text-white text-xs font-bold" x-text="$store.cart.count + ' items'"></span>
                         </div>
 
                         <!-- Items in cart preview -->
@@ -315,18 +315,18 @@
                         </div>
 
                         <!-- Grand Total -->
-                        <div class="flex justify-between items-baseline border-t border-zinc-200 pt-4 bg-zinc-50 -mx-6 -mb-6 p-6 rounded-b-2xl">
+                        <div class="flex justify-between items-baseline border-t border-zinc-200 pt-4 bg-[#FAF6F0] -mx-6 -mb-6 p-6 rounded-b-2xl">
                             <div>
                                 <span class="font-bold text-zinc-800 text-sm block">Total Payable</span>
                                 <span class="text-[11px] text-zinc-500">VAT & packaging included</span>
                             </div>
-                            <span class="font-editorial text-3xl font-extrabold text-brand-red" x-text="formattedOrderTotal"></span>
+                            <span class="font-editorial text-3xl font-extrabold text-red-600" x-text="formattedOrderTotal"></span>
                         </div>
 
                         <!-- Submit Order Buttons -->
                         <div class="space-y-3 pt-4">
                             <button type="submit" 
-                                    class="w-full py-4 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2 cursor-pointer">
+                                    class="w-full py-4 rounded-xl bg-red-600 hover:bg-red-600-dark text-white font-bold text-sm shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2 cursor-pointer">
                                 <span>Confirm & Place Order</span>
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             </button>

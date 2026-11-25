@@ -7,8 +7,8 @@
     <!-- Header Banner -->
     <section class="py-16 bg-brand-charcoal border-b border-brand-border relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10 space-y-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-red/20 text-brand-red border border-brand-red/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-600/20 text-red-600 border border-red-600/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
                 The Heritage & Craft
             </span>
             <h1 class="font-editorial text-4xl sm:text-6xl font-bold text-white tracking-wide">
@@ -29,7 +29,7 @@
                     From Buguruni Malapa to Discerning Tables Across Tanzania
                 </h2>
                 <p>
-                    <strong class="text-brand-red">INAS Company Limited</strong> was founded with a singular conviction: Tanzania is home to some of Africa’s richest, most naturally grass-fed cattle, yet the market was inundated with processed, sugar-laden, imported meat snacks.
+                    <strong class="text-red-600">INAS Company Limited</strong> was founded with a singular conviction: Tanzania is home to some of Africa’s richest, most naturally grass-fed cattle, yet the market was inundated with processed, sugar-laden, imported meat snacks.
                 </p>
                 <p>
                     We set out to master the craft of authentic <em>biltong</em>—a method developed centuries ago that relies on whole coriander seed, sea salt, coarse black pepper, and gentle air movement rather than high-temperature ovens or chemical curing salts.
@@ -60,31 +60,31 @@
             <!-- Pillars -->
             <div class="space-y-8">
                 <div class="text-center">
-                    <span class="text-xs uppercase tracking-widest text-brand-red font-bold">Our Philosophy</span>
+                    <span class="text-xs uppercase tracking-widest text-red-600 font-bold">Our Philosophy</span>
                     <h3 class="font-editorial text-3xl font-bold text-zinc-900 mt-1">Our Four Founding Principles</h3>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-2">
-                        <span class="text-xs font-bold text-brand-red uppercase tracking-wider block">01. Unadulterated Meat</span>
+                        <span class="text-xs font-bold text-red-600 uppercase tracking-wider block">01. Unadulterated Meat</span>
                         <p class="text-xs text-zinc-600 leading-relaxed">
                             No fillers, no mechanical re-formation, no soy substitutes. Each pouch contains genuine whole muscle cuts.
                         </p>
                     </div>
                     <div class="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-2">
-                        <span class="text-xs font-bold text-brand-red uppercase tracking-wider block">02. 100% Halal Standards</span>
+                        <span class="text-xs font-bold text-red-600 uppercase tracking-wider block">02. 100% Halal Standards</span>
                         <p class="text-xs text-zinc-600 leading-relaxed">
                             Every batch follows certified Halal slaughtering, handling and packaging protocols under stringent hygienic control.
                         </p>
                     </div>
                     <div class="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-2">
-                        <span class="text-xs font-bold text-brand-red uppercase tracking-wider block">03. Nutrient Density</span>
+                        <span class="text-xs font-bold text-red-600 uppercase tracking-wider block">03. Nutrient Density</span>
                         <p class="text-xs text-zinc-600 leading-relaxed">
                             Over 52g protein per 100g. Naturally abundant in bioavailable iron, vitamin B12, and potassium.
                         </p>
                     </div>
                     <div class="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-2">
-                        <span class="text-xs font-bold text-brand-red uppercase tracking-wider block">04. Local Pride</span>
+                        <span class="text-xs font-bold text-red-600 uppercase tracking-wider block">04. Local Pride</span>
                         <p class="text-xs text-zinc-600 leading-relaxed">
                             Proudly Tanzanian. Supporting local cattle farming communities while competing at an international gourmet standard.
                         </p>
@@ -99,10 +99,10 @@
                     Try our flagship 100g Biltong Original or order direct for same-day Dar es Salaam dispatch.
                 </p>
                 <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                    <a href="{{ route('shop') }}" class="px-8 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm shadow-md transition">
+                    <a href="{{ route('shop') }}" class="px-8 py-3.5 rounded-full bg-red-600 hover:bg-red-600-dark text-white font-bold text-sm shadow-md transition">
                         Shop Our Cuts
                     </a>
-                    <a href="{{ route('contact') }}" class="px-8 py-3.5 rounded-full bg-zinc-800 hover:bg-zinc-700 border border-zinc-600 text-white text-sm font-semibold transition">
+                    <a href="{{ route('contact') }}" class="px-8 py-3.5 rounded-full bg-stone-100 hover:bg-zinc-700 border border-zinc-600 text-white text-sm font-semibold transition">
                         Visit Us in Buguruni Malapa
                     </a>
                 </div>

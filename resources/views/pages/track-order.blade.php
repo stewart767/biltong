@@ -7,8 +7,8 @@
     <!-- Header Section -->
     <section class="py-14 bg-brand-charcoal border-b border-brand-border text-center">
         <div class="max-w-4xl mx-auto px-4 space-y-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-red/20 text-brand-red border border-brand-red/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-600/20 text-red-600 border border-red-600/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
                 Real-Time Dispatch Tracking
             </span>
             <h1 class="font-editorial text-3xl sm:text-5xl font-bold text-white tracking-wide">
@@ -29,8 +29,8 @@
                 <form action="{{ route('track') }}" method="GET" class="flex flex-col sm:flex-row gap-3">
                     <input type="text" name="query" value="{{ request('query', request('order_number')) }}" required 
                            placeholder="Enter Order # (e.g. INAS-202611-01) or Phone (e.g. 0754...)"
-                           class="flex-1 px-4 py-3.5 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 placeholder-zinc-400 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
-                    <button type="submit" class="px-8 py-3.5 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
+                           class="flex-1 px-4 py-3.5 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 placeholder-zinc-400 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                    <button type="submit" class="px-8 py-3.5 rounded-xl bg-red-600 hover:bg-red-600-dark text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                         <span>Track Status</span>
                     </button>
@@ -44,7 +44,7 @@
                     <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-zinc-100">
                         <div>
                             <span class="text-xs text-zinc-500 uppercase tracking-wider block font-semibold">Found Order</span>
-                            <span class="font-editorial text-2xl font-extrabold text-brand-red">#{{ $order->order_number }}</span>
+                            <span class="font-editorial text-2xl font-extrabold text-red-600">#{{ $order->order_number }}</span>
                         </div>
                         <div>
                             <span class="text-xs text-zinc-500 uppercase tracking-wider block font-semibold">Order Placed</span>
@@ -76,8 +76,8 @@
                         <span class="text-xs text-zinc-500 uppercase tracking-wider font-bold block">Delivery Pipeline</span>
                         <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-xs">
                             @foreach($statusOrder as $idx => $st)
-                                <div class="p-3 rounded-xl border {{ $idx <= $currentIndex ? 'bg-red-50 border-brand-red text-brand-red font-bold' : 'bg-zinc-50 border-zinc-200 text-zinc-400' }}">
-                                    <div class="w-6 h-6 mx-auto mb-1.5 rounded-full flex items-center justify-center text-[11px] {{ $idx <= $currentIndex ? 'bg-brand-red text-white' : 'bg-zinc-200 text-zinc-500' }}">
+                                <div class="p-3 rounded-xl border {{ $idx <= $currentIndex ? 'bg-red-50 border-red-600 text-red-600 font-bold' : 'bg-[#FAF6F0] border-zinc-200 text-zinc-400' }}">
+                                    <div class="w-6 h-6 mx-auto mb-1.5 rounded-full flex items-center justify-center text-[11px] {{ $idx <= $currentIndex ? 'bg-red-600 text-white' : 'bg-zinc-200 text-zinc-500' }}">
                                         {{ $idx + 1 }}
                                     </div>
                                     <span>{{ $stages[$st] }}</span>
@@ -98,18 +98,18 @@
                             <span class="text-xs text-zinc-500 uppercase tracking-wider font-bold block">Delivery & Payment</span>
                             <p class="text-xs text-zinc-700"><strong class="text-zinc-900">Method:</strong> {{ $order->delivery_method }}</p>
                             <p class="text-xs text-zinc-700"><strong class="text-zinc-900">Payment:</strong> {{ strtoupper($order->payment_method) }} ({{ ucfirst($order->payment_status) }})</p>
-                            <p class="text-xs text-brand-red font-bold mt-1"><strong class="text-zinc-900">Total:</strong> {{ $order->formatted_total }}</p>
+                            <p class="text-xs text-red-600 font-bold mt-1"><strong class="text-zinc-900">Total:</strong> {{ $order->formatted_total }}</p>
                         </div>
                     </div>
 
                     <!-- Items -->
                     <div class="space-y-2 pt-4 border-t border-zinc-100">
                         <span class="text-xs text-zinc-500 uppercase tracking-wider font-bold block">Items in this Delivery</span>
-                        <div class="divide-y divide-zinc-200 rounded-xl bg-zinc-50 border border-zinc-200 overflow-hidden">
+                        <div class="divide-y divide-zinc-200 rounded-xl bg-[#FAF6F0] border border-zinc-200 overflow-hidden">
                             @foreach($order->items as $item)
                                 <div class="p-3.5 flex items-center justify-between text-xs">
                                     <span class="font-medium text-zinc-900">{{ $item->product_name }} ({{ $item->pack_size }}) × {{ $item->quantity }}</span>
-                                    <span class="font-bold text-brand-red">TZS {{ number_format($item->subtotal, 0) }}</span>
+                                    <span class="font-bold text-red-600">TZS {{ number_format($item->subtotal, 0) }}</span>
                                 </div>
                             @endforeach
                         </div>
@@ -134,7 +134,7 @@
                     </p>
                     <a href="https://wa.me/255682869629?text=Hello%20INAS!%20I%20am%20trying%20to%20track%20my%20order%20query:%20{{ urlencode(request('query')) }}" 
                        target="_blank" 
-                       class="inline-flex items-center gap-2 text-xs text-brand-red font-bold hover:underline">
+                       class="inline-flex items-center gap-2 text-xs text-red-600 font-bold hover:underline">
                         <span>Contact Dispatch Support on WhatsApp</span>
                     </a>
                 </div>

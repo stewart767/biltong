@@ -7,8 +7,8 @@
     <!-- Header Banner -->
     <section class="py-16 bg-brand-charcoal border-b border-brand-border text-center">
         <div class="max-w-4xl mx-auto px-4 space-y-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-red/20 text-brand-red border border-brand-red/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-600/20 text-red-600 border border-red-600/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
                 Get In Touch
             </span>
             <h1 class="font-editorial text-4xl sm:text-6xl font-bold text-white tracking-wide">
@@ -34,7 +34,7 @@
 
                         <div class="space-y-4 text-sm">
                             <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-brand-red border border-red-100 flex-shrink-0">
+                                <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-600 border border-red-100 flex-shrink-0">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                 </div>
                                 <div>
@@ -45,12 +45,12 @@
                             </div>
 
                             <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-brand-red border border-red-100 flex-shrink-0">
+                                <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-600 border border-red-100 flex-shrink-0">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                                 </div>
                                 <div>
                                     <span class="block text-xs text-zinc-500 uppercase font-bold tracking-wider">Direct Hotline & WhatsApp</span>
-                                    <a href="tel:+255682869629" class="text-zinc-900 font-bold hover:text-brand-red transition block">
+                                    <a href="tel:+255682869629" class="text-zinc-900 font-bold hover:text-red-600 transition block">
                                         +255 682 869 629
                                     </a>
                                     <a href="https://wa.me/255682869629" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-emerald-600 font-semibold hover:underline mt-1">
@@ -61,19 +61,19 @@
                             </div>
 
                             <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-brand-red border border-red-100 flex-shrink-0">
+                                <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-600 border border-red-100 flex-shrink-0">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                                 </div>
                                 <div>
                                     <span class="block text-xs text-zinc-500 uppercase font-bold tracking-wider">Official Email</span>
-                                    <a href="mailto:sales@inasbiltong.co.tz" class="text-zinc-900 font-bold hover:text-brand-red transition">
+                                    <a href="mailto:sales@inasbiltong.co.tz" class="text-zinc-900 font-bold hover:text-red-600 transition">
                                         sales@inasbiltong.co.tz
                                     </a>
                                 </div>
                             </div>
 
                             <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-brand-red border border-red-100 flex-shrink-0">
+                                <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-600 border border-red-100 flex-shrink-0">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </div>
                                 <div>
@@ -97,7 +97,7 @@
 
                     <!-- Pickup Notice -->
                     <div class="p-6 rounded-2xl bg-white border border-red-200 shadow-sm space-y-2">
-                        <span class="text-xs uppercase tracking-wider text-brand-red font-bold flex items-center gap-1.5">
+                        <span class="text-xs uppercase tracking-wider text-red-600 font-bold flex items-center gap-1.5">
                             <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                             <span>Direct Customer Pickup Available</span>
                         </span>
@@ -111,12 +111,12 @@
                 <div class="lg:col-span-7">
                     <div class="p-8 sm:p-10 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-6">
                         <div class="space-y-2">
-                            <span class="text-xs uppercase tracking-widest text-brand-red font-bold">Online Inquiry</span>
+                            <span class="text-xs uppercase tracking-widest text-red-600 font-bold">Online Inquiry</span>
                             <h2 class="font-editorial text-3xl font-bold text-zinc-900">
                                 Send Us a Message
                             </h2>
                             <p class="text-xs text-zinc-500">
-                                Fill out the form below. For bulk or wholesale orders, please visit our <a href="{{ route('wholesale') }}" class="text-brand-red underline font-bold">Wholesale Portal</a>.
+                                Fill out the form below. For bulk or wholesale orders, please visit our <a href="{{ route('wholesale') }}" class="text-red-600 underline font-bold">Wholesale Portal</a>.
                             </p>
                         </div>
 
@@ -132,24 +132,24 @@
                                 <div class="space-y-1.5">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Your Full Name</label>
                                     <input type="text" name="name" required placeholder="e.g. Salim Bakari"
-                                           class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                           class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                 </div>
                                 <div class="space-y-1.5">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Phone / WhatsApp</label>
                                     <input type="text" name="phone" required placeholder="e.g. +255 754 000 000"
-                                           class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                           class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                 </div>
                             </div>
 
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Email Address</label>
                                 <input type="email" name="email" required placeholder="e.g. salim@example.com"
-                                       class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                       class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                             </div>
 
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Subject / Purpose</label>
-                                <select name="subject" class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition">
+                                <select name="subject" class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
                                     <option value="General Inquiry">General Product Inquiry</option>
                                     <option value="Retail Order Status">Question About an Existing Order</option>
                                     <option value="Buguruni Pickup">Buguruni Malapa Pickup Inquiry</option>
@@ -160,10 +160,10 @@
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">Your Message</label>
                                 <textarea name="message" rows="4" required placeholder="Tell us how we can help you..."
-                                          class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-brand-red focus:ring-1 focus:ring-brand-red focus:outline-none transition"></textarea>
+                                          class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition"></textarea>
                             </div>
 
-                            <button type="submit" class="w-full py-4 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                            <button type="submit" class="w-full py-4 rounded-xl bg-red-600 hover:bg-red-600-dark text-white font-bold text-sm shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
                                 <span>Send Message to INAS Team</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                             </button>
