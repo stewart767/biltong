@@ -258,7 +258,7 @@
                         <div class="grid grid-cols-2 gap-3">
                             <div class="space-y-1">
                                 <label class="block text-[10px] uppercase font-bold text-brand-muted">Badge Tag</label>
-                                <input type="text" name="hero_slide_4_tag" value="{{ $settings['hero_slide_4_tag'] ?? 'CHEF\'S SPECIAL' }}"
+                                <input type="text" name="hero_slide_4_tag" value="{{ $settings['hero_slide_4_tag'] ?? 'CHEF SPECIAL' }}"
                                        class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
                             </div>
                             <div class="space-y-1">
@@ -270,7 +270,7 @@
 
                         <div class="space-y-1">
                             <label class="block text-[10px] uppercase font-bold text-brand-muted">Dish / Cut Name</label>
-                            <input type="text" name="hero_slide_4_title" value="{{ $settings['hero_slide_4_title'] ?? 'Carver\'s Whole Slab' }}"
+                            <input type="text" name="hero_slide_4_title" value="{{ $settings['hero_slide_4_title'] ?? 'Carvers Whole Slab' }}"
                                    class="w-full px-3 py-2 rounded-lg bg-brand-dark border border-brand-border text-xs text-brand-cream focus:border-brand-red focus:outline-none">
                         </div>
 
