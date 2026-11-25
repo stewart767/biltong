@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Cache;
 
 class Category extends Model
 {
@@ -30,6 +31,17 @@ class Category extends Model
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    public static function getActiveCategories()
+    {
+        try {
+            return Cache::remember('active_categories_list', 3600, function () {
+                return static::where('is_active', true)->orderBy('sort_order')->get();
+            });
+        } catch (\Throwable $e) {
+            return static::where('is_active', true)->orderBy('sort_order')->get();
+        }
     }
 
     public function getImageUrlAttribute(): string

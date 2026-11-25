@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -48,6 +49,8 @@ class AdminCategoryController extends Controller
             'image' => $imagePath,
         ]);
 
+        Cache::forget('active_categories_list');
+
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
 
@@ -81,12 +84,16 @@ class AdminCategoryController extends Controller
             'image' => $imagePath,
         ]);
 
+        Cache::forget('active_categories_list');
+
         return redirect()->route('admin.categories.index')->with('success', 'Category photo and details updated successfully.');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
+        Cache::forget('active_categories_list');
+
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted.');
     }
 }

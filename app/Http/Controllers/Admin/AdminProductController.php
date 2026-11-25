@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -122,6 +123,8 @@ class AdminProductController extends Controller
             ]);
         }
 
+        Cache::forget('home_featured_products');
+
         return redirect()->route('admin.products.index')->with('success', "Product '{$product->name}' created successfully.");
     }
 
@@ -211,6 +214,8 @@ class AdminProductController extends Controller
             ]);
         }
 
+        Cache::forget('home_featured_products');
+
         return redirect()->route('admin.products.index')->with('success', "Product '{$product->name}' updated successfully.");
     }
 
@@ -218,6 +223,8 @@ class AdminProductController extends Controller
     {
         $name = $product->name;
         $product->delete();
+        Cache::forget('home_featured_products');
+
         return redirect()->route('admin.products.index')->with('success', "Product '{$name}' deleted.");
     }
 }
