@@ -194,6 +194,81 @@
                 </div>
 
             </div>
+
+            <!-- TOP HORIZONTAL NAVIGATION (Visible on Desktop) -->
+            <nav class="hidden lg:flex items-center gap-1.5 py-2.5 border-t border-stone-100 overflow-x-auto text-xs font-bold">
+                <!-- Home -->
+                <a href="{{ route('home') }}" 
+                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('home') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span>{{ app()->getLocale() === 'sw' ? 'Nyumbani' : 'Home' }}</span>
+                </a>
+
+                <!-- Menu / Shop Cuts -->
+                <a href="{{ route('shop') }}" 
+                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('shop*') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                    </svg>
+                    <span>{{ app()->getLocale() === 'sw' ? 'Menyu ya Biltong' : 'Menu' }}</span>
+                </a>
+
+                <!-- Offers / Specials -->
+                <a href="{{ route('shop') }}#offers" 
+                   class="flex items-center gap-2 px-4 py-2 rounded-full transition text-zinc-600 hover:bg-stone-100 hover:text-red-600">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                    </svg>
+                    <span>{{ app()->getLocale() === 'sw' ? 'Punguzo & Ofa' : 'Offers' }}</span>
+                </a>
+
+                <!-- Track Orders -->
+                <a href="{{ route('track') }}" 
+                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('track') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    <span>{{ app()->getLocale() === 'sw' ? 'Fuatilia Oda' : 'Orders' }}</span>
+                </a>
+
+                <!-- Wholesale -->
+                <a href="{{ route('wholesale') }}" 
+                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('wholesale') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                    <span>{{ app()->getLocale() === 'sw' ? 'Uuzaji wa Jumla' : 'Wholesale' }}</span>
+                </a>
+
+                <!-- The Craft -->
+                <a href="{{ route('craft') }}" 
+                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('craft') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <span>{{ app()->getLocale() === 'sw' ? 'Ukaushaji Wetu' : 'The Craft' }}</span>
+                </a>
+
+                <!-- About Us -->
+                <a href="{{ route('about') }}" 
+                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('about') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>{{ app()->getLocale() === 'sw' ? 'Kuhusu Sisi' : 'About Us' }}</span>
+                </a>
+
+                <!-- Support / Contact -->
+                <a href="{{ route('contact') }}" 
+                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('contact') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <span>{{ app()->getLocale() === 'sw' ? 'Mawasiliano' : 'Support' }}</span>
+                </a>
+            </nav>
         </div>
 
         <!-- Mobile Drawer Navigation -->
@@ -208,9 +283,13 @@
             </form>
 
             <a href="{{ route('home') }}" class="block px-3 py-2 rounded-xl text-sm font-bold {{ request()->routeIs('home') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Home</a>
-            <a href="{{ route('shop') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('shop*') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Menu / Shop Cuts</a>
-            <a href="{{ route('track') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('track') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Track Order</a>
+            <a href="{{ route('shop') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('shop*') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Menu</a>
+            <a href="{{ route('shop') }}#offers" class="block px-3 py-2 rounded-xl text-sm font-semibold text-zinc-700 hover:bg-red-50">Offers</a>
+            <a href="{{ route('track') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('track') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Orders</a>
+            <a href="{{ route('wholesale') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('wholesale') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Wholesale</a>
+            <a href="{{ route('craft') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('craft') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">The Craft</a>
             <a href="{{ route('about') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('about') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">About Us</a>
+            <a href="{{ route('contact') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('contact') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Support / Contact</a>
             
             <div class="pt-2">
                 <a href="https://wa.me/255682869629" target="_blank" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-bold text-xs">
@@ -220,90 +299,11 @@
         </div>
     </header>
 
-    <!-- MAIN TWO-COLUMN APP CONTAINER (Sidebar on Left + Content on Right) -->
+    <!-- MAIN APP CONTAINER (Full Width without Sidebar) -->
     <div class="max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1">
-        <div class="flex flex-col lg:flex-row gap-8 items-start">
-            
-            <!-- LEFT VERTICAL SIDEBAR NAVIGATION (Exact TasteHouse Design) -->
-            <aside class="hidden lg:flex flex-col w-56 flex-shrink-0 sticky top-24 space-y-6">
-                
-                <!-- Navigation Menu List -->
-                <nav class="space-y-1.5 w-full">
-                    
-                    <!-- Home (Active: Orange pill with white text & icon) -->
-                    <a href="{{ route('home') }}" 
-                       class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition {{ request()->routeIs('home') ? 'bg-red-600 text-white shadow-md shadow-red-600/30' : 'text-zinc-600 hover:bg-white hover:text-red-600' }}">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                        </svg>
-                        <span>Home</span>
-                    </a>
-
-                    <!-- Menu / Shop Cuts -->
-                    <a href="{{ route('shop') }}" 
-                       class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition {{ request()->routeIs('shop*') ? 'bg-red-600 text-white shadow-md shadow-red-600/30' : 'text-zinc-600 hover:bg-white hover:text-red-600' }}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-                        </svg>
-                        <span>Menu</span>
-                    </a>
-
-                    <!-- Offers / Specials -->
-                    <a href="{{ route('shop') }}" 
-                       class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition text-zinc-600 hover:bg-white hover:text-red-600">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                        </svg>
-                        <span>Offers</span>
-                    </a>
-
-                    <!-- Orders / Track Order -->
-                    <a href="{{ route('track') }}" 
-                       class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition {{ request()->routeIs('track') ? 'bg-red-600 text-white shadow-md shadow-red-600/30' : 'text-zinc-600 hover:bg-white hover:text-red-600' }}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                        </svg>
-                        <span>Orders</span>
-                    </a>
-
-                    <!-- Support -->
-                    <a href="https://wa.me/255682869629?text=Habari%20INAS%20Biltong" 
-                       target="_blank"
-                       class="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-bold transition text-zinc-600 hover:bg-white hover:text-red-600">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
-                        </svg>
-                        <span>Support</span>
-                    </a>
-
-                </nav>
-
-                <!-- Bottom Promo Mini-Card Widget (Exact TasteHouse mini-card) -->
-                <div class="rounded-3xl bg-white border border-red-200/80 p-5 text-center space-y-3 relative overflow-hidden shadow-sm">
-                    <span class="text-[10px] font-black uppercase tracking-wider text-red-700 bg-red-100/90 px-2.5 py-0.5 rounded-full inline-block">
-                        Special Promo
-                    </span>
-                    <h5 class="font-extrabold text-sm text-zinc-900 leading-tight">
-                        Get 10% OFF<br><span class="text-xs font-normal text-zinc-600">on your first order</span>
-                    </h5>
-                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden shadow-md border-2 border-white">
-                        <img src="{{ asset(\App\Models\SiteSetting::get('sidebar_promo_image', 'images/bbq-biltong.jpg')) }}" alt="Biltong Promo" class="w-full h-full object-cover">
-                    </div>
-                    <a href="{{ route('shop') }}" 
-                       class="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md transition transform hover:scale-[1.02]">
-                        <span>Order Now</span>
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </a>
-                </div>
-
-            </aside>
-
-            <!-- RIGHT MAIN CONTENT AREA -->
-            <main class="flex-1 w-full min-w-0">
-                @yield('content')
-            </main>
-
-        </div>
+        <main class="w-full min-w-0">
+            @yield('content')
+        </main>
     </div>
 
     <!-- FIRST VISIT LANGUAGE CHOOSER POPUP MODAL -->
