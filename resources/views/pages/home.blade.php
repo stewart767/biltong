@@ -4,182 +4,178 @@
 
 @section('content')
 
-    <!-- 1. Hero Section (Sizzling Butcher Spread with Grand 10% Offer & Arched Curve) -->
-    <section class="relative bg-brand-black overflow-hidden pt-6 pb-20 sm:pb-28">
-        <!-- Ambient Sizzling Background with Warm Embers & Charcoal Vignette -->
+    <!-- 1. Hero Full-Bleed Clear Automated Image Slider -->
+    <section class="relative bg-zinc-950 overflow-hidden pt-12 pb-24 sm:pb-32 min-h-[580px] sm:min-h-[660px] lg:min-h-[720px] flex items-center justify-center text-center"
+             x-data="{
+                 activeSlide: 0,
+                 timer: null,
+                 slides: [
+                     {
+                         image: '{{ asset("images/bbq-biltong.jpg") }}',
+                         tag: 'BUGURUNI MALAPA • DAR ES SALAAM',
+                         title: '{{ app()->getLocale() === "sw" ? "NYAMA HALISI." : "REAL BEEF." }}',
+                         subtitle: '{{ app()->getLocale() === "sw" ? "LADHA HALISI." : "REAL FLAVOUR." }}',
+                         desc: '{{ app()->getLocale() === "sw" ? "Nyama halisi ya ng\'ombe wa malishoni Tanzania iliyokaushwa kwa asili na viungo vya giligilani vilivyokaangwa." : "100% pasture-grazed Tanzanian beef cured with skillet-toasted coriander and natural air drying. Tender, savoury, authentic." }}',
+                         ctaText: '{{ app()->getLocale() === "sw" ? "Nunua Biltong Sasa" : "Shop Biltong Cuts" }}',
+                         ctaLink: '{{ route("shop") }}'
+                     },
+                     {
+                         image: '{{ asset("images/hero-biltong.jpg") }}',
+                         tag: '{{ app()->getLocale() === "sw" ? "PAKITI YA 100G YA ASILI" : "ORIGINAL 100G FLAGSHIP PACK" }}',
+                         title: 'BILTONG ORIGINAL.',
+                         subtitle: '52G PROTEIN.',
+                         desc: '{{ app()->getLocale() === "sw" ? "Minofu mikavu iliyokatwa kwa ufundi. Protini safi 52g, 100% Halal, haina kemikali wala nitrati." : "Clean gourmet protein packed with 52.4g protein per 100g. 100% Halal certified, zero nitrates, zero artificial salts." }}',
+                         ctaText: '{{ app()->getLocale() === "sw" ? "Agiza Biltong Original" : "Order Biltong Original" }}',
+                         ctaLink: '{{ route("product.show", "biltong-original-100g") }}'
+                     },
+                     {
+                         image: '{{ asset("images/biltong-original-2.jpg") }}',
+                         tag: '{{ app()->getLocale() === "sw" ? "UKAUSHAJI WA ASILI WA MASAA 72" : "72-HOUR ARTISAN AIR CURE" }}',
+                         title: 'SLOW CURED.',
+                         subtitle: 'PURE TENDER.',
+                         desc: '{{ app()->getLocale() === "sw" ? "Haikupikwa wala kuchomwa moshi. Ukaushaji wa upepo wa asili huweka virutubisho na ladha halisi ya nyama." : "Never cooked, never heat-dried. Slow air convection locks in natural juices, deep umami notes and tender texture." }}',
+                         ctaText: '{{ app()->getLocale() === "sw" ? "Fahamu Ukaushaji Wetu" : "Discover Air-Cure Craft" }}',
+                         ctaLink: '{{ route("craft") }}'
+                     },
+                     {
+                         image: '{{ asset("images/craft-spices.jpg") }}',
+                         tag: '{{ app()->getLocale() === "sw" ? "VIUNGO ASILIA VILIVYOKAANGWA" : "SKILLET-TOASTED SPICES" }}',
+                         title: 'WHOLE SPICES.',
+                         subtitle: 'ZERO MSG.',
+                         desc: '{{ app()->getLocale() === "sw" ? "Mbegu za giligilani, pilipili manga ya Tellicherry na siki ya tofaa kwa ukaukaji safi na ladha murua." : "Crushed coriander toasted in cast iron, Tellicherry black peppercorns and pure apple cider marinade." }}',
+                         ctaText: '{{ app()->getLocale() === "sw" ? "Tazama Bidhaa Zote" : "Explore All Products" }}',
+                         ctaLink: '{{ route("shop") }}'
+                     }
+                 ],
+                 next() {
+                     this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                 },
+                 prev() {
+                     this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
+                 },
+                 startAuto() {
+                     this.stopAuto();
+                     this.timer = setInterval(() => { this.next() }, 4500);
+                 },
+                 stopAuto() {
+                     if (this.timer) {
+                         clearInterval(this.timer);
+                         this.timer = null;
+                     }
+                 }
+             }"
+             x-init="startAuto()"
+             @mouseenter="stopAuto()"
+             @mouseleave="startAuto()">
+
+        <!-- FULL BACKGROUND CLEAR IMAGES (Edge-to-Edge, Vivid, Bright, Automated) -->
         <div class="absolute inset-0 z-0">
-            <img src="{{ asset('images/bbq-biltong.jpg') }}" 
-                 alt="INAS Artisanal Beef Biltong & Prime Cuts" 
-                 class="w-full h-full object-cover object-center opacity-30 scale-105 filter brightness-75 contrast-125">
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/85 to-brand-black/70"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-brand-black/80"></div>
-            <!-- Subtle fiery glow at the top right -->
-            <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-red/15 rounded-full blur-3xl pointer-events-none"></div>
+            <template x-for="(slide, index) in slides" :key="index">
+                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+                     :class="activeSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none z-0'">
+                    <img :src="slide.image" 
+                         :alt="slide.title" 
+                         class="w-full h-full object-cover object-center brightness-95 contrast-105">
+                </div>
+            </template>
+            
+            <!-- Soft readable vignette (Bright & Clear: photos stay visible and colorful) -->
+            <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-black/40 to-black/35 pointer-events-none"></div>
+            <div class="absolute inset-0 z-10 bg-black/20 pointer-events-none"></div>
         </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
+        <!-- Slider Navigation Arrows (Left / Right) -->
+        <button @click="prev()" 
+                class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/55 hover:bg-brand-red text-white border border-white/25 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer shadow-xl hover:scale-110"
+                aria-label="Previous Slide">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button @click="next()" 
+                class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/55 hover:bg-brand-red text-white border border-white/25 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer shadow-xl hover:scale-110"
+                aria-label="Next Slide">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </button>
+
+        <!-- Clean Main Centered Content (No Boxes, No Half-Image Designs) -->
+        <div class="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col items-center">
             
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                
-                <!-- Hero Left: Headline, Story & Core CTAs -->
-                <div class="lg:col-span-7 space-y-6 text-left">
-                    
-                    <!-- Offer Pill with Pulsing Dot -->
-                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-red/20 border border-brand-red/50 text-white backdrop-blur-md shadow-lg">
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-brand-red text-white uppercase tracking-wider flex items-center gap-1.5 shadow">
-                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-                            {{ app()->getLocale() === 'sw' ? 'OFA YA LEO' : 'TODAY\'S OFFER' }}
-                        </span>
-                        <span class="text-xs font-bold tracking-wide text-zinc-100">
-                            {{ app()->getLocale() === 'sw' ? 'Usafirishaji BURE Dar & Punguzo la 10% kwa Oda zaidi ya TZS 50,000' : 'FREE Dar Delivery & 10% Off Orders Over TZS 50,000' }}
-                        </span>
-                    </div>
+            <!-- Category / Location Pill -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-brand-red/80 text-white backdrop-blur-md shadow-lg mb-4">
+                <span class="w-2 h-2 rounded-full bg-brand-red animate-ping"></span>
+                <span class="text-xs font-bold tracking-widest text-zinc-100 uppercase" x-text="slides[activeSlide].tag">
+                    BUGURUNI MALAPA • DAR ES SALAAM
+                </span>
+            </div>
 
-                    <!-- Main Bold Headline -->
-                    <h1 class="font-editorial text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05]">
-                        @if(app()->getLocale() === 'sw')
-                            NYAMA HALISI.<br>
-                            <span class="text-brand-red-light italic font-serif">LADHA HALISI.</span>
-                        @else
-                            REAL BEEF.<br>
-                            <span class="text-brand-red-light italic font-serif">REAL FLAVOUR.</span>
-                        @endif
-                    </h1>
+            <!-- Big Bold Dynamic Headline -->
+            <h1 class="font-editorial text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+                <span x-text="slides[activeSlide].title">{{ app()->getLocale() === 'sw' ? 'NYAMA HALISI.' : 'REAL BEEF.' }}</span> 
+                <span class="text-brand-red italic font-serif" x-text="slides[activeSlide].subtitle">{{ app()->getLocale() === 'sw' ? 'LADHA HALISI.' : 'REAL FLAVOUR.' }}</span>
+            </h1>
 
-                    <!-- Subheadline -->
-                    <p class="max-w-xl text-base sm:text-lg text-zinc-300 font-normal leading-relaxed">
-                        @if(app()->getLocale() === 'sw')
-                            Imetengenezwa kwa ufundi stadi Buguruni Malapa, Dar es Salaam. Asilimia 100 nyama ya ng'ombe wa malishoni Tanzania, giligilani iliyokaangwa kwenye kikaango cha chuma, pilipili manga na ukaushaji wa asili wa upepo kwa utamu na ulaini wa kipekee.
-                        @else
-                            Handcrafted in Buguruni Malapa, Dar es Salaam. 100% pasture-grazed Tanzanian beef steeped in skillet-toasted coriander, coarse black pepper and natural air curing for tender, savory richness.
-                        @endif
-                    </p>
+            <!-- Dynamic Description -->
+            <p class="mt-4 max-w-2xl text-base sm:text-xl text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]" 
+               x-text="slides[activeSlide].desc">
+                Handcrafted in Buguruni Malapa, Dar es Salaam. 100% pasture-grazed Tanzanian beef cured with skillet-toasted coriander and cracked black pepper.
+            </p>
 
-                    <!-- CTAs with vibrant Red Buttons -->
-                    <div class="flex flex-wrap items-center gap-4 pt-2">
-                        <a href="{{ route('shop') }}" 
-                           class="px-8 py-4 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-extrabold text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(220,38,38,0.5)] hover:scale-105 transition transform duration-200 flex items-center gap-2 cursor-pointer">
-                            <span>{{ app()->getLocale() === 'sw' ? 'Nunua Biltong Sasa' : 'Shop Biltong Cuts' }}</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </a>
-                        <a href="{{ route('about') }}" 
-                           class="px-7 py-4 rounded-full bg-brand-charcoal/90 border border-zinc-700 hover:border-white text-white font-semibold text-sm transition duration-200">
-                            {{ app()->getLocale() === 'sw' ? 'Fahamu Simulizi Yetu' : 'Discover Our Story' }}
-                        </a>
-                    </div>
+            <!-- Clean Direct CTAs -->
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <a :href="slides[activeSlide].ctaLink" 
+                   class="px-8 py-4 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-black text-sm uppercase tracking-wider shadow-[0_0_35px_rgba(220,38,38,0.7)] hover:scale-105 transition transform duration-200 flex items-center gap-2 cursor-pointer border border-red-500/50">
+                    <span x-text="slides[activeSlide].ctaText">{{ app()->getLocale() === 'sw' ? 'Nunua Biltong Sasa' : 'Shop Biltong Cuts' }}</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
 
-                    <!-- 4 Badges row -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-zinc-800 text-left">
-                        <div>
-                            <span class="block text-2xl font-black text-brand-red-light">52g</span>
-                            <span class="text-[11px] text-zinc-400 uppercase tracking-wider font-semibold">Protein / 100g</span>
-                        </div>
-                        <div>
-                            <span class="block text-2xl font-black text-white">100%</span>
-                            <span class="text-[11px] text-zinc-400 uppercase tracking-wider font-semibold">Halal Certified</span>
-                        </div>
-                        <div>
-                            <span class="block text-2xl font-black text-brand-red-light">0%</span>
-                            <span class="text-[11px] text-zinc-400 uppercase tracking-wider font-semibold">Nitrates / MSG</span>
-                        </div>
-                        <div>
-                            <span class="block text-2xl font-black text-white">72 hrs</span>
-                            <span class="text-[11px] text-zinc-400 uppercase tracking-wider font-semibold">Natural Air Cure</span>
-                        </div>
-                    </div>
+                <a href="https://wa.me/255682869629?text={{ urlencode('Habari INAS Biltong, nataka kuagiza Biltong...') }}"
+                   target="_blank"
+                   rel="noopener"
+                   class="px-7 py-4 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm tracking-wide transition transform hover:scale-105 duration-200 shadow-lg flex items-center gap-2 cursor-pointer border border-emerald-400/40">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    <span>{{ app()->getLocale() === 'sw' ? 'Agiza Kupitia WhatsApp' : 'Order via WhatsApp' }}</span>
+                </a>
+            </div>
 
+            <!-- 4 Trust Badges (Clean, Minimalist Horizontal Row) -->
+            <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 w-full max-w-3xl">
+                <div class="bg-black/50 backdrop-blur-md py-3 px-4 rounded-2xl border border-white/20 text-center shadow-lg">
+                    <span class="block text-2xl font-black text-brand-red">52g</span>
+                    <span class="text-[11px] text-zinc-200 uppercase tracking-wider font-bold">Protein / 100g</span>
                 </div>
-
-                <!-- Hero Right: Grand Butcher Showcase with Giant 10% Discount (Matching Reference Image) -->
-                <div class="lg:col-span-5 relative flex flex-col justify-center">
-                    
-                    <!-- Outer Decorative Container -->
-                    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-b from-zinc-900/90 via-black/95 to-black border border-zinc-800 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-md">
-                        
-                        <!-- Top Sizzling Beef Visual -->
-                        <div class="relative h-60 sm:h-72 overflow-hidden group">
-                            <img src="{{ asset('images/bbq-biltong.jpg') }}" 
-                                 alt="INAS Artisanal Beef Biltong & Cuts" 
-                                 class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                            
-                            <!-- Live Butcher Tag Overlay -->
-                            <div class="absolute top-4 left-4">
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/80 text-white border border-white/20 text-xs font-bold backdrop-blur-md">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                    <span>Buguruni Malapa • Fresh Daily</span>
-                                </span>
-                            </div>
-
-                            <div class="absolute top-4 right-4">
-                                <span class="px-3 py-1 rounded-full bg-brand-red text-white text-[11px] font-black uppercase tracking-wider shadow-lg">
-                                    100g Original
-                                </span>
-                            </div>
-
-                            <!-- Bottom Floating Title -->
-                            <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-white">
-                                <span class="font-bold text-sm drop-shadow">Biltong Original 100g</span>
-                                <span class="text-brand-red-light font-black text-sm drop-shadow">TZS 10,000</span>
-                            </div>
-                        </div>
-
-                        <!-- Grand Typographic 10% Offer Box (Exact Layout from Reference Image) -->
-                        <div class="p-6 sm:p-7 text-center space-y-4 bg-zinc-950/80 border-t border-zinc-850">
-                            
-                            <!-- Accent Flanked Offer Title -->
-                            <div class="flex items-center justify-center gap-3">
-                                <span class="h-0.5 w-10 bg-brand-red"></span>
-                                <span class="text-xs uppercase font-extrabold tracking-widest text-brand-red">
-                                    {{ app()->getLocale() === 'sw' ? 'USIKOSE OFA MAALUM' : "DON'T MISS THE OFFER" }}
-                                </span>
-                                <span class="h-0.5 w-10 bg-brand-red"></span>
-                            </div>
-
-                            <!-- Free Delivery + Giant Red 10% Typography -->
-                            <div class="space-y-1">
-                                <span class="block text-sm sm:text-base font-bold text-white uppercase tracking-wider">
-                                    {{ app()->getLocale() === 'sw' ? 'Usafirishaji Bure & Punguzo la' : 'Free Delivery & Discount' }}
-                                </span>
-                                <div class="font-editorial text-6xl sm:text-7xl font-black text-brand-red tracking-tight leading-none drop-shadow-[0_2px_15px_rgba(220,38,38,0.4)]">
-                                    10% OFF
-                                </div>
-                            </div>
-
-                            <p class="text-xs text-zinc-400 max-w-xs mx-auto leading-relaxed">
-                                {{ app()->getLocale() === 'sw' 
-                                    ? 'Biltong bora zaidi Tanzania, iliyotengenezwa kwa ufundi stadi na viungo asilia vya upepo.' 
-                                    : 'The finest artisanal beef biltong, air-cured to tender perfection in Dar es Salaam.' 
-                                }}
-                            </p>
-
-                            <!-- Direct Add to Cart / Shop CTA Button -->
-                            <div class="pt-1">
-                                <a href="{{ route('shop') }}" 
-                                   class="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-red-900/50 transition transform hover:scale-[1.02] duration-150 cursor-pointer">
-                                    <span>{{ app()->getLocale() === 'sw' ? 'Agiza Sasa Mtandaoni' : 'Order Now Online' }}</span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                                </a>
-                            </div>
-
-                        </div>
-
-                    </div>
-
+                <div class="bg-black/50 backdrop-blur-md py-3 px-4 rounded-2xl border border-white/20 text-center shadow-lg">
+                    <span class="block text-2xl font-black text-white">100%</span>
+                    <span class="text-[11px] text-zinc-200 uppercase tracking-wider font-bold">Halal Certified</span>
                 </div>
+                <div class="bg-black/50 backdrop-blur-md py-3 px-4 rounded-2xl border border-white/20 text-center shadow-lg">
+                    <span class="block text-2xl font-black text-brand-red">0%</span>
+                    <span class="text-[11px] text-zinc-200 uppercase tracking-wider font-bold">Nitrates / MSG</span>
+                </div>
+                <div class="bg-black/50 backdrop-blur-md py-3 px-4 rounded-2xl border border-white/20 text-center shadow-lg">
+                    <span class="block text-2xl font-black text-white">72 hrs</span>
+                    <span class="text-[11px] text-zinc-200 uppercase tracking-wider font-bold">Natural Air Cure</span>
+                </div>
+            </div>
 
+            <!-- Automated Slide Indicator Dots / Progress Pills -->
+            <div class="flex items-center justify-center gap-3 mt-8">
+                <template x-for="(slide, i) in slides" :key="i">
+                    <button @click="activeSlide = i" 
+                            class="transition-all duration-300 rounded-full cursor-pointer shadow-md"
+                            :class="activeSlide === i ? 'w-10 h-3 bg-brand-red border border-white/60' : 'w-3 h-3 bg-white/50 hover:bg-white'"
+                            :aria-label="'Go to slide ' + (i + 1)">
+                    </button>
+                </template>
             </div>
 
         </div>
 
-        <!-- Distinctive Arched Curve Transition to White Section (As seen in the screenshot!) -->
-        <div class="relative -mb-1 w-full overflow-hidden leading-none z-20">
-            <svg class="relative block w-full h-12 sm:h-16 text-white" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M0,0 C300,90 900,90 1200,0 L1200,120 L0,120 Z" fill="currentColor"></path>
+        <!-- Distinctive Arched Curve Transition to White Section (Smooth & Crisp) -->
+        <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-30 pointer-events-none">
+            <svg class="relative block w-full h-10 sm:h-14 text-white" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0 C300,85 900,85 1200,0 L1200,120 L0,120 Z" fill="currentColor"></path>
             </svg>
         </div>
     </section>
-
 
     <!-- 2. White Body Area: Category Showcase (Matching Banner & 3 Sub-Cards from User Image) -->
     <section class="bg-white text-zinc-900 pt-8 pb-16">
