@@ -278,8 +278,8 @@
                 </span>
 
                 <h2 class="text-3xl sm:text-4xl font-black text-zinc-900 leading-[1.1] tracking-tight">
-                    {{ app()->getLocale() === 'sw' ? 'Ofa Maalum za Biltong' : 'Special' }}<br>
-                    <span class="text-red-600">{{ app()->getLocale() === 'sw' ? 'Na Punguzo' : 'Combo Deals' }}</span>
+                    {{ app()->getLocale() === 'sw' ? 'Ofa Maalum za Biltong' : 'Best Beef' }}<br>
+                    <span class="text-red-600">{{ app()->getLocale() === 'sw' ? 'Na Punguzo' : 'Biltong Bites' }}</span>
                 </h2>
 
                 <p class="text-xs sm:text-sm text-zinc-600 leading-relaxed">
