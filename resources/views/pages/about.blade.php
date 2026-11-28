@@ -133,17 +133,23 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div class="p-6 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] space-y-3">
-                <img src="{{ asset('images/partners/trc-sgr.svg') }}" alt="TRC SGR Logo" class="h-16 w-full object-contain bg-white rounded-xl p-2 border border-[#E8DDD0]">
+                <div class="h-20 w-full bg-white rounded-xl p-2 border border-[#E8DDD0] flex items-center justify-center">
+                    @include('partials.partner-logo', ['partner' => 'trc', 'class' => 'h-full w-auto'])
+                </div>
                 <h3 class="font-extrabold text-base text-zinc-900">SGR (Standard Gauge Railway)</h3>
                 <p class="text-xs text-zinc-600 leading-relaxed">Serving travelers commuting between major cities in Tanzania with convenient high-protein biltong packs.</p>
             </div>
             <div class="p-6 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] space-y-3">
-                <img src="{{ asset('images/partners/air-tanzania.svg') }}" alt="Air Tanzania Logo" class="h-16 w-full object-contain bg-white rounded-xl p-2 border border-[#E8DDD0]">
+                <div class="h-20 w-full bg-white rounded-xl p-2 border border-[#E8DDD0] flex items-center justify-center">
+                    @include('partials.partner-logo', ['partner' => 'air_tanzania', 'class' => 'h-full w-auto'])
+                </div>
                 <h3 class="font-extrabold text-base text-zinc-900">Air Tanzania Passengers</h3>
                 <p class="text-xs text-zinc-600 leading-relaxed">Showcasing locally sourced, expertly crafted Tanzanian biltong across domestic and international flights.</p>
             </div>
             <div class="p-6 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] space-y-3">
-                <img src="{{ asset('images/partners/precision-air.svg') }}" alt="Precision Air Logo" class="h-16 w-full object-contain bg-white rounded-xl p-2 border border-[#E8DDD0]">
+                <div class="h-20 w-full bg-white rounded-xl p-2 border border-[#E8DDD0] flex items-center justify-center">
+                    @include('partials.partner-logo', ['partner' => 'precision_air', 'class' => 'h-full w-auto'])
+                </div>
                 <h3 class="font-extrabold text-base text-zinc-900">Precision Air Passengers</h3>
                 <p class="text-xs text-zinc-600 leading-relaxed">Bringing BEAC's traditional and flavored biltong variants to domestic and regional flyers.</p>
             </div>

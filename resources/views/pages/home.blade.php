@@ -540,21 +540,27 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
                 <div class="p-3 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] flex items-center gap-4">
-                    <img src="{{ asset('images/partners/trc-sgr.svg') }}" alt="TRC SGR Logo" class="h-12 w-28 object-contain rounded-lg bg-white p-1 border border-[#E8DDD0] flex-shrink-0">
+                    <div class="h-14 w-32 rounded-xl bg-white p-1 border border-[#E8DDD0] flex items-center justify-center flex-shrink-0">
+                        @include('partials.partner-logo', ['partner' => 'trc', 'class' => 'w-full h-full'])
+                    </div>
                     <div>
                         <div class="font-extrabold text-xs text-zinc-900">TRC / SGR</div>
                         <div class="text-[11px] text-zinc-500">Standard Gauge Railway Passengers</div>
                     </div>
                 </div>
                 <div class="p-3 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] flex items-center gap-4">
-                    <img src="{{ asset('images/partners/air-tanzania.svg') }}" alt="Air Tanzania Logo" class="h-12 w-28 object-contain rounded-lg bg-white p-1 border border-[#E8DDD0] flex-shrink-0">
+                    <div class="h-14 w-32 rounded-xl bg-white p-1 border border-[#E8DDD0] flex items-center justify-center flex-shrink-0">
+                        @include('partials.partner-logo', ['partner' => 'air_tanzania', 'class' => 'w-full h-full'])
+                    </div>
                     <div>
                         <div class="font-extrabold text-xs text-zinc-900">Air Tanzania</div>
                         <div class="text-[11px] text-zinc-500">Domestic &amp; International Flights</div>
                     </div>
                 </div>
                 <div class="p-3 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] flex items-center gap-4">
-                    <img src="{{ asset('images/partners/precision-air.svg') }}" alt="Precision Air Logo" class="h-12 w-28 object-contain rounded-lg bg-white p-1 border border-[#E8DDD0] flex-shrink-0">
+                    <div class="h-14 w-32 rounded-xl bg-white p-1 border border-[#E8DDD0] flex items-center justify-center flex-shrink-0">
+                        @include('partials.partner-logo', ['partner' => 'precision_air', 'class' => 'w-full h-full'])
+                    </div>
                     <div>
                         <div class="font-extrabold text-xs text-zinc-900">Precision Air</div>
                         <div class="text-[11px] text-zinc-500">Domestic &amp; Regional Flyers</div>
