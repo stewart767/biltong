@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 90" fill="none">
+  <rect width="260" height="90" rx="12" fill="#FFFFFF"/>
+  <!-- Golden Sun Circle -->
+  <circle cx="52" cy="45" r="28" fill="#FBBF24"/>
+  <!-- Sun Horizontal Stripes -->
+  <rect x="24" y="54" width="56" height="2.5" fill="#FFFFFF" opacity="0.85"/>
+  <rect x="26" y="60" width="52" height="2.5" fill="#FFFFFF" opacity="0.85"/>
+  <!-- Leaping Gazelle/Antelope Silhouette -->
+  <path d="M35 50C40 44 47 41 55 40C60 39 64 35 66 30L69 27L68 33C70 33 72 35 71 37C68 38 65 40 62 43C64 47 68 51 73 53L70 55C65 53 60 50 57 46C51 47 46 49 41 54L36 53L35 50Z" fill="#14532D"/>
+  <!-- Precision Air Wordmark -->
+  <text x="92" y="46" font-family="Poppins, Arial, sans-serif" font-size="20" font-weight="800" fill="#14532D">Precision<tspan fill="#DC2626">Air</tspan></text>
+  <text x="92" y="61" font-family="Poppins, Arial, sans-serif" font-size="9.5" font-weight="600" fill="#71717A">Regional &amp; Domestic Aviation</text>
+</svg>

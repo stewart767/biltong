@@ -132,18 +132,18 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div class="p-6 rounded-2xl bg-[#FFF5F5] border border-red-200 space-y-2">
-                <span class="inline-block px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-black uppercase">TRC Rail</span>
+            <div class="p-6 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] space-y-3">
+                <img src="{{ asset('images/partners/trc-sgr.svg') }}" alt="TRC SGR Logo" class="h-16 w-full object-contain bg-white rounded-xl p-2 border border-[#E8DDD0]">
                 <h3 class="font-extrabold text-base text-zinc-900">SGR (Standard Gauge Railway)</h3>
                 <p class="text-xs text-zinc-600 leading-relaxed">Serving travelers commuting between major cities in Tanzania with convenient high-protein biltong packs.</p>
             </div>
-            <div class="p-6 rounded-2xl bg-[#FFF5F5] border border-red-200 space-y-2">
-                <span class="inline-block px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-black uppercase">Aviation</span>
+            <div class="p-6 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] space-y-3">
+                <img src="{{ asset('images/partners/air-tanzania.svg') }}" alt="Air Tanzania Logo" class="h-16 w-full object-contain bg-white rounded-xl p-2 border border-[#E8DDD0]">
                 <h3 class="font-extrabold text-base text-zinc-900">Air Tanzania Passengers</h3>
                 <p class="text-xs text-zinc-600 leading-relaxed">Showcasing locally sourced, expertly crafted Tanzanian biltong across domestic and international flights.</p>
             </div>
-            <div class="p-6 rounded-2xl bg-[#FFF5F5] border border-red-200 space-y-2">
-                <span class="inline-block px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-black uppercase">Regional</span>
+            <div class="p-6 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] space-y-3">
+                <img src="{{ asset('images/partners/precision-air.svg') }}" alt="Precision Air Logo" class="h-16 w-full object-contain bg-white rounded-xl p-2 border border-[#E8DDD0]">
                 <h3 class="font-extrabold text-base text-zinc-900">Precision Air Passengers</h3>
                 <p class="text-xs text-zinc-600 leading-relaxed">Bringing BEAC's traditional and flavored biltong variants to domestic and regional flyers.</p>
             </div>
@@ -164,25 +164,37 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="p-5 rounded-2xl bg-white/15 border border-white/20">
-                <div class="font-black text-base">Hanaiya Ramadhani</div>
-                <div class="text-xs text-red-100 font-semibold">'Official Nai'</div>
-                <div class="mt-2 text-[11px] font-bold bg-white/20 inline-block px-2.5 py-0.5 rounded-full">3.7M Followers on Instagram</div>
+            <div class="p-5 rounded-2xl bg-white text-zinc-900 shadow-md flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-xl bg-red-600 text-white font-black text-base flex items-center justify-center flex-shrink-0">ON</div>
+                <div class="min-w-0">
+                    <div class="font-black text-sm truncate">Hanaiya Ramadhani</div>
+                    <div class="text-xs text-red-600 font-bold">'Official Nai'</div>
+                    <div class="mt-1 text-[10px] font-bold bg-[#FAF5EE] border border-[#E8DDD0] inline-block px-2 py-0.5 rounded-full">3.7M Followers on IG</div>
+                </div>
             </div>
-            <div class="p-5 rounded-2xl bg-white/15 border border-white/20">
-                <div class="font-black text-base">Zuwena Mohammed</div>
-                <div class="text-xs text-red-100 font-semibold">'Shilole'</div>
-                <div class="mt-2 text-[11px] font-bold bg-white/20 inline-block px-2.5 py-0.5 rounded-full">12M Followers on Instagram</div>
+            <div class="p-5 rounded-2xl bg-white text-zinc-900 shadow-md flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-xl bg-red-600 text-white font-black text-base flex items-center justify-center flex-shrink-0">SH</div>
+                <div class="min-w-0">
+                    <div class="font-black text-sm truncate">Zuwena Mohammed</div>
+                    <div class="text-xs text-red-600 font-bold">'Shilole'</div>
+                    <div class="mt-1 text-[10px] font-bold bg-[#FAF5EE] border border-[#E8DDD0] inline-block px-2 py-0.5 rounded-full">12M Followers on IG</div>
+                </div>
             </div>
-            <div class="p-5 rounded-2xl bg-white/15 border border-white/20">
-                <div class="font-black text-base">Burton Mwemba</div>
-                <div class="text-xs text-red-100 font-semibold">'Mwijaku'</div>
-                <div class="mt-2 text-[11px] font-bold bg-white/20 inline-block px-2.5 py-0.5 rounded-full">2.2M Followers on Instagram</div>
+            <div class="p-5 rounded-2xl bg-white text-zinc-900 shadow-md flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-xl bg-red-600 text-white font-black text-base flex items-center justify-center flex-shrink-0">MW</div>
+                <div class="min-w-0">
+                    <div class="font-black text-sm truncate">Burton Mwemba</div>
+                    <div class="text-xs text-red-600 font-bold">'Mwijaku'</div>
+                    <div class="mt-1 text-[10px] font-bold bg-[#FAF5EE] border border-[#E8DDD0] inline-block px-2 py-0.5 rounded-full">2.2M Followers on IG</div>
+                </div>
             </div>
-            <div class="p-5 rounded-2xl bg-white/15 border border-white/20">
-                <div class="font-black text-base">Sylvester Mujuni</div>
-                <div class="text-xs text-red-100 font-semibold">'Mpoki'</div>
-                <div class="mt-2 text-[11px] font-bold bg-white/20 inline-block px-2.5 py-0.5 rounded-full">3.1M Followers on Instagram</div>
+            <div class="p-5 rounded-2xl bg-white text-zinc-900 shadow-md flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-xl bg-red-600 text-white font-black text-base flex items-center justify-center flex-shrink-0">MP</div>
+                <div class="min-w-0">
+                    <div class="font-black text-sm truncate">Sylvester Mujuni</div>
+                    <div class="text-xs text-red-600 font-bold">'Mpoki'</div>
+                    <div class="mt-1 text-[10px] font-bold bg-[#FAF5EE] border border-[#E8DDD0] inline-block px-2 py-0.5 rounded-full">3.1M Followers on IG</div>
+                </div>
             </div>
         </div>
     </section>

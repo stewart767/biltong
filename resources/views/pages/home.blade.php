@@ -530,40 +530,96 @@
             </div>
         </div>
 
-        <!-- Right: Our Brand Influencers & Strategic Outlook -->
-        <div class="lg:col-span-5 bg-red-600 text-white rounded-[32px] p-6 sm:p-8 shadow-md space-y-5 flex flex-col justify-between">
+        <!-- Right: Strategic Travel Partners with Official Logos (TRC / SGR, Air Tanzania, Precision Air) -->
+        <div class="lg:col-span-5 bg-white rounded-[32px] border border-[#E8DDD0] p-6 sm:p-8 shadow-sm space-y-5 flex flex-col justify-between">
             <div>
-                <span class="text-[11px] font-black uppercase tracking-wider text-red-100">BEAC Community</span>
-                <h2 class="text-xl sm:text-2xl font-black text-white">Our Brand Influencers</h2>
-                <p class="text-xs text-red-100 mt-1">Trusted by Tanzania's leading voices &amp; expanding across SGR, Air Tanzania &amp; Precision Air.</p>
+                <span class="text-[11px] font-black uppercase tracking-wider text-red-600">Future Outlook</span>
+                <h2 class="text-xl sm:text-2xl font-black text-zinc-900">Strategic Travel Partners</h2>
+                <p class="text-xs text-zinc-500 mt-1">Bringing BEAC premium beef biltong snacks to passengers across Tanzania's leading transit networks.</p>
             </div>
-            <div class="grid grid-cols-2 gap-3 text-xs">
-                <div class="p-3 rounded-2xl bg-white/15 backdrop-blur-xs border border-white/20">
-                    <div class="font-extrabold text-white">Hanaiya Ramadhani</div>
-                    <div class="text-[11px] text-red-100">'Official Nai' &bull; 3.7M IG</div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
+                <div class="p-3 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] flex items-center gap-4">
+                    <img src="{{ asset('images/partners/trc-sgr.svg') }}" alt="TRC SGR Logo" class="h-12 w-28 object-contain rounded-lg bg-white p-1 border border-[#E8DDD0] flex-shrink-0">
+                    <div>
+                        <div class="font-extrabold text-xs text-zinc-900">TRC / SGR</div>
+                        <div class="text-[11px] text-zinc-500">Standard Gauge Railway Passengers</div>
+                    </div>
                 </div>
-                <div class="p-3 rounded-2xl bg-white/15 backdrop-blur-xs border border-white/20">
-                    <div class="font-extrabold text-white">Zuwena Mohammed</div>
-                    <div class="text-[11px] text-red-100">'Shilole' &bull; 12M IG</div>
+                <div class="p-3 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] flex items-center gap-4">
+                    <img src="{{ asset('images/partners/air-tanzania.svg') }}" alt="Air Tanzania Logo" class="h-12 w-28 object-contain rounded-lg bg-white p-1 border border-[#E8DDD0] flex-shrink-0">
+                    <div>
+                        <div class="font-extrabold text-xs text-zinc-900">Air Tanzania</div>
+                        <div class="text-[11px] text-zinc-500">Domestic &amp; International Flights</div>
+                    </div>
                 </div>
-                <div class="p-3 rounded-2xl bg-white/15 backdrop-blur-xs border border-white/20">
-                    <div class="font-extrabold text-white">Burton Mwemba</div>
-                    <div class="text-[11px] text-red-100">'Mwijaku' &bull; 2.2M IG</div>
-                </div>
-                <div class="p-3 rounded-2xl bg-white/15 backdrop-blur-xs border border-white/20">
-                    <div class="font-extrabold text-white">Sylvester Mujuni</div>
-                    <div class="text-[11px] text-red-100">'Mpoki' &bull; 3.1M IG</div>
+                <div class="p-3 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] flex items-center gap-4">
+                    <img src="{{ asset('images/partners/precision-air.svg') }}" alt="Precision Air Logo" class="h-12 w-28 object-contain rounded-lg bg-white p-1 border border-[#E8DDD0] flex-shrink-0">
+                    <div>
+                        <div class="font-extrabold text-xs text-zinc-900">Precision Air</div>
+                        <div class="text-[11px] text-zinc-500">Domestic &amp; Regional Flyers</div>
+                    </div>
                 </div>
             </div>
-            <div class="pt-2 border-t border-white/20 flex flex-wrap items-center justify-between gap-3 text-xs">
-                <span class="text-[11px] text-red-50 font-semibold">SGR &bull; Air Tanzania &bull; Precision Air</span>
-                <a href="{{ route('wholesale') }}#enquiry-form" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-red-600 hover:bg-[#FAF5EE] font-extrabold text-xs shadow-sm transition">
+
+            <div class="pt-2 border-t border-[#F0E6D8] flex items-center justify-between gap-3">
+                <span class="text-[11px] font-bold text-zinc-500">Want to stock BEAC?</span>
+                <a href="{{ route('wholesale') }}#enquiry-form" class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-sm transition">
                     <span>Partnership</span>
                     <span>&rarr;</span>
                 </a>
             </div>
         </div>
 
+    </section>
+
+    <!-- 7. OUR BRAND INFLUENCERS (Dedicated Full-Width Showcase) -->
+    <section class="mt-10 rounded-[32px] bg-red-600 text-white p-6 sm:p-10 shadow-md space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div>
+                <span class="text-[11px] font-black uppercase tracking-widest text-red-100">BEAC Brand Ambassadors</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-white mt-0.5">Our Brand Influencers</h2>
+            </div>
+            <span class="text-xs font-semibold text-red-100">Combined Reach: 21M+ Instagram Followers</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="p-5 rounded-2xl bg-white text-zinc-900 shadow-md flex items-center gap-4">
+                <div class="w-14 h-14 rounded-2xl bg-red-600 text-white font-black text-lg flex items-center justify-center flex-shrink-0 shadow-sm">ON</div>
+                <div class="min-w-0">
+                    <h3 class="font-extrabold text-sm text-zinc-900 truncate">Hanaiya Ramadhani</h3>
+                    <div class="text-xs font-bold text-red-600">'Official Nai'</div>
+                    <span class="mt-1 inline-block px-2.5 py-0.5 rounded-full bg-[#FAF5EE] border border-[#E8DDD0] text-[10px] font-bold text-zinc-700">3.7M Instagram</span>
+                </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white text-zinc-900 shadow-md flex items-center gap-4">
+                <div class="w-14 h-14 rounded-2xl bg-red-600 text-white font-black text-lg flex items-center justify-center flex-shrink-0 shadow-sm">SH</div>
+                <div class="min-w-0">
+                    <h3 class="font-extrabold text-sm text-zinc-900 truncate">Zuwena Mohammed</h3>
+                    <div class="text-xs font-bold text-red-600">'Shilole'</div>
+                    <span class="mt-1 inline-block px-2.5 py-0.5 rounded-full bg-[#FAF5EE] border border-[#E8DDD0] text-[10px] font-bold text-zinc-700">12M Instagram</span>
+                </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white text-zinc-900 shadow-md flex items-center gap-4">
+                <div class="w-14 h-14 rounded-2xl bg-red-600 text-white font-black text-lg flex items-center justify-center flex-shrink-0 shadow-sm">MW</div>
+                <div class="min-w-0">
+                    <h3 class="font-extrabold text-sm text-zinc-900 truncate">Burton Mwemba</h3>
+                    <div class="text-xs font-bold text-red-600">'Mwijaku'</div>
+                    <span class="mt-1 inline-block px-2.5 py-0.5 rounded-full bg-[#FAF5EE] border border-[#E8DDD0] text-[10px] font-bold text-zinc-700">2.2M Instagram</span>
+                </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white text-zinc-900 shadow-md flex items-center gap-4">
+                <div class="w-14 h-14 rounded-2xl bg-red-600 text-white font-black text-lg flex items-center justify-center flex-shrink-0 shadow-sm">MP</div>
+                <div class="min-w-0">
+                    <h3 class="font-extrabold text-sm text-zinc-900 truncate">Sylvester Mujuni</h3>
+                    <div class="text-xs font-bold text-red-600">'Mpoki'</div>
+                    <span class="mt-1 inline-block px-2.5 py-0.5 rounded-full bg-[#FAF5EE] border border-[#E8DDD0] text-[10px] font-bold text-zinc-700">3.1M Instagram</span>
+                </div>
+            </div>
+        </div>
     </section>
 
 @endsection
