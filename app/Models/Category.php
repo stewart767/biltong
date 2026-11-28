@@ -35,13 +35,7 @@ class Category extends Model
 
     public static function getActiveCategories()
     {
-        try {
-            return Cache::remember('active_categories_list', 3600, function () {
-                return static::where('is_active', true)->orderBy('sort_order')->get();
-            });
-        } catch (\Throwable $e) {
-            return static::where('is_active', true)->orderBy('sort_order')->get();
-        }
+        return static::where('is_active', true)->orderBy('sort_order')->get();
     }
 
     public function getImageUrlAttribute(): string

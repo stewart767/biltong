@@ -561,6 +561,12 @@
                         <span class="w-2.5 h-2.5 rounded-full border-2 border-red-300 bg-red-50"></span>
                         <span class="w-2.5 h-2.5 rounded-full border-2 border-red-300 bg-red-50"></span>
                     </div>
+                @empty
+                    <div class="col-span-full py-10 text-center text-zinc-500">
+                        No products available yet.
+                    </div>
+                @endforelse
+            </div>
 
                 </div>
 

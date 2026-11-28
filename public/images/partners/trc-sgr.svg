@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 90" fill="none">
+  <rect width="260" height="90" rx="12" fill="#FFFFFF"/>
+  <!-- Bold TRC Stylized Mark -->
+  <path d="M24 18H74V29H55V62H42V29H24V18Z" fill="#7C1D18"/>
+  <!-- Speed-stripe R -->
+  <path d="M80 18H116C127 18 134 24 134 33C134 40 129 45 121 47L136 62H119L106 48H93V62H80V18ZM93 28V39H113C118 39 121 37 121 33.5C121 30 118 28 113 28H93Z" fill="#7C1D18"/>
+  <!-- Speed bars across R -->
+  <rect x="76" y="29" width="22" height="3.5" fill="#FFFFFF"/>
+  <rect x="76" y="36" width="26" height="3.5" fill="#FFFFFF"/>
+  <rect x="76" y="43" width="20" height="3.5" fill="#FFFFFF"/>
+  <!-- C -->
+  <path d="M168 18C180 18 189 23 193 31H178C175 28 172 27 167 27C158 27 153 32 153 40C153 48 158 53 167 53C172 53 176 51 179 48H194C189 57 180 62 167 62C150 62 139 53 139 40C139 27 150 18 168 18Z" fill="#7C1D18"/>
+  <!-- Subtitle -->
+  <text x="130" y="79" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="9.5" font-weight="700" letter-spacing="0.8" fill="#3F3F46">TANZANIA RAILWAYS CORPORATION • SGR</text>
+</svg>

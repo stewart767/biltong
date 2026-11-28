@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 90" fill="none">
+  <rect width="260" height="90" rx="12" fill="#FFFFFF"/>
+  <!-- Stylized Air Tanzania Swoosh & A -->
+  <path d="M26 52C36 28 56 14 78 14C62 24 52 38 46 56L26 52Z" fill="#0072BC"/>
+  <path d="M40 54C52 34 68 24 88 22C74 32 64 43 58 56L40 54Z" fill="#009B4D"/>
+  <path d="M20 44C45 36 72 34 95 40C72 41 48 45 26 52L20 44Z" fill="#0072BC"/>
+  <!-- Wordmark -->
+  <text x="102" y="45" font-family="Poppins, Arial, sans-serif" font-size="22" font-weight="800" fill="#0072BC">Air Tanzania</text>
+  <text x="104" y="60" font-family="Poppins, Arial, sans-serif" font-size="9.5" font-style="italic" font-weight="600" fill="#009B4D">The Wings of Kilimanjaro</text>
+</svg>
