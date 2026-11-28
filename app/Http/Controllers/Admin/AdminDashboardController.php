@@ -7,7 +7,9 @@ use App\Models\Category;
 use App\Models\ContactMessage;
 use App\Models\NewsletterSubscriber;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\WholesaleEnquiry;
 use Illuminate\View\View;
 
@@ -15,33 +17,35 @@ class AdminDashboardController extends Controller
 {
     public function index(): View
     {
-        $totalRevenue = Order::where('payment_status', 'paid')->sum('total');
-        $allOrdersCount = Order::count();
-        $pendingOrdersCount = Order::where('order_status', 'pending')->count();
+        // Overview metrics required by Section 7
+        $totalSales = Order::where('order_status', '!=', Order::STATUS_CANCELLED)->sum('total');
+        $totalOrders = Order::count();
+        $pendingOrders = Order::whereIn('order_status', [Order::STATUS_PENDING, Order::STATUS_AWAITING_PAYMENT, 'pending'])->count();
+        $completedOrders = Order::whereIn('order_status', [Order::STATUS_PAID, Order::STATUS_DELIVERED, 'delivered'])->count();
+        $totalCustomers = User::where('is_admin', false)->count();
+        $lowStockProducts = Product::where('stock', '<=', 15)->orderBy('stock')->get();
+        $recentTransactions = Payment::with('order')->latest()->take(6)->get();
+
         $productsCount = Product::count();
         $categoriesCount = Category::count();
-        $lowStockProducts = Product::where('stock', '<=', 10)->get();
-        $wholesaleCount = WholesaleEnquiry::where('status', 'new')->count();
         $unreadMessagesCount = ContactMessage::where('status', 'unread')->count();
         $subscribersCount = NewsletterSubscriber::count();
 
-        $recentOrders = Order::with('items')->latest()->take(6)->get();
-        $recentWholesale = WholesaleEnquiry::latest()->take(5)->get();
-        $recentMessages = ContactMessage::latest()->take(5)->get();
+        $recentOrders = Order::with('items')->latest()->take(7)->get();
 
         return view('admin.dashboard', compact(
-            'totalRevenue',
-            'allOrdersCount',
-            'pendingOrdersCount',
+            'totalSales',
+            'totalOrders',
+            'pendingOrders',
+            'completedOrders',
+            'totalCustomers',
+            'lowStockProducts',
+            'recentTransactions',
             'productsCount',
             'categoriesCount',
-            'lowStockProducts',
-            'wholesaleCount',
             'unreadMessagesCount',
             'subscribersCount',
-            'recentOrders',
-            'recentWholesale',
-            'recentMessages'
+            'recentOrders'
         ));
     }
 }

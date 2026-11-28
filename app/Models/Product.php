@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
@@ -54,41 +55,80 @@ class Product extends Model
 
     public function images(): HasMany
     {
-        return $this->hasMany(ProductImage::class)->orderBy('is_primary', 'desc')->orderBy('sort_order', 'asc');
+        return $this->hasMany(ProductImage::class)->orderBy('sort_order');
     }
 
-    public function primaryImage()
+    public function variants(): HasMany
     {
-        return $this->images()->where('is_primary', true)->first() ?? $this->images()->first();
+        return $this->hasMany(ProductVariant::class);
     }
 
-    public function getImageUrlAttribute(): string
+    public function inventoryLogs(): HasMany
     {
-        $primary = $this->primaryImage();
-        if ($primary && $primary->image_path) {
-            if (str_starts_with($primary->image_path, 'http') || str_starts_with($primary->image_path, '/')) {
-                return $primary->image_path;
-            }
-            return asset($primary->image_path);
-        }
-        return asset('images/biltong-original-main.jpg');
+        return $this->hasMany(Inventory::class)->latest();
+    }
+
+    public function primaryImage(): HasOne
+    {
+        return $this->hasOne(ProductImage::class)->ofMany([
+            'is_primary' => 'max',
+            'sort_order' => 'min',
+        ]);
     }
 
     public function getEffectivePriceAttribute(): float
     {
-        return (float) ($this->promo_price && $this->promo_price > 0 ? $this->promo_price : $this->price);
+        if ($this->promo_price && $this->promo_price > 0 && $this->promo_price < $this->price) {
+            return (float) $this->promo_price;
+        }
+
+        return (float) $this->price;
     }
 
     public function getFormattedPriceAttribute(): string
     {
-        return 'TZS ' . number_format($this->effective_price, 0);
+        return 'Tshs ' . number_format($this->effective_price, 0);
     }
 
-    public function getFormattedOriginalPriceAttribute(): ?string
+    public function getFormattedRegularPriceAttribute(): string
     {
-        if ($this->promo_price && $this->promo_price < $this->price) {
-            return 'TZS ' . number_format($this->price, 0);
+        return 'Tshs ' . number_format($this->price, 0);
+    }
+
+    public function getIsOnSaleAttribute(): bool
+    {
+        return (bool) ($this->promo_price && $this->promo_price > 0 && $this->promo_price < $this->price);
+    }
+
+    public function getDiscountPercentageAttribute(): ?int
+    {
+        if (!$this->is_on_sale || $this->price <= 0) {
+            return null;
         }
-        return null;
+
+        return (int) round((($this->price - $this->promo_price) / $this->price) * 100);
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        $primary = $this->images->firstWhere('is_primary', true) ?? $this->images->first();
+
+        if ($primary && $primary->image_path) {
+            $path = $primary->image_path;
+            if (str_starts_with($path, 'http')) {
+                return $path;
+            }
+            if (str_starts_with($path, 'images/')) {
+                return asset($path);
+            }
+            return asset('storage/' . $path);
+        }
+
+        return asset('images/biltong-original-1.jpg');
+    }
+
+    public function isInStock(): bool
+    {
+        return $this->stock > 0;
     }
 }

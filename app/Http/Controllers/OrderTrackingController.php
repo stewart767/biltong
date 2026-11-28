@@ -15,7 +15,7 @@ class OrderTrackingController extends Controller
 
         if ($query) {
             $cleaned = trim($query);
-            $order = Order::with('items')
+            $order = Order::with(['items.product', 'payments', 'delivery'])
                 ->where('order_number', $cleaned)
                 ->orWhere('customer_phone', 'like', "%{$cleaned}%")
                 ->latest()

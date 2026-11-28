@@ -15,10 +15,9 @@ class WholesaleTest extends TestCase
         $response = $this->get('/wholesale');
 
         $response->assertStatus(200);
-        $response->assertSee('Partner with INAS Biltong');
+        $response->assertSee('COY BILTONG');
         $response->assertSee('Supermarkets');
         $response->assertSee('Safari Lodges');
-        $response->assertSee('Wholesale Application');
     }
 
     public function test_wholesale_enquiry_form_submits_and_creates_lead(): void

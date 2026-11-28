@@ -1,146 +1,152 @@
 @extends('layouts.app')
 
-@section('title', 'Track Your Order | INAS Premium Beef Biltong')
+@section('title', 'Track Your Order | COY BILTONG')
 
 @section('content')
 
-    <!-- Header Section -->
-    <section class="py-14 bg-brand-charcoal border-b border-brand-border text-center">
-        <div class="max-w-4xl mx-auto px-4 space-y-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-600/20 text-red-600 border border-red-600/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
-                Real-Time Dispatch Tracking
-            </span>
-            <h1 class="font-editorial text-3xl sm:text-5xl font-bold text-white tracking-wide">
-                Track Your Biltong Order
-            </h1>
-            <p class="text-zinc-400 text-xs sm:text-sm max-w-md mx-auto">
-                Enter your INAS order reference number (e.g. INAS-202611-01) or customer phone number to check live status.
-            </p>
+<!-- Header Section -->
+<section class="py-14 bg-[#171717] border-b border-[#262626] text-center text-white">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#262626] text-[#B77B3B] border border-[#B77B3B]/30">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#B77B3B] animate-pulse"></span>
+            Real-Time Butchery & Courier Tracking
+        </span>
+        <h1 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            Track Your Biltong Order
+        </h1>
+        <p class="text-stone-300 text-xs sm:text-sm max-w-md mx-auto">
+            Enter your COY BILTONG reference number (e.g. COY-202611-001) or customer phone number to check status.
+        </p>
+    </div>
+</section>
+
+<!-- Main Tracking Content -->
+<section class="py-14 bg-[#F6F0E6]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
+        
+        <!-- Search Box -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-white border border-[#ECE2D2] shadow-xs">
+            <form action="{{ route('track') }}" method="GET" class="flex flex-col sm:flex-row gap-3">
+                <input type="text" 
+                       name="query" 
+                       value="{{ request('query', request('order_number')) }}" 
+                       required 
+                       placeholder="Enter Order # (e.g. COY-202611-001) or Phone (e.g. +255 754...)"
+                       class="flex-1 px-4 py-3.5 rounded-xl bg-[#F6F0E6] border border-[#ECE2D2] text-sm text-[#171717] placeholder-stone-400 focus:bg-white focus:ring-2 focus:ring-[#B77B3B] focus:outline-none transition">
+                <button type="submit" class="px-8 py-3.5 rounded-xl bg-[#171717] hover:bg-[#B77B3B] text-white font-bold text-xs uppercase tracking-wider shadow-md transition flex items-center justify-center gap-2">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                    <span>Track Status</span>
+                </button>
+            </form>
         </div>
-    </section>
 
-    <!-- Main Content -->
-    <section class="py-14 bg-zinc-100 text-zinc-900">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-10">
-            
-            <!-- Lookup Form -->
-            <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm">
-                <form action="{{ route('track') }}" method="GET" class="flex flex-col sm:flex-row gap-3">
-                    <input type="text" name="query" value="{{ request('query', request('order_number')) }}" required 
-                           placeholder="Enter Order # (e.g. INAS-202611-01) or Phone (e.g. 0754...)"
-                           class="flex-1 px-4 py-3.5 rounded-xl bg-[#FAF6F0] border border-zinc-300 text-sm text-zinc-900 placeholder-zinc-400 focus:bg-white focus:border-red-600 focus:ring-1 focus:ring-brand-red focus:outline-none transition">
-                    <button type="submit" class="px-8 py-3.5 rounded-xl bg-red-600 hover:bg-red-600-dark text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                        <span>Track Status</span>
-                    </button>
-                </form>
-            </div>
-
-            @if(isset($order) && $order)
-                <!-- Order Result Box -->
-                <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-8">
-                    
-                    <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-zinc-100">
-                        <div>
-                            <span class="text-xs text-zinc-500 uppercase tracking-wider block font-semibold">Found Order</span>
-                            <span class="font-editorial text-2xl font-extrabold text-red-600">#{{ $order->order_number }}</span>
-                        </div>
-                        <div>
-                            <span class="text-xs text-zinc-500 uppercase tracking-wider block font-semibold">Order Placed</span>
-                            <span class="text-xs font-bold text-zinc-800">{{ $order->created_at->format('M d, Y - h:i A') }}</span>
-                        </div>
-                        <div>
-                            <span class="text-xs text-zinc-500 uppercase tracking-wider block font-semibold">Current Status</span>
-                            <span class="px-3 py-1 rounded-full text-xs font-bold border {{ $order->status_badge_class }}">
-                                {{ ucfirst($order->order_status) }}
-                            </span>
-                        </div>
+        @if(isset($order) && $order)
+            <!-- Order Found Box -->
+            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-[#ECE2D2] shadow-xs space-y-8">
+                
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#ECE2D2]">
+                    <div>
+                        <span class="text-xs text-stone-400 uppercase tracking-wider block font-semibold">Order Reference</span>
+                        <span class="font-display text-2xl font-extrabold text-[#171717]">#{{ $order->order_number }}</span>
                     </div>
-
-                    <!-- Step-by-Step Progress Pipeline -->
-                    @php
-                        $stages = [
-                            'pending' => '1. Received',
-                            'confirmed' => '2. Confirmed',
-                            'processing' => '3. Sliced & Sealed',
-                            'dispatched' => '4. Out for Delivery',
-                            'delivered' => '5. Delivered',
-                        ];
-                        $statusOrder = ['pending', 'confirmed', 'processing', 'dispatched', 'delivered'];
-                        $currentIndex = array_search($order->order_status, $statusOrder);
-                        if ($currentIndex === false) $currentIndex = 0;
-                    @endphp
-
-                    <div class="space-y-4">
-                        <span class="text-xs text-zinc-500 uppercase tracking-wider font-bold block">Delivery Pipeline</span>
-                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-xs">
-                            @foreach($statusOrder as $idx => $st)
-                                <div class="p-3 rounded-xl border {{ $idx <= $currentIndex ? 'bg-red-50 border-red-600 text-red-600 font-bold' : 'bg-[#FAF6F0] border-zinc-200 text-zinc-400' }}">
-                                    <div class="w-6 h-6 mx-auto mb-1.5 rounded-full flex items-center justify-center text-[11px] {{ $idx <= $currentIndex ? 'bg-red-600 text-white' : 'bg-zinc-200 text-zinc-500' }}">
-                                        {{ $idx + 1 }}
-                                    </div>
-                                    <span>{{ $stages[$st] }}</span>
-                                </div>
-                            @endforeach
-                        </div>
+                    <div>
+                        <span class="text-xs text-stone-400 uppercase tracking-wider block font-semibold">Date Placed</span>
+                        <span class="text-xs font-bold text-[#171717]">{{ $order->created_at->format('M d, Y - h:i A') }}</span>
                     </div>
-
-                    <!-- Details Row -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-zinc-100 text-xs sm:text-sm">
-                        <div class="space-y-1">
-                            <span class="text-xs text-zinc-500 uppercase tracking-wider font-bold block">Recipient</span>
-                            <p class="font-bold text-zinc-900">{{ $order->customer_name }} ({{ $order->customer_phone }})</p>
-                            <p class="text-xs text-zinc-600">{{ $order->delivery_area }}, {{ $order->delivery_city }}</p>
-                            <p class="text-xs text-zinc-500">{{ $order->delivery_address }}</p>
-                        </div>
-                        <div class="space-y-1">
-                            <span class="text-xs text-zinc-500 uppercase tracking-wider font-bold block">Delivery & Payment</span>
-                            <p class="text-xs text-zinc-700"><strong class="text-zinc-900">Method:</strong> {{ $order->delivery_method }}</p>
-                            <p class="text-xs text-zinc-700"><strong class="text-zinc-900">Payment:</strong> {{ strtoupper($order->payment_method) }} ({{ ucfirst($order->payment_status) }})</p>
-                            <p class="text-xs text-red-600 font-bold mt-1"><strong class="text-zinc-900">Total:</strong> {{ $order->formatted_total }}</p>
-                        </div>
+                    <div>
+                        <span class="text-xs text-stone-400 uppercase tracking-wider block font-semibold">Current Status</span>
+                        <span class="inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold border {{ $order->status_color }}">
+                            {{ $order->order_status }}
+                        </span>
                     </div>
-
-                    <!-- Items -->
-                    <div class="space-y-2 pt-4 border-t border-zinc-100">
-                        <span class="text-xs text-zinc-500 uppercase tracking-wider font-bold block">Items in this Delivery</span>
-                        <div class="divide-y divide-zinc-200 rounded-xl bg-[#FAF6F0] border border-zinc-200 overflow-hidden">
-                            @foreach($order->items as $item)
-                                <div class="p-3.5 flex items-center justify-between text-xs">
-                                    <span class="font-medium text-zinc-900">{{ $item->product_name }} ({{ $item->pack_size }}) × {{ $item->quantity }}</span>
-                                    <span class="font-bold text-red-600">TZS {{ number_format($item->subtotal, 0) }}</span>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <!-- Dispatch Help -->
-                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <span class="text-xs text-zinc-500">Need to modify delivery address or time?</span>
-                        <a href="https://wa.me/255682869629?text=Hello%20INAS!%20I%20am%20checking%20on%20my%20order%20%23{{ $order->order_number }}" 
-                           target="_blank" 
-                           class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition flex items-center gap-1.5 shadow">
-                            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                            <span>Chat with Dispatch Desk (+255 682 869 629)</span>
-                        </a>
-                    </div>
-
                 </div>
-            @elseif(request('query'))
-                <div class="p-8 rounded-2xl bg-white border border-zinc-200 text-center space-y-4 shadow-sm">
-                    <p class="text-sm text-zinc-600">
-                        No order found matching "<strong class="text-zinc-900">{{ request('query') }}</strong>". Please double-check your order number or phone number.
-                    </p>
-                    <a href="https://wa.me/255682869629?text=Hello%20INAS!%20I%20am%20trying%20to%20track%20my%20order%20query:%20{{ urlencode(request('query')) }}" 
+
+                <!-- Progress Pipeline -->
+                @php
+                    $stages = [
+                        'Pending' => '1. Received',
+                        'Awaiting Payment' => '2. Awaiting Payment',
+                        'Paid' => '3. Paid',
+                        'Processing' => '4. Butchery Prep',
+                        'Ready for Delivery' => '5. Ready',
+                        'Shipped' => '6. In Transit',
+                        'Delivered' => '7. Delivered',
+                    ];
+                    $statusOrder = ['Pending', 'Awaiting Payment', 'Paid', 'Processing', 'Ready for Delivery', 'Shipped', 'Delivered'];
+                    $currentIndex = array_search($order->order_status, $statusOrder);
+                    if ($currentIndex === false) $currentIndex = 0;
+                @endphp
+
+                <div class="space-y-3">
+                    <span class="text-xs text-stone-400 uppercase tracking-wider font-bold block">Fulfillment Journey</span>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-center text-xs">
+                        @foreach($statusOrder as $idx => $st)
+                            <div class="p-3 rounded-xl border {{ $idx <= $currentIndex ? 'bg-[#FCF9F4] border-[#B77B3B] text-[#B77B3B] font-bold' : 'bg-[#F6F0E6] border-[#ECE2D2] text-stone-400' }}">
+                                <div class="w-5 h-5 mx-auto mb-1 rounded-full flex items-center justify-center text-[10px] {{ $idx <= $currentIndex ? 'bg-[#B77B3B] text-white' : 'bg-stone-300 text-stone-600' }}">
+                                    {{ $idx + 1 }}
+                                </div>
+                                <span class="text-[11px]">{{ $stages[$st] }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Details Row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-[#ECE2D2] text-xs">
+                    <div class="space-y-1">
+                        <span class="text-xs text-stone-400 uppercase tracking-wider font-bold block">Delivery Destination</span>
+                        <p class="font-bold text-[#171717]">{{ $order->customer_name }} ({{ $order->customer_phone }})</p>
+                        <p class="text-stone-600">{{ $order->delivery_address }}, {{ $order->delivery_area }}, {{ $order->delivery_city }}</p>
+                        @if($order->delivery?->tracking_number)
+                            <p class="text-[#B77B3B] font-mono mt-2">Courier Tracking #: {{ $order->delivery->tracking_number }} ({{ $order->delivery->carrier }})</p>
+                        @endif
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-xs text-stone-400 uppercase tracking-wider font-bold block">Payment & Method</span>
+                        <p class="text-stone-700"><strong>Method:</strong> {{ strtoupper($order->payment_method) }}</p>
+                        <p class="text-stone-700"><strong>Payment Status:</strong> <span class="capitalize">{{ $order->payment_status }}</span></p>
+                        <p class="text-stone-700"><strong>Total Amount:</strong> {{ $order->formatted_total }}</p>
+                    </div>
+                </div>
+
+                <!-- Items Breakdown -->
+                <div class="pt-4 border-t border-[#ECE2D2]">
+                    <span class="text-xs text-stone-400 uppercase tracking-wider font-bold block mb-3">Items in This Order</span>
+                    <div class="divide-y divide-[#ECE2D2] text-xs">
+                        @foreach($order->items as $item)
+                            <div class="py-2.5 flex justify-between">
+                                <span class="font-medium text-[#171717]">{{ $item->product_name }} ({{ $item->pack_size }}) x {{ $item->quantity }}</span>
+                                <span class="font-bold text-[#171717]">TZS {{ number_format($item->subtotal, 0) }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Live Assistance via WhatsApp -->
+                <div class="pt-4 border-t border-[#ECE2D2] flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <span class="text-xs text-stone-500">Need immediate assistance with this delivery?</span>
+                    <a href="https://wa.me/{{ \App\Models\SiteSetting::get('company_whatsapp', '255768123456') }}?text={{ urlencode("Hello COY BILTONG, I would like to inquire about my order #" . $order->order_number) }}" 
                        target="_blank" 
-                       class="inline-flex items-center gap-2 text-xs text-red-600 font-bold hover:underline">
-                        <span>Contact Dispatch Support on WhatsApp</span>
+                       class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#128C7E] rounded-xl text-xs font-bold transition">
+                        <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                        <span>WhatsApp Dispatch Desk</span>
                     </a>
                 </div>
-            @endif
 
-        </div>
-    </section>
+            </div>
+        @elseif(request('query') || request('order_number'))
+            <div class="bg-white rounded-3xl border border-[#ECE2D2] p-10 text-center">
+                <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mx-auto mb-3">
+                    <i data-lucide="alert-circle" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-display font-bold text-lg text-[#171717]">Order Not Found</h3>
+                <p class="text-xs text-stone-500 mt-1 max-w-sm mx-auto">
+                    We could not locate an order matching <strong>"{{ request('query', request('order_number')) }}"</strong>. Please double check the reference number or phone.
+                </p>
+            </div>
+        @endif
+
+    </div>
+</section>
 
 @endsection

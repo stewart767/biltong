@@ -33,7 +33,7 @@ class AdminAuthController extends Controller
                 return back()->withErrors(['email' => 'Access denied: You do not have administrator permissions.']);
             }
 
-            return redirect()->intended(route('admin.dashboard'))->with('success', 'Welcome to INAS Biltong Management Dashboard.');
+            return redirect()->intended(route('admin.dashboard'))->with('success', 'Welcome to Burger House Operations Portal.');
         }
 
         return back()->withErrors([

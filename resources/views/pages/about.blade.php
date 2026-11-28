@@ -1,114 +1,111 @@
 @extends('layouts.app')
 
-@section('title', 'Our Story | INAS Premium Beef Biltong | Buguruni Malapa, Dar es Salaam')
+@section('title', 'About Us | Our Story')
+@section('meta_description', 'Discover the story behind our delicious recipes, fresh prime ingredients, artisanal preparation, and dedication to unforgettable taste.')
 
 @section('content')
 
-    <!-- Header Banner -->
-    <section class="py-16 bg-brand-charcoal border-b border-brand-border relative overflow-hidden">
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 space-y-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-600/20 text-red-600 border border-red-600/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
-                The Heritage & Craft
-            </span>
-            <h1 class="font-editorial text-4xl sm:text-6xl font-bold text-white tracking-wide">
-                The Story Behind INAS
-            </h1>
-            <p class="text-zinc-300 text-base sm:text-lg max-w-2xl mx-auto">
-                Born out of passion for genuine Tanzanian livestock and the time-honored artisanal tradition of natural air-cured beef.
+<!-- Hero Header Section -->
+<div class="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-8 text-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-100/70 border border-red-200 text-[#E52E2E] text-[11px] font-bold uppercase tracking-wider mb-3">
+        <span>About Our Kitchen</span>
+    </div>
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1E1E1E] tracking-tight leading-tight">
+        Our Story & Passion for<br>
+        <span class="text-[#E52E2E]">Real Delicious Taste</span>
+    </h1>
+    <p class="mt-2.5 text-xs sm:text-sm text-stone-500 max-w-xl mx-auto leading-relaxed">
+        Crafted with pride, prepared fresh daily, and dedicated to delivering delicious food experiences using the finest prime ingredients.
+    </p>
+</div>
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 pb-14 space-y-10">
+    
+    <!-- Section 1: The Origin & Vision with Classic Modified Border -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 items-center bg-white rounded-3xl p-6 sm:p-10 border-2 border-stone-200/85 shadow-sm">
+        <div class="md:col-span-6 space-y-4">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-[#E52E2E]">Where It All Began</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1E1E1E]">
+                Made Fresh, Served with Love
+            </h2>
+            <p class="text-sm text-stone-600 leading-relaxed">
+                We believe that great food starts with simple, honest principles: prime ingredients, signature secret spices, and culinary patience. Every single recipe is crafted from scratch to ensure juicy tenderness, bold aroma, and unmatched flavor in every bite.
             </p>
+            <p class="text-sm text-stone-600 leading-relaxed">
+                Whether you are enjoying lunch with friends, grabbing dinner on the go, or celebrating with family, our mission is to deliver the freshest, most satisfying experience right to your table or doorstep.
+            </p>
+            <div class="pt-2">
+                <a href="{{ route('home') }}#menu" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#E52E2E] hover:bg-[#C61A1A] text-white text-xs font-bold transition shadow-md shadow-red-500/20 border-2 border-white/40 ring-2 ring-red-300/30">
+                    <span>Explore Our Menu</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
         </div>
-    </section>
-
-    <!-- Content Sections -->
-    <section class="py-16 bg-zinc-100 text-zinc-900">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-16">
-            
-            <div class="space-y-6 text-zinc-700 leading-relaxed text-base sm:text-lg bg-white p-8 sm:p-10 rounded-3xl border border-zinc-200 shadow-sm">
-                <h2 class="font-editorial text-3xl font-bold text-zinc-900">
-                    From Buguruni Malapa to Discerning Tables Across Tanzania
-                </h2>
-                <p>
-                    <strong class="text-red-600">INAS Company Limited</strong> was founded with a singular conviction: Tanzania is home to some of Africa’s richest, most naturally grass-fed cattle, yet the market was inundated with processed, sugar-laden, imported meat snacks.
-                </p>
-                <p>
-                    We set out to master the craft of authentic <em>biltong</em>—a method developed centuries ago that relies on whole coriander seed, sea salt, coarse black pepper, and gentle air movement rather than high-temperature ovens or chemical curing salts.
-                </p>
-                <p>
-                    From our production facility in <strong>Buguruni Malapa, Dar es Salaam</strong>, our butchers hand-select silverside and topside prime cuts every morning, ensuring exact marbling and thickness before our traditional curing process begins.
-                </p>
+        <div class="md:col-span-6">
+            <div class="rounded-2xl overflow-hidden shadow-lg border-2 border-stone-200/80 ring-4 ring-red-100/40 aspect-4/3">
+                <img src="{{ asset('images/burger-house/hero-burger.jpg') }}" alt="Gourmet Burger Meal" class="w-full h-full object-cover">
             </div>
-
-            <!-- Visual Showcase -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="rounded-2xl overflow-hidden border border-zinc-200 bg-white shadow-sm">
-                    <img src="{{ asset('images/tanzania-pasture.jpg') }}" alt="Tanzanian Cattle" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h4 class="font-bold text-zinc-900 text-base">100% Pasture-Grazed Cattle</h4>
-                        <p class="text-xs text-zinc-500 mt-1">Ethically sourced from sustainable Tanzanian pastoralists.</p>
-                    </div>
-                </div>
-                <div class="rounded-2xl overflow-hidden border border-zinc-200 bg-white shadow-sm">
-                    <img src="{{ asset('images/craft-spices.jpg') }}" alt="Artisanal Spices" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h4 class="font-bold text-zinc-900 text-base">Iron Skillet Toasted Spices</h4>
-                        <p class="text-xs text-zinc-500 mt-1">Cracked coriander, tellicherry pepper, and rock salt.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pillars -->
-            <div class="space-y-8">
-                <div class="text-center">
-                    <span class="text-xs uppercase tracking-widest text-red-600 font-bold">Our Philosophy</span>
-                    <h3 class="font-editorial text-3xl font-bold text-zinc-900 mt-1">Our Four Founding Principles</h3>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-2">
-                        <span class="text-xs font-bold text-red-600 uppercase tracking-wider block">01. Unadulterated Meat</span>
-                        <p class="text-xs text-zinc-600 leading-relaxed">
-                            No fillers, no mechanical re-formation, no soy substitutes. Each pouch contains genuine whole muscle cuts.
-                        </p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-2">
-                        <span class="text-xs font-bold text-red-600 uppercase tracking-wider block">02. 100% Halal Standards</span>
-                        <p class="text-xs text-zinc-600 leading-relaxed">
-                            Every batch follows certified Halal slaughtering, handling and packaging protocols under stringent hygienic control.
-                        </p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-2">
-                        <span class="text-xs font-bold text-red-600 uppercase tracking-wider block">03. Nutrient Density</span>
-                        <p class="text-xs text-zinc-600 leading-relaxed">
-                            Over 52g protein per 100g. Naturally abundant in bioavailable iron, vitamin B12, and potassium.
-                        </p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm space-y-2">
-                        <span class="text-xs font-bold text-red-600 uppercase tracking-wider block">04. Local Pride</span>
-                        <p class="text-xs text-zinc-600 leading-relaxed">
-                            Proudly Tanzanian. Supporting local cattle farming communities while competing at an international gourmet standard.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA -->
-            <div class="p-8 sm:p-12 rounded-3xl bg-brand-charcoal text-white border border-brand-border text-center space-y-5">
-                <h3 class="font-editorial text-3xl font-bold text-white">Experience the Taste of Real Beef</h3>
-                <p class="text-sm text-zinc-300 max-w-md mx-auto">
-                    Try our flagship 100g Biltong Original or order direct for same-day Dar es Salaam dispatch.
-                </p>
-                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                    <a href="{{ route('shop') }}" class="px-8 py-3.5 rounded-full bg-red-600 hover:bg-red-600-dark text-white font-bold text-sm shadow-md transition">
-                        Shop Our Cuts
-                    </a>
-                    <a href="{{ route('contact') }}" class="px-8 py-3.5 rounded-full bg-stone-100 hover:bg-zinc-700 border border-zinc-600 text-white text-sm font-semibold transition">
-                        Visit Us in Buguruni Malapa
-                    </a>
-                </div>
-            </div>
-
         </div>
-    </section>
+    </div>
+
+    <!-- Section 2: 3 Core Pillars with Classic Modified Borders -->
+    <div class="bg-white rounded-3xl border-2 border-stone-200/85 p-8 sm:p-12 shadow-sm">
+        <div class="text-center max-w-xl mx-auto mb-10">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-[#E52E2E]">Our Standards</span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-[#1E1E1E] mt-1">What Sets Us Apart</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="flex flex-col items-center text-center p-5 rounded-2xl bg-[#FAF6F0] border-2 border-red-200/80 hover:border-[#E52E2E]/70 transition-all shadow-xs">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#DC2626] to-[#EF4444] text-white flex items-center justify-center mb-4 shadow-sm border border-white/50">
+                    <i data-lucide="award" class="w-6 h-6"></i>
+                </div>
+                <h4 class="font-bold text-base text-[#1E1E1E]">100% Prime Quality</h4>
+                <p class="mt-2 text-xs text-stone-500 leading-relaxed">
+                    We select prime pasture beef, farm-fresh produce, and artisan buns baked to perfection daily.
+                </p>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-5 rounded-2xl bg-[#FAF6F0] border-2 border-red-200/80 hover:border-[#E52E2E]/70 transition-all shadow-xs">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#DC2626] to-[#EF4444] text-white flex items-center justify-center mb-4 shadow-sm border border-white/50">
+                    <i data-lucide="flame" class="w-6 h-6"></i>
+                </div>
+                <h4 class="font-bold text-base text-[#1E1E1E]">Signature Recipes</h4>
+                <p class="mt-2 text-xs text-stone-500 leading-relaxed">
+                    Custom seasoning blends, melted real cheddar, and house sauces created for pure deliciousness.
+                </p>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-5 rounded-2xl bg-[#FAF6F0] border-2 border-red-200/80 hover:border-[#E52E2E]/70 transition-all shadow-xs">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#DC2626] to-[#EF4444] text-white flex items-center justify-center mb-4 shadow-sm border border-white/50">
+                    <i data-lucide="truck" class="w-6 h-6"></i>
+                </div>
+                <h4 class="font-bold text-base text-[#1E1E1E]">Fast & Fresh Delivery</h4>
+                <p class="mt-2 text-xs text-stone-500 leading-relaxed">
+                    Speedy delivery in thermal packaging so every order arrives piping hot and full of flavor.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Call to Action Banner with Classic Border -->
+    <div class="bg-gradient-to-r from-[#E52E2E] to-[#C61A1A] text-white rounded-3xl p-8 sm:p-12 text-center shadow-lg shadow-red-500/20 border-2 border-white/40 ring-4 ring-red-200/50">
+        <h3 class="text-3xl sm:text-4xl font-black text-white">
+            Ready to Taste the Difference?
+        </h3>
+        <p class="mt-3 text-orange-100 text-sm max-w-xl mx-auto leading-relaxed">
+            Order your favorite combo now with golden crisp fries and ice-cold refreshments!
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href="{{ route('home') }}#menu" class="px-8 py-3.5 bg-white hover:bg-stone-50 text-[#E52E2E] font-extrabold rounded-full text-xs uppercase tracking-wider transition shadow-md border-2 border-white">
+                ORDER NOW ↗
+            </a>
+            <a href="tel:5551234567" class="px-8 py-3.5 bg-orange-800/40 hover:bg-orange-800/60 text-white font-bold rounded-full text-xs uppercase tracking-wider border-2 border-white/40 transition">
+                CALL TO ORDER
+            </a>
+        </div>
+    </div>
+
+</div>
 
 @endsection

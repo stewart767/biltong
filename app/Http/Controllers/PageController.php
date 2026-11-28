@@ -25,6 +25,26 @@ class PageController extends Controller
         return view('pages.contact');
     }
 
+    public function privacy(): View
+    {
+        return view('pages.privacy');
+    }
+
+    public function terms(): View
+    {
+        return view('pages.terms');
+    }
+
+    public function refund(): View
+    {
+        return view('pages.refund');
+    }
+
+    public function shops(): View
+    {
+        return view('pages.shops');
+    }
+
     public function contactSend(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -46,7 +66,7 @@ class PageController extends Controller
 
         return redirect()->route('contact')->with(
             'contact_success',
-            'Thank you for reaching out to INAS Company Limited! Our team at Buguruni Malapa has received your message and will respond promptly.'
+            'Thank you for reaching out to COY BILTONG! Our customer support team has received your message and will respond promptly.'
         );
     }
 
@@ -61,6 +81,6 @@ class PageController extends Controller
             ['status' => 'subscribed', 'ip_address' => $request->ip()]
         );
 
-        return back()->with('success', 'Thank you for subscribing to The Butcher’s Club! You will receive fresh batch alerts.');
+        return back()->with('success', 'Thank you for subscribing to COY BILTONG! You are now in the loop for new batches and exclusive offers.');
     }
 }

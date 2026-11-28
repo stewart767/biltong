@@ -3,21 +3,40 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivityLog;
 use App\Models\Category;
+use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductVariant;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class AdminProductController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $products = Product::with(['category', 'images'])->latest()->paginate(15);
-        return view('admin.products.index', compact('products'));
+        $search = $request->get('search');
+        $categoryId = $request->get('category_id');
+
+        $query = Product::with(['category', 'images', 'variants'])->latest();
+
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%")->orWhere('sku', 'like', "%{$search}%");
+        }
+
+        if ($categoryId && $categoryId !== 'all') {
+            $query->where('category_id', $categoryId);
+        }
+
+        $products = $query->paginate(15)->withQueryString();
+        $categories = Category::all();
+
+        return view('admin.products.index', compact('products', 'categories', 'search', 'categoryId'));
     }
 
     public function create(): View
@@ -47,7 +66,9 @@ class AdminProductController extends Controller
             'energy' => 'nullable|string|max:50',
             'fat' => 'nullable|string|max:50',
             'salt' => 'nullable|string|max:50',
-            'image' => 'nullable|image|max:3072',
+            'badge' => 'nullable|string|max:50',
+            'images.*' => 'nullable|image|max:4096',
+            'image' => 'nullable|image|max:4096',
         ]);
 
         $slug = Str::slug($validated['name']);
@@ -57,39 +78,18 @@ class AdminProductController extends Controller
             $slug = "{$originalSlug}-" . $counter++;
         }
 
-        // Process weight options
-        $weightOptions = null;
-        if (!empty($validated['weight_options_raw'])) {
-            $lines = explode("\n", str_replace("\r", "", $validated['weight_options_raw']));
-            $weightOptions = [];
-            foreach ($lines as $i => $line) {
-                $parts = explode(':', trim($line));
-                if (count($parts) >= 2) {
-                    $weight = trim($parts[0]);
-                    $p = (float) trim($parts[1]);
-                    $weightOptions[] = [
-                        'weight' => $weight,
-                        'price' => $p,
-                        'label' => $weight,
-                        'is_default' => ($i === 0),
-                    ];
-                }
-            }
-        }
-
-        // Process nutritional info
         $nutritionalInfo = [
-            'protein_per_100g' => $validated['protein'] ?? '52.4g',
-            'energy_kcal_per_100g' => $validated['energy'] ?? '274 kcal',
-            'total_fat_per_100g' => $validated['fat'] ?? '6.8g',
-            'salt_sodium_per_100g' => $validated['salt'] ?? '4.2g',
+            'protein' => $validated['protein'] ?? '28g',
+            'calories' => $validated['energy'] ?? '155 kcal',
+            'fat' => $validated['fat'] ?? '4g',
+            'salt' => $validated['salt'] ?? '1.2g',
         ];
 
         $product = Product::create([
             'category_id' => $validated['category_id'],
             'name' => $validated['name'],
             'slug' => $slug,
-            'sku' => $validated['sku'] ?? ('INAS-' . strtoupper(Str::random(6))),
+            'sku' => $validated['sku'] ?? ('COY-' . strtoupper(Str::random(6))),
             'pack_size' => $validated['pack_size'],
             'price' => $validated['price'],
             'promo_price' => $validated['promo_price'] ?? null,
@@ -100,29 +100,88 @@ class AdminProductController extends Controller
             'storage_instructions' => $validated['storage_instructions'] ?? null,
             'is_featured' => $request->boolean('is_featured'),
             'is_active' => $request->boolean('is_active', true),
-            'weight_options' => $weightOptions,
             'nutritional_info' => $nutritionalInfo,
-            'certifications' => ['100% Halal', 'Tanzanian Pasture Beef'],
-            'badges' => ['Artisanal Cut'],
+            'certifications' => ['100% Halal Certified', 'TBS Compliant', 'Prime Pasture Beef'],
+            'badges' => $request->filled('badge') ? [$request->input('badge')] : ['Popular'],
         ]);
 
-        if ($request->hasFile('image')) {
+        // Inventory log
+        Inventory::create([
+            'product_id' => $product->id,
+            'change_type' => 'initial_stock',
+            'quantity' => $product->stock,
+            'stock_after' => $product->stock,
+            'notes' => 'Initial product creation',
+            'user_id' => Auth::id(),
+        ]);
+
+        // Process images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $idx => $file) {
+                $filename = time() . '_' . $idx . '_' . $file->getClientOriginalName();
+                $file->move(public_path('images/products'), $filename);
+                $product->images()->create([
+                    'image_path' => 'images/products/' . $filename,
+                    'is_primary' => ($idx === 0),
+                    'sort_order' => $idx,
+                    'alt_text' => $product->name,
+                ]);
+            }
+        } elseif ($request->hasFile('image')) {
             $filename = time() . '_' . $request->file('image')->getClientOriginalName();
             $request->file('image')->move(public_path('images/products'), $filename);
             $product->images()->create([
                 'image_path' => 'images/products/' . $filename,
                 'is_primary' => true,
+                'sort_order' => 0,
                 'alt_text' => $product->name,
             ]);
         } else {
-            // Default placeholder image
             $product->images()->create([
                 'image_path' => 'images/biltong-original-1.jpg',
                 'is_primary' => true,
+                'sort_order' => 0,
                 'alt_text' => $product->name,
             ]);
         }
 
+        // Process default variant
+        ProductVariant::create([
+            'product_id' => $product->id,
+            'weight' => $product->pack_size,
+            'sku' => $product->sku . '-DEF',
+            'price' => $product->price,
+            'promo_price' => $product->promo_price,
+            'stock' => $product->stock,
+            'is_default' => true,
+            'is_active' => true,
+        ]);
+
+        // Process additional weight options/variants if provided
+        if (!empty($validated['weight_options_raw'])) {
+            $lines = explode("\n", str_replace("\r", "", $validated['weight_options_raw']));
+            foreach ($lines as $line) {
+                $parts = explode(':', trim($line));
+                if (count($parts) >= 2) {
+                    $weight = trim($parts[0]);
+                    $price = (float) trim($parts[1]);
+                    if ($weight !== $product->pack_size) {
+                        ProductVariant::create([
+                            'product_id' => $product->id,
+                            'weight' => $weight,
+                            'sku' => $product->sku . '-' . Str::slug($weight),
+                            'price' => $price,
+                            'promo_price' => null,
+                            'stock' => 50,
+                            'is_default' => false,
+                            'is_active' => true,
+                        ]);
+                    }
+                }
+            }
+        }
+
+        ActivityLog::log('created_product', "Created product '{$product->name}' (SKU: {$product->sku})", $product);
         Cache::forget('home_featured_products');
 
         return redirect()->route('admin.products.index')->with('success', "Product '{$product->name}' created successfully.");
@@ -131,6 +190,7 @@ class AdminProductController extends Controller
     public function edit(Product $product): View
     {
         $categories = Category::all();
+        $product->load(['images', 'variants', 'inventoryLogs']);
         return view('admin.products.edit', compact('product', 'categories'));
     }
 
@@ -150,38 +210,23 @@ class AdminProductController extends Controller
             'storage_instructions' => 'nullable|string',
             'is_featured' => 'nullable|boolean',
             'is_active' => 'nullable|boolean',
-            'weight_options_raw' => 'nullable|string',
             'protein' => 'nullable|string|max:50',
             'energy' => 'nullable|string|max:50',
             'fat' => 'nullable|string|max:50',
             'salt' => 'nullable|string|max:50',
-            'image' => 'nullable|image|max:3072',
+            'badge' => 'nullable|string|max:50',
+            'images.*' => 'nullable|image|max:4096',
+            'image' => 'nullable|image|max:4096',
         ]);
 
-        $weightOptions = $product->weight_options;
-        if (!empty($validated['weight_options_raw'])) {
-            $lines = explode("\n", str_replace("\r", "", $validated['weight_options_raw']));
-            $weightOptions = [];
-            foreach ($lines as $i => $line) {
-                $parts = explode(':', trim($line));
-                if (count($parts) >= 2) {
-                    $weight = trim($parts[0]);
-                    $p = (float) trim($parts[1]);
-                    $weightOptions[] = [
-                        'weight' => $weight,
-                        'price' => $p,
-                        'label' => $weight,
-                        'is_default' => ($i === 0),
-                    ];
-                }
-            }
-        }
-
         $nutritionalInfo = $product->nutritional_info ?? [];
-        if (!empty($validated['protein'])) $nutritionalInfo['protein_per_100g'] = $validated['protein'];
-        if (!empty($validated['energy'])) $nutritionalInfo['energy_kcal_per_100g'] = $validated['energy'];
-        if (!empty($validated['fat'])) $nutritionalInfo['total_fat_per_100g'] = $validated['fat'];
-        if (!empty($validated['salt'])) $nutritionalInfo['salt_sodium_per_100g'] = $validated['salt'];
+        if (!empty($validated['protein'])) $nutritionalInfo['protein'] = $validated['protein'];
+        if (!empty($validated['energy'])) $nutritionalInfo['calories'] = $validated['energy'];
+        if (!empty($validated['fat'])) $nutritionalInfo['fat'] = $validated['fat'];
+        if (!empty($validated['salt'])) $nutritionalInfo['salt'] = $validated['salt'];
+
+        $oldStock = $product->stock;
+        $newStock = (int) $validated['stock'];
 
         $product->update([
             'category_id' => $validated['category_id'],
@@ -190,22 +235,43 @@ class AdminProductController extends Controller
             'pack_size' => $validated['pack_size'],
             'price' => $validated['price'],
             'promo_price' => $validated['promo_price'] ?? null,
-            'stock' => $validated['stock'],
+            'stock' => $newStock,
             'short_description' => $validated['short_description'] ?? null,
             'description' => $validated['description'] ?? null,
             'ingredients' => $validated['ingredients'] ?? null,
             'storage_instructions' => $validated['storage_instructions'] ?? null,
             'is_featured' => $request->boolean('is_featured'),
             'is_active' => $request->boolean('is_active'),
-            'weight_options' => $weightOptions,
+            'badges' => $request->filled('badge') ? [$request->input('badge')] : $product->badges,
             'nutritional_info' => $nutritionalInfo,
         ]);
 
-        if ($request->hasFile('image')) {
+        // If stock changed manually, log it
+        if ($oldStock !== $newStock) {
+            Inventory::create([
+                'product_id' => $product->id,
+                'change_type' => 'manual_adjustment',
+                'quantity' => $newStock - $oldStock,
+                'stock_after' => $newStock,
+                'notes' => 'Admin manual inventory update',
+                'user_id' => Auth::id(),
+            ]);
+        }
+
+        // New uploaded images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('images/products'), $filename);
+                $product->images()->create([
+                    'image_path' => 'images/products/' . $filename,
+                    'is_primary' => false,
+                    'alt_text' => $product->name,
+                ]);
+            }
+        } elseif ($request->hasFile('image')) {
             $filename = time() . '_' . $request->file('image')->getClientOriginalName();
             $request->file('image')->move(public_path('images/products'), $filename);
-            
-            // set previous primary to false
             $product->images()->update(['is_primary' => false]);
             $product->images()->create([
                 'image_path' => 'images/products/' . $filename,
@@ -214,6 +280,7 @@ class AdminProductController extends Controller
             ]);
         }
 
+        ActivityLog::log('updated_product', "Updated product '{$product->name}'", $product);
         Cache::forget('home_featured_products');
 
         return redirect()->route('admin.products.index')->with('success', "Product '{$product->name}' updated successfully.");
@@ -223,8 +290,18 @@ class AdminProductController extends Controller
     {
         $name = $product->name;
         $product->delete();
+        ActivityLog::log('deleted_product', "Deleted product '{$name}'");
         Cache::forget('home_featured_products');
 
         return redirect()->route('admin.products.index')->with('success', "Product '{$name}' deleted.");
+    }
+
+    public function destroyImage(int $imageId): RedirectResponse
+    {
+        $image = ProductImage::findOrFail($imageId);
+        $productId = $image->product_id;
+        $image->delete();
+
+        return redirect()->route('admin.products.edit', $productId)->with('success', 'Image removed.');
     }
 }

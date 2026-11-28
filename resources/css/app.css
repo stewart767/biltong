@@ -1,75 +1,80 @@
 @import 'tailwindcss';
 
 @theme {
-    --font-serif: 'Playfair Display', serif;
-    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-    /* Red, Black, and White Color Palette matching the user's reference */
-    --color-brand-red: #b91c1c;
-    --color-brand-red-light: #dc2626;
-    --color-brand-red-dark: #991b1b;
-    --color-brand-red-deep: #7f1d1d;
-    --color-brand-black: #0b0b0b;
+    /* Burger House Brand Palette - Red, White & Cream */
+    --color-coy-charcoal: #171717;
+    --color-coy-charcoal-deep: #0f0f0f;
+    --color-coy-charcoal-light: #262626;
+    
+    --color-coy-brown: #E52E2E;
+    --color-coy-brown-light: #FF4D4D;
+    --color-coy-brown-dark: #C61A1A;
+    --color-coy-brown-tint: #FFF0F0;
+
+    --color-coy-cream: #FAF6F0;
+    --color-coy-cream-light: #FFFFFF;
+    --color-coy-cream-dark: #F5EBE1;
+
+    --color-coy-olive: #E52E2E;
+    --color-coy-olive-light: #FF4D4D;
+    --color-coy-olive-dark: #C61A1A;
+    
+    --color-coy-white: #FFFFFF;
+
+    /* Admin compatibility mappings */
     --color-brand-dark: #121212;
-    --color-brand-charcoal: #1a1a1a;
-    --color-brand-card-dark: #222222;
-    --color-brand-white: #ffffff;
-    --color-brand-light: #f8fafc;
-    --color-brand-cream: #ffffff;
-    --color-brand-border: #27272a;
-    --color-brand-border-light: #e2e8f0;
-    --color-brand-muted: #94a3b8;
+    --color-brand-card: #1C1C1C;
+    --color-brand-border: #2A2A2A;
+    --color-brand-red: #E52E2E;
+    --color-brand-red-dark: #C61A1A;
+    --color-brand-cream: #FAF6F0;
+    --color-brand-muted: #A3A3A3;
 }
 
-/* Custom smooth transitions and typography accents */
-.font-editorial {
-    font-family: var(--font-serif);
-    letter-spacing: -0.015em;
+/* Custom typography & brand styling */
+.font-display, .font-editorial, .font-serif {
+    font-family: var(--font-sans);
+    letter-spacing: -0.02em;
 }
 
-.text-red-gradient {
-    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 50%, #7f1d1d 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.font-body {
+    font-family: var(--font-sans);
 }
 
-.bg-red-gradient {
-    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+/* Tasteful subtle borders and accents */
+.border-coy-brown {
+    border-color: #B77B3B;
 }
 
-.bg-red-gradient:hover {
-    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+.border-coy-charcoal {
+    border-color: #171717;
 }
 
-.border-red-glow {
-    box-shadow: 0 0 15px rgba(185, 28, 28, 0.25);
+.border-coy-cream {
+    border-color: #ECE2D2;
 }
 
-/* Arched curved divider between hero and white body */
-.arch-curve-divider {
-    border-top-left-radius: 50% 30px;
-    border-top-right-radius: 50% 30px;
+/* Smooth transitions */
+.transition-luxury {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (min-width: 768px) {
-    .arch-curve-divider {
-        border-top-left-radius: 50% 60px;
-        border-top-right-radius: 50% 60px;
-    }
-}
-
-/* Custom scrollbar */
+/* Custom refined scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
 }
 ::-webkit-scrollbar-track {
-    background: #0b0b0b;
+    background: #171717;
 }
 ::-webkit-scrollbar-thumb {
-    background: #b91c1c;
-    border-radius: 4px;
+    background: #B77B3B;
+    border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #dc2626;
+    background: #98632C;
 }

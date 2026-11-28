@@ -1,105 +1,129 @@
 @extends('layouts.admin')
 
-@section('title', 'Product Management')
-@section('page_title', 'Product Catalogue Management')
+@section('title', 'Menu & Product Management')
 
 @section('content')
 
-    <div class="space-y-6">
-        
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-                <h2 class="font-editorial text-2xl font-bold text-brand-cream">Beef Cuts & Biltong Varieties</h2>
-                <span class="text-xs text-brand-muted">Configure prices, pack sizes, weight options, stock levels and nutritional facts</span>
-            </div>
-            <a href="{{ route('admin.products.create') }}" class="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-bold text-xs font-bold hover:shadow-lg transition flex items-center gap-1.5">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                <span>Add New Biltong Cut</span>
-            </a>
+<div class="space-y-6">
+    
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-black text-white">Burgers, Combos & Sides Catalog</h2>
+            <span class="text-xs text-stone-400">Manage prices, food portions, stock levels, burger photos and menu availability</span>
         </div>
-
-        <div class="rounded-2xl bg-brand-card border border-brand-border overflow-hidden shadow-xl">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs">
-                    <thead>
-                        <tr class="border-b border-brand-border bg-brand-dark/80 text-brand-muted uppercase text-[10px] tracking-wider">
-                            <th class="py-3.5 px-6">Product</th>
-                            <th class="py-3.5 px-4">Category</th>
-                            <th class="py-3.5 px-4">Pack Size</th>
-                            <th class="py-3.5 px-4">Price</th>
-                            <th class="py-3.5 px-4">Stock</th>
-                            <th class="py-3.5 px-4">Status</th>
-                            <th class="py-3.5 px-6 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-brand-border/60">
-                        @forelse($products as $product)
-                            <tr class="hover:bg-brand-dark/40 transition">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center gap-3">
-                                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-12 h-12 rounded-lg object-cover bg-brand-dark border border-brand-border">
-                                        <div>
-                                            <span class="font-bold text-brand-cream text-sm block">{{ $product->name }}</span>
-                                            <span class="text-xs text-brand-red font-mono">{{ $product->sku }}</span>
-                                            @if($product->is_featured)
-                                                <span class="inline-block px-2 py-0.2 rounded text-[9px] bg-brand-red text-white font-bold uppercase ml-1">Featured</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-4 text-brand-cream/80">
-                                    {{ $product->category->name ?? 'Uncategorized' }}
-                                </td>
-                                <td class="py-4 px-4 font-semibold text-brand-cream">
-                                    {{ $product->pack_size }}
-                                </td>
-                                <td class="py-4 px-4">
-                                    <span class="font-bold text-brand-cream">{{ $product->formatted_price }}</span>
-                                    @if($product->formatted_original_price)
-                                        <span class="block text-[11px] text-brand-muted line-through">{{ $product->formatted_original_price }}</span>
-                                    @endif
-                                </td>
-                                <td class="py-4 px-4">
-                                    <span class="px-2 py-0.5 rounded text-[11px] font-bold {{ $product->stock > 10 ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/40' : 'bg-red-950 text-red-400 border border-red-500/40' }}">
-                                        {{ $product->stock }} packs
-                                    </span>
-                                </td>
-                                <td class="py-4 px-4">
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold {{ $product->is_active ? 'bg-emerald-950 text-emerald-300' : 'bg-zinc-800 text-zinc-400' }}">
-                                        {{ $product->is_active ? 'Active' : 'Inactive' }}
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6 text-right">
-                                    <div class="flex items-center justify-end gap-2">
-                                        <a href="{{ route('admin.products.edit', $product) }}" class="p-1.5 rounded-lg bg-brand-dark text-brand-red hover:text-white transition" title="Edit">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                                        </a>
-                                        <form action="{{ route('admin.products.destroy', $product) }}" method="POST" onsubmit="return confirm('Are you sure you want to remove this product?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="p-1.5 rounded-lg bg-brand-dark text-brand-muted hover:text-red-400 transition" title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="py-8 text-center text-brand-muted">No products found.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            @if($products->hasPages())
-                <div class="p-4 border-t border-brand-border bg-brand-dark">
-                    {{ $products->links() }}
-                </div>
-            @endif
-        </div>
-
+        <a href="{{ route('admin.products.create') }}" class="px-4 py-2.5 rounded-xl bg-[#E52E2E] hover:bg-[#C61A1A] text-white font-bold text-xs uppercase tracking-wider transition flex items-center gap-1.5 shadow-md shadow-red-500/20 border-2 border-white/20">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Add New Menu Item</span>
+        </a>
     </div>
+
+    <!-- Filter & Search with Classic Modified Borders -->
+    <form action="{{ route('admin.products.index') }}" method="GET" class="p-4 rounded-2xl bg-[#1C1C1C] border-2 border-[#2A2A2A] flex flex-wrap gap-3 text-xs">
+        <input type="text" 
+               name="search" 
+               value="{{ request('search') }}" 
+               placeholder="Search item name or SKU..." 
+               class="px-4 py-2 bg-[#141414] border-2 border-[#2A2A2A] rounded-xl text-xs text-white focus:outline-none focus:border-[#E52E2E] min-w-[220px]">
+
+        <select name="category_id" onchange="this.form.submit()" class="px-3 py-2 bg-[#141414] border-2 border-[#2A2A2A] rounded-xl text-white focus:outline-none focus:border-[#E52E2E]">
+            <option value="">All Categories</option>
+            @foreach($categories as $cat)
+                <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
+            @endforeach
+        </select>
+
+        <button type="submit" class="px-5 py-2 bg-[#E52E2E] hover:bg-[#C61A1A] text-white rounded-xl font-bold uppercase transition shadow-xs">
+            Filter
+        </button>
+    </form>
+
+    <div class="rounded-3xl bg-[#1C1C1C] border-2 border-[#2A2A2A] overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="border-b border-[#2A2A2A] bg-[#141414] text-stone-400 uppercase text-[10px] tracking-wider">
+                        <th class="py-3.5 px-6">Menu Item</th>
+                        <th class="py-3.5 px-4">Category</th>
+                        <th class="py-3.5 px-4">Portion / Weight</th>
+                        <th class="py-3.5 px-4">Price (Tshs)</th>
+                        <th class="py-3.5 px-4">Stock</th>
+                        <th class="py-3.5 px-4">Status</th>
+                        <th class="py-3.5 px-6 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-[#2A2A2A]">
+                    @forelse($products as $product)
+                        <tr class="hover:bg-[#242424] transition">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center gap-3">
+                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-12 h-12 rounded-xl object-cover bg-[#141414] border border-[#333333]">
+                                    <div>
+                                        <span class="font-bold text-white text-sm block">{{ $product->name }}</span>
+                                        <span class="text-xs text-[#E52E2E] font-mono">{{ $product->sku }}</span>
+                                        @if($product->is_featured)
+                                            <span class="inline-block px-2 py-0.5 rounded text-[9px] bg-[#E52E2E] text-white font-bold uppercase ml-1">Featured</span>
+                                        @endif
+                                        @if(!empty($product->badges))
+                                            @foreach((array)$product->badges as $b)
+                                                <span class="inline-block px-1.5 py-0.5 rounded text-[8px] bg-orange-950 text-orange-400 border border-orange-800 font-bold uppercase ml-1">{{ $b }}</span>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-4 text-stone-300">
+                                {{ $product->category->name ?? 'Uncategorized' }}
+                            </td>
+                            <td class="py-4 px-4 font-semibold text-white">
+                                {{ $product->pack_size }}
+                            </td>
+                            <td class="py-4 px-4">
+                                <span class="font-bold text-white">{{ $product->formatted_price }}</span>
+                                @if($product->is_on_sale)
+                                    <span class="block text-[10px] text-stone-400 line-through">{{ $product->formatted_regular_price }}</span>
+                                @endif
+                            </td>
+                            <td class="py-4 px-4">
+                                <span class="px-2.5 py-0.5 rounded text-[11px] font-bold {{ $product->stock > 10 ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-red-950 text-red-400 border border-red-800' }}">
+                                    {{ $product->stock }} packs
+                                </span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <span class="px-2.5 py-0.5 rounded text-[10px] font-bold {{ $product->is_active ? 'bg-emerald-950 text-emerald-300' : 'bg-stone-800 text-stone-400' }}">
+                                    {{ $product->is_active ? 'Active' : 'Unpublished' }}
+                                </span>
+                            </td>
+                            <td class="py-4 px-6 text-right">
+                                <div class="flex items-center justify-end gap-2">
+                                    <a href="{{ route('admin.products.edit', $product) }}" class="p-1.5 rounded-lg bg-[#2A2A2A] text-stone-300 hover:text-white transition" title="Edit">
+                                        <i data-lucide="edit" class="w-4 h-4"></i>
+                                    </a>
+                                    <form action="{{ route('admin.products.destroy', $product) }}" method="POST" onsubmit="return confirm('Remove product?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="p-1.5 rounded-lg bg-[#2A2A2A] text-stone-400 hover:text-red-400 transition" title="Delete">
+                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="py-8 text-center text-stone-500">No products found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        @if($products->hasPages())
+            <div class="p-4 border-t border-[#2A2A2A] bg-[#171717]">
+                {{ $products->links() }}
+            </div>
+        @endif
+    </div>
+
+</div>
 
 @endsection

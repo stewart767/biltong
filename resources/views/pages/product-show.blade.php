@@ -1,351 +1,357 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' (' . $product->pack_size . ') | INAS Premium Beef Biltong')
-@section('meta_description', $product->short_description ?? 'Handcrafted Tanzanian beef biltong from Buguruni Malapa. 100% pasture beef, 52g protein.')
+@section('title', $product->name . ' | COY BILTONG')
+@section('meta_description', Str::limit(strip_tags($product->short_description ?? $product->description), 160))
 
 @section('content')
 
-    <!-- Breadcrumb -->
-    <div class="bg-white border-b border-stone-200 py-3 px-4">
-        <div class="max-w-7xl mx-auto flex items-center gap-2 text-xs text-zinc-500">
-            <a href="{{ route('home') }}" class="hover:text-red-600">Home</a>
+<!-- Breadcrumb Header -->
+<div class="bg-[#171717] text-white py-6 border-b border-[#262626]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex items-center gap-2 text-xs text-stone-400">
+            <a href="{{ route('home') }}" class="hover:text-white transition">Home</a>
             <span>/</span>
-            <a href="{{ route('shop') }}" class="hover:text-red-600">Shop</a>
+            <a href="{{ route('shop') }}" class="hover:text-white transition">Shop</a>
             <span>/</span>
-            <a href="{{ route('shop', ['category' => $product->category->slug]) }}" class="hover:text-red-600">
-                {{ $product->category->name }}
+            <a href="{{ route('shop', ['category' => $product->category?->slug]) }}" class="hover:text-white transition">
+                {{ $product->category?->name ?? 'Category' }}
             </a>
             <span>/</span>
-            <span class="text-red-600 font-bold truncate">{{ $product->name }}</span>
-        </div>
+            <span class="text-[#B77B3B] font-semibold truncate">{{ $product->name }}</span>
+        </nav>
     </div>
+</div>
 
-    <!-- Product Details Section (Clean White Area) -->
-    <section class="py-16 bg-white text-zinc-900" x-data="{
-        selectedImage: '{{ $product->image_url }}',
-        selectedWeight: '{{ $product->pack_size }}',
-        currentPrice: {{ (float) $product->effective_price }},
-        quantity: 1,
-        weightOptions: {{ json_encode($product->weight_options ?? []) }},
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+     x-data="{
+         selectedImage: '{{ $product->image_url }}',
+         selectedVariantId: {{ $product->variants->firstWhere('is_default', true)?->id ?? 'null' }},
+         selectedWeight: '{{ $product->pack_size }}',
+         unitPrice: {{ $product->effective_price }},
+         regularPrice: {{ $product->price }},
+         isOnSale: {{ $product->is_on_sale ? 'true' : 'false' }},
+         quantity: 1,
+         get totalFormatted() {
+             return 'TZS ' + (this.unitPrice * this.quantity).toLocaleString();
+         },
+         updateVariant(id, weight, price, promoPrice) {
+             this.selectedVariantId = id;
+             this.selectedWeight = weight;
+             this.regularPrice = price;
+             if (promoPrice && promoPrice > 0 && promoPrice < price) {
+                 this.unitPrice = promoPrice;
+                 this.isOnSale = true;
+             } else {
+                 this.unitPrice = price;
+                 this.isOnSale = false;
+             }
+         },
+         buyNow() {
+             fetch('{{ route('cart.add') }}', {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json',
+                     'X-CSRF-TOKEN': document.querySelector('meta[name=\'csrf-token\']').getAttribute('content'),
+                     'Accept': 'application/json'
+                 },
+                 body: JSON.stringify({
+                     product_id: {{ $product->id }},
+                     variant_id: this.selectedVariantId,
+                     weight: this.selectedWeight,
+                     quantity: this.quantity
+                 })
+             })
+             .then(() => {
+                 window.location.href = '{{ route('checkout') }}';
+             });
+         }
+     }">
 
-        init() {
-            if (this.weightOptions.length > 0) {
-                const defaultOption = this.weightOptions.find(o => o.is_default) || this.weightOptions[0];
-                this.selectedWeight = defaultOption.weight;
-                this.currentPrice = defaultOption.price;
-            }
-        },
-
-        selectWeight(option) {
-            this.selectedWeight = option.weight;
-            this.currentPrice = option.price;
-        },
-
-        get formattedPrice() {
-            return 'TZS ' + Number(this.currentPrice * this.quantity).toLocaleString();
-        },
-
-        get singleFormattedPrice() {
-            return 'TZS ' + Number(this.currentPrice).toLocaleString();
-        },
-
-        getWhatsAppOrderUrl() {
-            const phone = '255682869629';
-            const total = this.currentPrice * this.quantity;
-            const text = `Hello INAS Biltong! I would like to order:\n\n` +
-                         `*Product:* {{ $product->name }}\n` +
-                         `*Pack Size:* ${this.selectedWeight}\n` +
-                         `*Quantity:* ${this.quantity}\n` +
-                         `*Total:* TZS ${Number(total).toLocaleString()}\n\n` +
-                         `Please let me know how soon it can be delivered in Dar es Salaam!`;
-            return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-        }
-    }">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                
-                <!-- Left: Multi-Image Gallery -->
-                <div class="lg:col-span-6 space-y-4">
-                    <!-- Main Large Image View -->
-                    <div class="relative rounded-3xl overflow-hidden bg-zinc-100 border border-zinc-200 shadow-xl aspect-[4/3] group">
-                        <img :src="selectedImage" 
-                             alt="{{ $product->name }}" 
-                             class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
-                        
-                        <div class="absolute top-4 left-4 flex flex-wrap gap-2">
-                            @if(!empty($product->badges))
-                                @foreach($product->badges as $badge)
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white shadow-md">
-                                        {{ $badge }}
-                                    </span>
-                                @endforeach
-                            @endif
-                        </div>
-
-                        <div class="absolute bottom-4 right-4 bg-red-600 px-3.5 py-1.5 rounded-lg text-xs text-white font-bold">
-                            Buguruni Malapa Cured
-                        </div>
-                    </div>
-
-                    <!-- Thumbnails row -->
-                    @if($product->images->count() > 1)
-                        <div class="flex items-center gap-3 overflow-x-auto pb-2">
-                            @foreach($product->images as $img)
-                                <button type="button" 
-                                        @click="selectedImage = '{{ asset($img->image_path) }}'"
-                                        class="w-20 h-20 rounded-xl overflow-hidden border-2 transition flex-shrink-0"
-                                        :class="selectedImage === '{{ asset($img->image_path) }}' ? 'border-brand-red ring-2 ring-brand-red/30' : 'border-zinc-200 opacity-70 hover:opacity-100'">
-                                    <img src="{{ asset($img->image_path) }}" alt="{{ $img->alt_text }}" class="w-full h-full object-cover">
-                                </button>
-                            @endforeach
-                        </div>
-                    @endif
-                </div>
-
-                <!-- Right: Product Purchase & Attributes Panel -->
-                <div class="lg:col-span-6 space-y-6">
-                    
-                    <!-- Header info -->
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs uppercase tracking-widest text-brand-red font-black">
-                                {{ $product->category->name }}
-                            </span>
-                            <span class="text-xs text-emerald-600 font-bold flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                                Fresh Batch in Stock (Buguruni Malapa)
-                            </span>
-                        </div>
-
-                        <h1 class="font-editorial text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900">
-                            {{ $product->name }}
-                        </h1>
-
-                        <div class="flex items-center gap-4 text-xs text-zinc-500 font-medium">
-                            <span>SKU: <strong class="text-zinc-900">{{ $product->sku }}</strong></span>
-                            <span>•</span>
-                            <span>Pack Size: <strong class="text-zinc-900">{{ $product->pack_size }}</strong></span>
-                            <span>•</span>
-                            <span>100% Halal Certified</span>
-                        </div>
-                    </div>
-
-                    <!-- Price Block -->
-                    <div class="p-5 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-baseline justify-between">
-                        <div>
-                            <span class="text-xs text-zinc-500 block font-semibold">Unit Price</span>
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-3xl sm:text-4xl font-black text-brand-red" x-text="singleFormattedPrice"></span>
-                                @if($product->promo_price)
-                                    <span class="text-sm text-zinc-500 line-through">
-                                        TZS {{ number_format($product->price, 0) }}
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <span class="text-xs text-brand-red font-bold uppercase tracking-wider bg-white px-3 py-1.5 rounded-lg border border-zinc-200">
-                            Grass-Fed Beef
-                        </span>
-                    </div>
-
-                    <!-- Short Description -->
-                    <p class="text-sm text-zinc-700 leading-relaxed">
-                        {{ $product->short_description }}
-                    </p>
-
-                    <!-- Weight / Pack Size Selector -->
-                    @if(!empty($product->weight_options))
-                        <div class="space-y-2">
-                            <label class="block text-xs font-bold uppercase tracking-wider text-zinc-700">
-                                Select Pack Size / Weight:
-                            </label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                                <template x-for="opt in weightOptions" :key="opt.weight">
-                                    <button type="button" 
-                                            @click="selectWeight(opt)"
-                                            class="p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1"
-                                            :class="selectedWeight === opt.weight 
-                                                ? 'bg-red-600 text-white border-brand-red shadow-md font-bold' 
-                                                : 'bg-white border-zinc-300 text-zinc-800 hover:border-zinc-500'">
-                                        <span class="text-xs font-bold" x-text="opt.weight"></span>
-                                        <span class="text-[11px]" :class="selectedWeight === opt.weight ? 'text-white/90' : 'text-zinc-500'" x-text="'TZS ' + Number(opt.price).toLocaleString()"></span>
-                                    </button>
-                                </template>
-                            </div>
-                        </div>
-                    @endif
-
-                    <!-- Quantity Stepper & CTAs -->
-                    <div class="space-y-4 pt-2">
-                        <div class="flex items-center gap-4">
-                            <!-- Stepper -->
-                            <div class="flex items-center border border-zinc-300 rounded-xl bg-zinc-50 p-1">
-                                <button type="button" 
-                                        @click="if(quantity > 1) quantity--" 
-                                        class="w-10 h-10 flex items-center justify-center text-zinc-600 hover:text-black font-black text-lg">
-                                    −
-                                </button>
-                                <span class="w-10 text-center font-bold text-zinc-900 text-sm" x-text="quantity"></span>
-                                <button type="button" 
-                                        @click="quantity++" 
-                                        class="w-10 h-10 flex items-center justify-center text-zinc-600 hover:text-black font-black text-lg">
-                                    +
-                                </button>
-                            </div>
-
-                            <!-- Add to Bag Button (Vibrant Red) -->
-                            <button type="button"
-                                    @click="$store.cart.addItem({
-                                        id: {{ $product->id }},
-                                        name: '{{ addslashes($product->name) }}',
-                                        slug: '{{ $product->slug }}',
-                                        image: selectedImage,
-                                        pack_size: selectedWeight,
-                                        price: currentPrice,
-                                        quantity: quantity
-                                    })"
-                                    class="flex-1 py-4 px-6 rounded-xl bg-red-600 hover:bg-red-600-dark text-white font-black text-sm uppercase tracking-wider hover:shadow-xl transition flex items-center justify-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                                <span>Add to Cart &bull; <span x-text="formattedPrice"></span></span>
-                            </button>
-                        </div>
-
-                        <!-- Direct WhatsApp Instant Order Button -->
-                        <div>
-                            <button type="button" 
-                                    @click="window.open(getWhatsAppOrderUrl(), '_blank')"
-                                    class="w-full py-3.5 px-6 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2.5">
-                                <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                                <span>1-Click Order via WhatsApp (+255 682 869 629)</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Dispatch Assurance -->
-                    <div class="grid grid-cols-2 gap-3 pt-4 border-t border-zinc-200 text-xs text-zinc-600 font-medium">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <span>Dar Express Same-Day Dispatch</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <span>Pickup at Buguruni Malapa</span>
-                        </div>
-                    </div>
-
-                </div>
-
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- =========================================================================
+             GALLERY (Left Column - 6 cols)
+             ========================================================================= -->
+        <div class="lg:col-span-6 flex flex-col gap-4">
+            <!-- Large Primary Image Viewer -->
+            <div class="bg-white rounded-3xl border border-[#ECE2D2] overflow-hidden p-4 shadow-sm">
+                <img :src="selectedImage" 
+                     alt="{{ $product->name }}" 
+                     class="w-full h-[400px] sm:h-[500px] object-cover rounded-2xl">
             </div>
 
-            <!-- Detailed Tabs: Full Narrative, Nutritional Panel, Ingredients, Storage -->
-            <div class="mt-20 pt-12 border-t border-zinc-200" x-data="{ activeTab: 'nutrition' }">
-                <!-- Tab Buttons -->
-                <div class="flex flex-wrap items-center gap-3 border-b border-zinc-200 pb-4">
-                    <button type="button" @click="activeTab = 'nutrition'" 
-                            class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition"
-                            :class="activeTab === 'nutrition' ? 'bg-red-600 text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
-                        Nutritional Facts
-                    </button>
-                    <button type="button" @click="activeTab = 'ingredients'" 
-                            class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition"
-                            :class="activeTab === 'ingredients' ? 'bg-red-600 text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
-                        Ingredients & Marinade
-                    </button>
-                    <button type="button" @click="activeTab = 'story'" 
-                            class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition"
-                            :class="activeTab === 'story' ? 'bg-red-600 text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
-                        Butcher’s Description
-                    </button>
-                    <button type="button" @click="activeTab = 'storage'" 
-                            class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition"
-                            :class="activeTab === 'storage' ? 'bg-red-600 text-white shadow-md' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'">
-                        Storage & Freshness
-                    </button>
-                </div>
-
-                <!-- Tab 1: Nutritional Breakdown Table -->
-                <div x-show="activeTab === 'nutrition'" class="py-8 max-w-3xl space-y-6">
-                    <div>
-                        <h3 class="font-editorial text-2xl font-bold text-zinc-900">Nutritional Information (Per 100g)</h3>
-                        <p class="text-xs text-zinc-500 mt-1">High protein dried beef cured naturally without artificial bulking agents.</p>
-                    </div>
-
-                    <div class="rounded-2xl bg-zinc-50 border border-zinc-200 overflow-hidden">
-                        <table class="w-full text-left text-xs sm:text-sm">
-                            <tbody class="divide-y divide-zinc-200">
-                                @if(!empty($product->nutritional_info))
-                                    @foreach($product->nutritional_info as $label => $val)
-                                        <tr class="hover:bg-zinc-100 transition">
-                                            <td class="py-3.5 px-6 font-semibold text-zinc-800 capitalize">
-                                                {{ str_replace('_', ' ', $label) }}
-                                            </td>
-                                            <td class="py-3.5 px-6 text-brand-red font-black text-right">
-                                                {{ $val }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Tab 2: Ingredients -->
-                <div x-show="activeTab === 'ingredients'" class="py-8 max-w-3xl space-y-4" style="display: none;">
-                    <h3 class="font-editorial text-2xl font-bold text-zinc-900">Natural Ingredients</h3>
-                    <div class="p-6 rounded-2xl bg-zinc-50 border border-zinc-200 space-y-3">
-                        <p class="text-sm text-zinc-800 leading-relaxed font-mono">
-                            {{ $product->ingredients ?? 'Selected Tanzanian Pasture Beef, Cider Vinegar, Coarse Sea Salt, Toasted Whole Coriander, Cracked Black Pepper, Brown Cane Sugar, Natural Spices.' }}
-                        </p>
-                        <div class="pt-3 border-t border-zinc-200 text-xs text-zinc-600 space-y-1">
-                            <p>&bull; <strong>No artificial preservatives</strong>: Free of sodium nitrites, potassium sorbate, and MSG.</p>
-                            <p>&bull; <strong>Halal compliance</strong>: 100% Halal certified cattle and slaughter methods.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tab 3: Description -->
-                <div x-show="activeTab === 'story'" class="py-8 max-w-3xl space-y-4 text-sm text-zinc-700 leading-relaxed" style="display: none;">
-                    <h3 class="font-editorial text-2xl font-bold text-zinc-900">About This Cut</h3>
-                    <div class="whitespace-pre-line space-y-4">
-                        {{ $product->description }}
-                    </div>
-                </div>
-
-                <!-- Tab 4: Storage -->
-                <div x-show="activeTab === 'storage'" class="py-8 max-w-3xl space-y-4" style="display: none;">
-                    <h3 class="font-editorial text-2xl font-bold text-zinc-900">Storage & Freshness Care</h3>
-                    <div class="p-6 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs sm:text-sm text-zinc-700 space-y-3">
-                        <p>{{ $product->storage_instructions ?? 'Store in a cool, dry pantry away from direct sunlight. Once opened, consume within 4 days or keep in an airtight container or refrigerated.' }}</p>
-                        <p class="text-xs text-zinc-500">Because our biltong contains no chemical antimycotics, do not leave open bags in high-humidity tropical conditions.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Related Products -->
-            @if(isset($relatedProducts) && $relatedProducts->count() > 0)
-                <div class="mt-20 pt-16 border-t border-zinc-200">
-                    <h3 class="font-editorial text-2xl sm:text-3xl font-bold text-zinc-900 mb-8">
-                        More from the Butcher’s Range
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        @foreach($relatedProducts as $rel)
-                            <div class="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 hover:border-brand-red transition flex items-center gap-4">
-                                <img src="{{ $rel->image_url }}" alt="{{ $rel->name }}" class="w-16 h-16 rounded-xl object-cover bg-zinc-200 flex-shrink-0">
-                                <div class="flex-1 overflow-hidden">
-                                    <h4 class="font-bold text-zinc-900 text-sm truncate hover:text-brand-red">
-                                        <a href="{{ route('product.show', $rel->slug) }}">{{ $rel->name }}</a>
-                                    </h4>
-                                    <span class="text-xs text-brand-red font-black">{{ $rel->formatted_price }}</span>
-                                    <span class="text-[10px] text-zinc-500 block">Pack: {{ $rel->pack_size }}</span>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+            <!-- Thumbnail Selector -->
+            @if($product->images->count() > 1)
+                <div class="flex items-center gap-3 overflow-x-auto pb-2">
+                    @foreach($product->images as $img)
+                        @php
+                            $path = str_starts_with($img->image_path, 'http') ? $img->image_path : (str_starts_with($img->image_path, 'images/') ? asset($img->image_path) : asset('storage/' . $img->image_path));
+                        @endphp
+                        <button type="button" 
+                                @click="selectedImage = '{{ $path }}'" 
+                                :class="selectedImage === '{{ $path }}' ? 'border-[#B77B3B] ring-2 ring-[#B77B3B]/40' : 'border-[#ECE2D2]'" 
+                                class="w-20 h-20 rounded-xl overflow-hidden border-2 bg-white flex-shrink-0 transition">
+                            <img src="{{ $path }}" alt="Thumbnail" class="w-full h-full object-cover">
+                        </button>
+                    @endforeach
                 </div>
             @endif
 
+            <!-- Trust Highlights Grid -->
+            <div class="mt-4 grid grid-cols-3 gap-3 text-center text-xs text-stone-600 bg-white p-4 rounded-2xl border border-[#ECE2D2]">
+                <div class="flex flex-col items-center gap-1.5 p-2">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-[#B77B3B]"></i>
+                    <span class="font-bold text-[#171717]">100% Halal</span>
+                    <span class="text-[10px] text-stone-400">Certified Butchery</span>
+                </div>
+                <div class="flex flex-col items-center gap-1.5 p-2 border-x border-[#ECE2D2]">
+                    <i data-lucide="truck" class="w-5 h-5 text-[#B77B3B]"></i>
+                    <span class="font-bold text-[#171717]">Express Delivery</span>
+                    <span class="text-[10px] text-stone-400">Dar & Upcountry</span>
+                </div>
+                <div class="flex flex-col items-center gap-1.5 p-2">
+                    <i data-lucide="refresh-cw" class="w-5 h-5 text-[#B77B3B]"></i>
+                    <span class="font-bold text-[#171717]">Fresh Batch</span>
+                    <span class="text-[10px] text-stone-400">Sliced Weekly</span>
+                </div>
+            </div>
         </div>
-    </section>
+
+        <!-- =========================================================================
+             DETAILS & PURCHASE (Right Column - 6 cols)
+             ========================================================================= -->
+        <div class="lg:col-span-6 flex flex-col justify-between">
+            <div>
+                <!-- Category and Stock Badge -->
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#68734B]">
+                        {{ $product->category?->name ?? 'Artisanal Cut' }}
+                    </span>
+                    @if($product->isInStock())
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            In Stock ({{ $product->stock }} packs ready)
+                        </span>
+                    @else
+                        <span class="px-3 py-1 rounded-full bg-red-50 text-red-800 text-xs font-bold border border-red-200">
+                            Temporarily Sold Out
+                        </span>
+                    @endif
+                </div>
+
+                <!-- Product Name -->
+                <h1 class="font-display font-extrabold text-3xl sm:text-4xl text-[#171717] mt-2">
+                    {{ $product->name }}
+                </h1>
+
+                <!-- Price Presentation -->
+                <div class="mt-4 flex items-baseline gap-3">
+                    <span class="font-display font-extrabold text-3xl text-[#171717]" x-text="'TZS ' + unitPrice.toLocaleString()">
+                        {{ $product->formatted_price }}
+                    </span>
+                    <span x-show="isOnSale" class="text-sm text-stone-400 line-through" x-text="'TZS ' + regularPrice.toLocaleString()">
+                        {{ $product->formatted_regular_price }}
+                    </span>
+                    <span x-show="isOnSale" class="px-2 py-0.5 bg-[#B77B3B] text-white text-[10px] font-black uppercase rounded-sm">
+                        Discounted Cut
+                    </span>
+                </div>
+
+                <!-- Short Description -->
+                <p class="mt-4 text-sm text-stone-600 leading-relaxed">
+                    {{ $product->short_description }}
+                </p>
+
+                <!-- Weight / Pack Variants Selector -->
+                @if($product->variants->count() > 0)
+                    <div class="mt-6 pt-6 border-t border-[#ECE2D2]">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">
+                            Select Pack Size / Weight:
+                        </label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                            @foreach($product->variants as $variant)
+                                <button type="button" 
+                                        @click="updateVariant({{ $variant->id }}, '{{ $variant->weight }}', {{ $variant->price }}, {{ $variant->promo_price ?? 'null' }})" 
+                                        :class="selectedVariantId === {{ $variant->id }} ? 'bg-[#171717] text-white border-[#171717] shadow-sm' : 'bg-white text-stone-700 border-[#ECE2D2] hover:border-[#B77B3B]'"
+                                        class="p-3 rounded-xl border text-center transition flex flex-col items-center">
+                                    <span class="text-xs font-bold">{{ $variant->weight }}</span>
+                                    <span class="text-[11px] opacity-80 mt-0.5">Tshs {{ number_format($variant->effective_price, 0) }}</span>
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Quantity Selector -->
+                <div class="mt-6 flex items-center gap-4">
+                    <label class="text-xs font-bold uppercase tracking-wider text-stone-700">Quantity:</label>
+                    <div class="flex items-center border border-[#ECE2D2] rounded-xl bg-white overflow-hidden shadow-xs">
+                        <button type="button" 
+                                @click="if (quantity > 1) quantity--" 
+                                class="px-3.5 py-2 text-stone-600 hover:bg-[#F6F0E6] transition font-bold">
+                            -
+                        </button>
+                        <span x-text="quantity" class="px-4 py-2 text-sm font-bold text-[#171717] w-12 text-center"></span>
+                        <button type="button" 
+                                @click="quantity++" 
+                                class="px-3.5 py-2 text-stone-600 hover:bg-[#F6F0E6] transition font-bold">
+                            +
+                        </button>
+                    </div>
+                    <span class="text-xs text-stone-500">
+                        Total: <strong class="text-[#171717]" x-text="totalFormatted"></strong>
+                    </span>
+                </div>
+
+                <!-- Purchase Buttons -->
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button type="button" 
+                            @click="addToCart({{ $product->id }}, selectedVariantId, selectedWeight, quantity)" 
+                            class="w-full bg-[#171717] hover:bg-[#B77B3B] text-white py-4 rounded-xl font-bold text-sm tracking-wide uppercase transition shadow-md flex items-center justify-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                        <span>Add to Cart</span>
+                    </button>
+
+                    <button type="button" 
+                            @click="buyNow()" 
+                            class="w-full bg-[#B77B3B] hover:bg-[#C98E4F] text-white py-4 rounded-xl font-bold text-sm tracking-wide uppercase transition shadow-lg shadow-[#B77B3B]/25 flex items-center justify-center gap-2">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        <span>Buy Now</span>
+                    </button>
+                </div>
+
+                <!-- WhatsApp Direct Order Button -->
+                <div class="mt-4">
+                    <a :href="'https://wa.me/{{ \App\Models\SiteSetting::get('company_whatsapp', '255768123456') }}?text=' + encodeURIComponent('Hello COY BILTONG, I would like to order: {{ $product->name }} (' + selectedWeight + ') x' + quantity)" 
+                       target="_blank" 
+                       class="w-full bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#128C7E] border border-[#25D366]/40 py-3 rounded-xl font-bold text-xs tracking-wider uppercase transition flex items-center justify-center gap-2">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span>Order Directly on WhatsApp</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- SKU & Meta details -->
+            <div class="mt-8 pt-6 border-t border-[#ECE2D2] text-xs text-stone-500 flex flex-wrap gap-4">
+                <span>SKU: <strong class="text-[#171717]">{{ $product->sku }}</strong></span>
+                <span>Category: <strong class="text-[#171717]">{{ $product->category?->name }}</strong></span>
+                <span>Default Size: <strong class="text-[#171717]">{{ $product->pack_size }}</strong></span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =========================================================================
+         DETAILED PRODUCT SPECS: Ingredients, Nutritional Info, Storage
+         ========================================================================= -->
+    <div class="mt-16 pt-12 border-t border-[#ECE2D2]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <!-- Long Description -->
+            <div class="lg:col-span-7">
+                <h3 class="font-display font-bold text-2xl text-[#171717] mb-4">
+                    Artisanal Craft & Preparation
+                </h3>
+                <div class="prose prose-stone max-w-none text-sm text-stone-600 leading-relaxed space-y-4">
+                    {!! nl2br(e($product->description ?? $product->short_description)) !!}
+                </div>
+
+                @if($product->ingredients)
+                    <div class="mt-8 bg-white p-6 rounded-2xl border border-[#ECE2D2]">
+                        <h4 class="font-display font-bold text-base text-[#171717] mb-2">Ingredients</h4>
+                        <p class="text-xs text-stone-600 leading-relaxed">{{ $product->ingredients }}</p>
+                    </div>
+                @endif
+            </div>
+
+            <!-- Nutritional & Storage Sidebar -->
+            <div class="lg:col-span-5 space-y-6">
+                
+                <!-- Nutritional Facts Table -->
+                <div class="bg-white p-6 rounded-2xl border border-[#ECE2D2] shadow-xs">
+                    <h4 class="font-display font-bold text-base text-[#171717] pb-3 border-b border-[#ECE2D2]">
+                        Nutritional Facts (Per 50g Serving)
+                    </h4>
+                    <div class="divide-y divide-[#ECE2D2] text-xs">
+                        <div class="py-2.5 flex justify-between">
+                            <span class="text-stone-500">Protein</span>
+                            <span class="font-bold text-[#171717]">{{ $product->nutritional_info['protein'] ?? $product->nutritional_info['protein_per_100g'] ?? '28g' }}</span>
+                        </div>
+                        <div class="py-2.5 flex justify-between">
+                            <span class="text-stone-500">Calories</span>
+                            <span class="font-bold text-[#171717]">{{ $product->nutritional_info['calories'] ?? $product->nutritional_info['energy_kcal_per_100g'] ?? '155 kcal' }}</span>
+                        </div>
+                        <div class="py-2.5 flex justify-between">
+                            <span class="text-stone-500">Total Fat</span>
+                            <span class="font-bold text-[#171717]">{{ $product->nutritional_info['fat'] ?? '4g' }}</span>
+                        </div>
+                        <div class="py-2.5 flex justify-between">
+                            <span class="text-stone-500">Carbohydrates</span>
+                            <span class="font-bold text-[#171717]">{{ $product->nutritional_info['carbs'] ?? '1.5g' }}</span>
+                        </div>
+                        <div class="py-2.5 flex justify-between">
+                            <span class="text-stone-500">Sugars</span>
+                            <span class="font-bold text-emerald-700">0.0g (Zero Added Sugar)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Instructions -->
+                <div class="bg-white p-6 rounded-2xl border border-[#ECE2D2] shadow-xs">
+                    <div class="flex items-center gap-2 mb-2 text-[#68734B]">
+                        <i data-lucide="thermometer" class="w-4 h-4"></i>
+                        <h4 class="font-display font-bold text-base text-[#171717]">Storage & Freshness</h4>
+                    </div>
+                    <p class="text-xs text-stone-600 leading-relaxed">
+                        {{ $product->storage_instructions ?? 'Store in a cool, dry place away from heat. Reseal airtight bag after opening or refrigerate to retain maximum moisture.' }}
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         RELATED PRODUCTS
+         ========================================================================= -->
+    @if(isset($relatedProducts) && $relatedProducts->count() > 0)
+        <div class="mt-20 pt-12 border-t border-[#ECE2D2]">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-[#68734B]">More Recommendations</span>
+                    <h3 class="font-display font-bold text-2xl text-[#171717]">You May Also Enjoy</h3>
+                </div>
+                <a href="{{ route('shop') }}" class="text-xs font-bold text-[#B77B3B] hover:underline">
+                    View All Cuts →
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                @foreach($relatedProducts as $rel)
+                    <div class="bg-white rounded-2xl border border-[#ECE2D2] overflow-hidden p-4 shadow-xs hover:shadow-lg transition">
+                        <a href="{{ route('product.show', $rel->slug) }}" class="block aspect-square rounded-xl overflow-hidden mb-3 bg-[#F6F0E6]">
+                            <img src="{{ $rel->image_url }}" alt="{{ $rel->name }}" class="w-full h-full object-cover">
+                        </a>
+                        <span class="text-[10px] font-bold uppercase text-[#68734B]">{{ $rel->pack_size }}</span>
+                        <a href="{{ route('product.show', $rel->slug) }}" class="block font-display font-bold text-sm text-[#171717] hover:text-[#B77B3B] truncate mt-1">
+                            {{ $rel->name }}
+                        </a>
+                        <div class="mt-2 flex items-center justify-between">
+                            <span class="text-sm font-black text-[#171717]">{{ $rel->formatted_price }}</span>
+                            <button @click="addToCart({{ $rel->id }}, null, '{{ $rel->pack_size }}', 1)" 
+                                    class="p-1.5 rounded-lg bg-[#F6F0E6] hover:bg-[#B77B3B] hover:text-white transition">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
+</div>
 
 @endsection
