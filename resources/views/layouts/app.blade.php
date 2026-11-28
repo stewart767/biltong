@@ -23,7 +23,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
-<body class="bg-[#FAF6F0] text-zinc-900 font-sans antialiased selection:bg-red-600 selection:text-white min-h-screen flex flex-col justify-between" 
+<body class="bg-[#FAF6F0] text-zinc-900 font-sans antialiased selection:bg-red-600 selection:text-white min-h-screen flex flex-col justify-between pb-20 lg:pb-0" 
       x-data="{ 
           mobileMenuOpen: false,
           langModalOpen: false,
@@ -74,11 +74,79 @@
 
     <!-- Main Clean Header (FastBite Layout in Red, White & Cream) -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EDE4D8] shadow-xs transition-all duration-300" x-data="{ searchOpen: false }">
+        @php $siteLogo = \App\Models\SiteSetting::get('site_logo'); @endphp
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20 gap-4">
+
+            <!-- MOBILE HEADER (< lg): Left [Hamburger + Cart], Center [Large Logo], Right [Language] -->
+            <div class="flex lg:hidden items-center justify-between h-20 relative">
+                <!-- Left: Hamburger Menu + Cart -->
+                <div class="flex items-center gap-1.5 z-10">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                            class="p-2.5 rounded-xl bg-[#FAF5EE] hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-[#E8DDD0] transition focus:outline-none cursor-pointer"
+                            aria-label="Toggle Menu">
+                        <svg x-show="!mobileMenuOpen" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <svg x-show="mobileMenuOpen" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+
+                    <button @click="$store.cart.toggle()" 
+                            class="relative p-2.5 rounded-xl bg-[#FAF5EE] hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-[#E8DDD0] transition cursor-pointer"
+                            aria-label="Open Shopping Cart">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span x-show="$store.cart.count > 0" 
+                              x-text="$store.cart.count"
+                              class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow"
+                              style="display: none;">
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Center: Large Clearly Visible Logo -->
+                <a href="{{ route('home') }}" class="absolute left-1/2 -translate-x-1/2 flex items-center gap-2.5 group">
+                    @if(!empty($siteLogo))
+                        <img src="{{ asset($siteLogo) }}" alt="INAS Beef Biltong Logo" class="h-14 w-auto max-w-[180px] object-contain rounded-lg">
+                    @else
+                        <div class="w-11 h-11 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md shadow-red-600/25">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
+                            </svg>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-black text-2xl tracking-tight text-zinc-900 leading-none">
+                                INAS<span class="text-red-600">.</span>
+                            </span>
+                            <span class="text-[9px] tracking-widest text-zinc-500 font-bold uppercase mt-0.5">
+                                Beef Biltong
+                            </span>
+                        </div>
+                    @endif
+                </a>
+
+                <!-- Right: Compact Language Switcher -->
+                <div class="relative z-10" x-data="{ mobileLangOpen: false }">
+                    <button @click="mobileLangOpen = !mobileLangOpen" 
+                            class="flex items-center gap-1 px-2.5 py-2 rounded-xl text-xs font-bold bg-[#FAF5EE] text-zinc-700 border border-[#E8DDD0] cursor-pointer">
+                        <span>{{ app()->getLocale() === 'sw' ? '🇹🇿 SW' : '🇬🇧 EN' }}</span>
+                    </button>
+                    <div x-show="mobileLangOpen" 
+                         @click.away="mobileLangOpen = false"
+                         class="absolute right-0 mt-2 w-40 rounded-2xl bg-white shadow-xl border border-[#E8DDD0] py-2 z-50 text-xs font-semibold"
+                         style="display: none;">
+                        <a href="{{ route('locale.switch', 'sw') }}" @click="localStorage.setItem('inas_lang_chosen', 'sw')" class="block px-4 py-2 hover:bg-red-50 {{ app()->getLocale() === 'sw' ? 'text-red-600 font-bold' : 'text-zinc-700' }}">🇹🇿 Kiswahili</a>
+                        <a href="{{ route('locale.switch', 'en') }}" @click="localStorage.setItem('inas_lang_chosen', 'en')" class="block px-4 py-2 hover:bg-red-50 {{ app()->getLocale() === 'en' ? 'text-red-600 font-bold' : 'text-zinc-700' }}">🇬🇧 English</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESKTOP HEADER (>= lg): Unchanged Style -->
+            <div class="hidden lg:flex items-center justify-between h-20 gap-4">
                 
                 <!-- Brand Logo (Managed via Admin Settings -> site_logo) -->
-                @php $siteLogo = \App\Models\SiteSetting::get('site_logo'); @endphp
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group flex-shrink-0">
                     @if(!empty($siteLogo))
                         <img src="{{ asset($siteLogo) }}" alt="INAS Beef Biltong Logo" class="h-11 sm:h-12 w-auto max-w-[160px] object-contain rounded-lg group-hover:scale-105 transition duration-200">
@@ -100,7 +168,7 @@
                 </a>
 
                 <!-- Center Horizontal Navigation Links (FastBite Single-Row Clean Style) -->
-                <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
+                <nav class="flex items-center gap-7 text-sm font-semibold">
                     <a href="{{ route('home') }}" 
                        class="py-2 transition border-b-2 {{ request()->routeIs('home') ? 'border-red-600 text-red-600 font-bold' : 'border-transparent text-zinc-700 hover:text-red-600' }}">
                         {{ app()->getLocale() === 'sw' ? 'Nyumbani' : 'Home' }}
@@ -132,11 +200,11 @@
                 </nav>
 
                 <!-- Right Utility Icons + Order Now CTA -->
-                <div class="flex items-center gap-2 sm:gap-3">
+                <div class="flex items-center gap-3">
                     
                     <!-- Search Toggle -->
                     <button @click="searchOpen = !searchOpen" 
-                            class="hidden md:flex items-center justify-center w-10 h-10 rounded-full text-zinc-600 hover:text-red-600 hover:bg-[#FAF5EE] transition cursor-pointer"
+                            class="flex items-center justify-center w-10 h-10 rounded-full text-zinc-600 hover:text-red-600 hover:bg-[#FAF5EE] transition cursor-pointer"
                             aria-label="Search">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -186,7 +254,7 @@
 
                     <!-- Staff Account -->
                     <a href="{{ route('admin.login') }}" 
-                       class="hidden sm:flex items-center justify-center w-10 h-10 rounded-full text-zinc-600 hover:text-red-600 hover:bg-[#FAF5EE] transition"
+                       class="flex items-center justify-center w-10 h-10 rounded-full text-zinc-600 hover:text-red-600 hover:bg-[#FAF5EE] transition"
                        title="Staff Account">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -195,24 +263,16 @@
 
                     <!-- Partnership CTA Pill -->
                     <a href="{{ route('wholesale') }}#enquiry-form" 
-                       class="hidden md:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#FAF5EE] hover:bg-red-50 text-red-600 border border-red-200 font-bold text-xs transition transform hover:scale-105">
+                       class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#FAF5EE] hover:bg-red-50 text-red-600 border border-red-200 font-bold text-xs transition transform hover:scale-105">
                         <span>{{ app()->getLocale() === 'sw' ? 'Ubia' : 'Partnership' }}</span>
                     </a>
 
                     <!-- Order Now CTA Pill (FastBite Top-Right Red CTA) -->
                     <a href="{{ route('shop') }}" 
-                       class="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md shadow-red-600/25 transition transform hover:scale-105">
+                       class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md shadow-red-600/25 transition transform hover:scale-105">
                         <span>{{ app()->getLocale() === 'sw' ? 'Agiza Sasa' : 'Order Now' }}</span>
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
-
-                    <!-- Mobile Menu Hamburger -->
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
-                            class="lg:hidden p-2 rounded-xl text-zinc-700 hover:bg-[#FAF5EE] focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </button>
 
                 </div>
 
@@ -255,10 +315,12 @@
             <a href="{{ route('wholesale') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('wholesale') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Wholesale</a>
             <a href="{{ route('craft') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('craft') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">The Craft</a>
             <a href="{{ route('about') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('about') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">About Us</a>
-            <a href="{{ route('contact') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('contact') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Support / Contact</a>
+            <a href="{{ route('contact') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('contact') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Contact</a>
+            <a href="{{ route('wholesale') }}#enquiry-form" class="block px-3 py-2 rounded-xl text-sm font-bold text-red-600 bg-[#FAF5EE] hover:bg-red-50">Partnership</a>
+            <a href="{{ route('admin.login') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold text-zinc-600 hover:bg-red-50">Staff Account</a>
             
             <div class="pt-2">
-                <a href="https://wa.me/255682869629" target="_blank" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-red-600 text-white font-bold text-xs">
+                <a href="https://wa.me/255749901907" target="_blank" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-red-600 text-white font-bold text-xs">
                     Order via WhatsApp Desk
                 </a>
             </div>
@@ -555,6 +617,66 @@
 
         </div>
     </footer>
+
+    <!-- MOBILE APP BOTTOM TAB NAVIGATION (< lg) -->
+    <nav class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E8DDD0] shadow-[0_-6px_24px_rgba(0,0,0,0.08)]" aria-label="Mobile Bottom Navigation">
+        <div class="grid grid-cols-5 h-16 max-w-lg mx-auto">
+            <!-- Home -->
+            <a href="{{ route('home') }}" 
+               class="flex flex-col items-center justify-center gap-0.5 transition {{ request()->routeIs('home') ? 'text-red-600 font-extrabold' : 'text-zinc-500 hover:text-red-600 font-semibold' }}">
+                <span class="p-1 rounded-xl {{ request()->routeIs('home') ? 'bg-red-50' : '' }}">
+                    <svg class="w-5 h-5" fill="{{ request()->routeIs('home') ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                </span>
+                <span class="text-[10px]">{{ app()->getLocale() === 'sw' ? 'Nyumbani' : 'Home' }}</span>
+            </a>
+
+            <!-- Menu -->
+            <a href="{{ route('shop') }}" 
+               class="flex flex-col items-center justify-center gap-0.5 transition {{ request()->routeIs('shop*') ? 'text-red-600 font-extrabold' : 'text-zinc-500 hover:text-red-600 font-semibold' }}">
+                <span class="p-1 rounded-xl {{ request()->routeIs('shop*') ? 'bg-red-50' : '' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                </span>
+                <span class="text-[10px]">{{ app()->getLocale() === 'sw' ? 'Menyu' : 'Menu' }}</span>
+            </a>
+
+            <!-- Wholesale -->
+            <a href="{{ route('wholesale') }}" 
+               class="flex flex-col items-center justify-center gap-0.5 transition {{ request()->routeIs('wholesale') ? 'text-red-600 font-extrabold' : 'text-zinc-500 hover:text-red-600 font-semibold' }}">
+                <span class="p-1 rounded-xl {{ request()->routeIs('wholesale') ? 'bg-red-50' : '' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                </span>
+                <span class="text-[10px]">{{ app()->getLocale() === 'sw' ? 'Jumla' : 'Wholesale' }}</span>
+            </a>
+
+            <!-- About -->
+            <a href="{{ route('about') }}" 
+               class="flex flex-col items-center justify-center gap-0.5 transition {{ request()->routeIs('about') ? 'text-red-600 font-extrabold' : 'text-zinc-500 hover:text-red-600 font-semibold' }}">
+                <span class="p-1 rounded-xl {{ request()->routeIs('about') ? 'bg-red-50' : '' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </span>
+                <span class="text-[10px]">{{ app()->getLocale() === 'sw' ? 'Kuhusu' : 'About' }}</span>
+            </a>
+
+            <!-- Contact -->
+            <a href="{{ route('contact') }}" 
+               class="flex flex-col items-center justify-center gap-0.5 transition {{ request()->routeIs('contact') ? 'text-red-600 font-extrabold' : 'text-zinc-500 hover:text-red-600 font-semibold' }}">
+                <span class="p-1 rounded-xl {{ request()->routeIs('contact') ? 'bg-red-50' : '' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                </span>
+                <span class="text-[10px]">{{ app()->getLocale() === 'sw' ? 'Mawasiliano' : 'Contact' }}</span>
+            </a>
+        </div>
+    </nav>
 
     @stack('scripts')
 </body>
