@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'INAS Premium Beef Biltong | REAL BEEF. REAL FLAVOUR. | Dar es Salaam')
+@section('title', 'INAS Premium Beef Biltong | Crave It. Order It. Get It Fast! | Dar es Salaam')
 
 @section('content')
 
@@ -32,17 +32,38 @@
             ],
             [
                 'image' => asset(\App\Models\SiteSetting::get('hero_slide_4_image', 'images/carvers-slab.jpg')),
-                'tag' => \App\Models\SiteSetting::get('hero_slide_4_tag', "CHEF'S SPECIAL"),
-                'dishName' => \App\Models\SiteSetting::get('hero_slide_4_title', "Carver's Whole Slab"),
+                'tag' => \App\Models\SiteSetting::get('hero_slide_4_tag', 'CHEF SPECIAL'),
+                'dishName' => \App\Models\SiteSetting::get('hero_slide_4_title', 'Carvers Whole Slab'),
                 'dishSub' => \App\Models\SiteSetting::get('hero_slide_4_sub', 'Prime dry-aged whole beef slab'),
                 'dishPrice' => \App\Models\SiteSetting::get('hero_slide_4_price', 'TZS 24,000'),
                 'dishLink' => \App\Models\SiteSetting::get('hero_slide_4_link', route('shop')),
             ],
         ];
+
+        $testimonials = [
+            [
+                'name' => 'Amina Hassan',
+                'role' => 'Masaki, Dar es Salaam',
+                'quote' => 'Amazing biltong, super fast delivery in Dar, and always fresh! My go-to place for high-protein beef snacks.',
+                'avatar' => asset('images/hero-biltong.jpg'),
+            ],
+            [
+                'name' => 'David Mushi',
+                'role' => 'Mikocheni, Dar es Salaam',
+                'quote' => 'The Chilli Biltong Bites have the perfect heat and authentic toasted coriander crunch. Unmatched quality.',
+                'avatar' => asset('images/chilli-biltong.jpg'),
+            ],
+            [
+                'name' => 'Sarah Kimaro',
+                'role' => 'Oysterbay, Dar es Salaam',
+                'quote' => 'We stock INAS 10-packs for our office pantry every week. Zero preservatives, 100% Halal, and everyone loves it.',
+                'avatar' => asset('images/droewors.jpg'),
+            ],
+        ];
     @endphp
 
-    <!-- 1. HERO SECTION (Exact TasteHouse Design: Warm Cream Card + Unconstrained Food Showcase + Halo + Floating Card) -->
-    <section class="rounded-[32px] bg-[#FFF8F2] border border-[#FFE7D6] p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-sm"
+    <!-- 1. HERO SECTION (FastBite Layout in Red, White & Cream) -->
+    <section class="rounded-[32px] bg-gradient-to-br from-[#FAF5EE] via-[#FFFDF9] to-[#F6E4DE]/60 border border-[#E8DDD0] p-6 sm:p-10 lg:p-14 relative overflow-hidden shadow-sm"
              x-data="{
                  activeSlide: 0,
                  timer: null,
@@ -70,379 +91,330 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             
-            <!-- Hero Left: Typography & CTAs -->
-            <div class="lg:col-span-7 space-y-5 text-left">
+            <!-- Hero Left: Stacked Bold Headline, CTAs & Inline Feature Badges -->
+            <div class="lg:col-span-6 space-y-6 text-left z-10">
                 
                 <!-- Pill Tag -->
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-red-200 text-red-600 text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-red-200 text-red-600 text-xs font-extrabold tracking-wide shadow-xs">
+                    <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
                     <span>
                         @if(app()->getLocale() === 'sw')
-                            NYAMA HALISI • DAR ES SALAAM
+                            Nyama Halisi Iliyokaushwa • Dar es Salaam
                         @else
-                            {{ \App\Models\SiteSetting::get('hero_badge', 'GOOD FOOD, GOOD MOOD') }}
+                            {{ \App\Models\SiteSetting::get('hero_badge', 'Hot & Fresh Artisanal Biltong') }}
                         @endif
                     </span>
                 </div>
 
-                <!-- Main Bold Headline (Exact TasteHouse styling) -->
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-900 tracking-tight leading-[1.08]">
+                <!-- 3-Line Bold Stacked Headline -->
+                <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-black text-zinc-900 tracking-tight leading-[1.06]">
                     @if(app()->getLocale() === 'sw')
-                        <span>NYAMA HALISI.</span><br>
-                        <span class="text-red-600">LADHA HALISI.</span>
+                        <span class="block">NYAMA HALISI.</span>
+                        <span class="block">LADHA HALISI.</span>
+                        <span class="block text-red-600 relative inline-block">
+                            PATA HARAKA!
+                            <svg class="w-full h-3 text-red-500/40 -mt-1" viewBox="0 0 200 12" fill="none"><path d="M2 9C60 2 140 2 198 9" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+                        </span>
                     @else
                         @php
-                            $headline = \App\Models\SiteSetting::get('hero_headline', 'REAL BEEF. REAL FLAVOUR.');
-                            $words = explode('.', $headline);
+                            $headline = \App\Models\SiteSetting::get('hero_headline', 'Crave It. Order It. Get It Fast!');
+                            $parts = preg_split('/(?<=[.!])\s+/', trim($headline), -1, PREG_SPLIT_NO_EMPTY);
                         @endphp
-                        @if(count($words) >= 2)
-                            <span>{{ trim($words[0]) }}.</span><br>
-                            <span class="text-red-600">{{ trim($words[1]) }}{{ isset($words[2]) && !empty(trim($words[2])) ? '.' . trim($words[2]) : '.' }}</span>
+                        @if(count($parts) >= 3)
+                            <span class="block">{{ $parts[0] }}</span>
+                            <span class="block">{{ $parts[1] }}</span>
+                            <span class="block text-red-600 relative inline-block">
+                                {{ implode(' ', array_slice($parts, 2)) }}
+                                <svg class="w-full h-3 text-red-500/35 -mt-1" viewBox="0 0 200 12" fill="none"><path d="M2 9C60 2 140 2 198 9" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+                            </span>
+                        @elseif(count($parts) === 2)
+                            <span class="block">{{ $parts[0] }}</span>
+                            <span class="block text-red-600 relative inline-block">
+                                {{ $parts[1] }}
+                                <svg class="w-full h-3 text-red-500/35 -mt-1" viewBox="0 0 200 12" fill="none"><path d="M2 9C60 2 140 2 198 9" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+                            </span>
                         @else
-                            <span>{{ $headline }}</span>
+                            <span class="block">{{ $headline }}</span>
                         @endif
                     @endif
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="text-zinc-600 text-sm sm:text-base font-normal max-w-xl leading-relaxed">
+                <p class="text-zinc-600 text-sm sm:text-base font-normal max-w-md leading-relaxed">
                     @if(app()->getLocale() === 'sw')
-                        Imetengenezwa kwa ufundi stadi Buguruni Malapa, Dar es Salaam. 100% pasture-grazed Tanzanian beef steeped in crushed toasted coriander and slow air convection.
+                        Imetengenezwa kwa ufundi stadi Buguruni Malapa, Dar es Salaam. Nyama halisi ya ng'ombe iliyokaushwa kwa asili na viungo bora.
                     @else
-                        {{ \App\Models\SiteSetting::get('hero_subheadline', 'Handcrafted in Buguruni Malapa, Dar es Salaam. Discover 100% pasture-grazed Tanzanian beef cured with skillet-toasted coriander and natural air drying. Tender, savoury, authentic.') }}
+                        {{ \App\Models\SiteSetting::get('hero_subheadline', 'Handcrafted biltong, spicy chilli bites, traditional droëwors and more — delivered fresh to your doorstep in Dar es Salaam.') }}
                     @endif
                 </p>
 
                 <!-- Action Buttons -->
-                <div class="flex flex-wrap items-center gap-4 pt-2">
+                <div class="flex flex-wrap items-center gap-4 pt-1">
                     <a href="{{ route('shop') }}" 
-                       class="px-8 py-3.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-red-600/30 hover:scale-105 transition transform duration-200 flex items-center gap-2 cursor-pointer">
-                        <span>{{ app()->getLocale() === 'sw' ? 'Duka la Biltong' : 'Order Now' }}</span>
+                       class="px-7 py-3.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-red-600/30 hover:scale-105 transition transform duration-200 flex items-center gap-2 cursor-pointer">
+                        <span>{{ app()->getLocale() === 'sw' ? 'Agiza Mtandaoni' : 'Order Online' }}</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
 
                     <a href="{{ route('craft') }}" 
-                       class="px-6 py-3.5 rounded-full bg-white hover:bg-stone-50 text-zinc-800 font-bold text-xs uppercase tracking-wider border border-stone-200/90 hover:border-red-300 transition shadow-sm flex items-center gap-2">
-                        <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        <span>{{ app()->getLocale() === 'sw' ? 'Fahamu Ukaushaji' : 'Explore Menu' }}</span>
+                       class="px-6 py-3.5 rounded-full bg-white hover:bg-[#FAF5EE] text-zinc-800 font-bold text-xs sm:text-sm border border-[#E2D6C8] hover:border-red-300 transition shadow-sm flex items-center gap-2.5">
+                        <span class="w-5 h-5 rounded-full border border-red-600 text-red-600 flex items-center justify-center">
+                            <svg class="w-2.5 h-2.5 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </span>
+                        <span>{{ app()->getLocale() === 'sw' ? 'Angalia Menyu' : 'Explore Menu' }}</span>
                     </a>
                 </div>
 
-                <!-- Social Proof: Happy Customers Avatars -->
-                <div class="pt-4 flex items-center gap-3">
-                    <div class="flex -space-x-2 overflow-hidden">
-                        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="{{ asset('images/biltong-original-1.jpg') }}" alt="User">
-                        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="{{ asset('images/chilli-biltong.jpg') }}" alt="User">
-                        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="{{ asset('images/droewors.jpg') }}" alt="User">
-                        <div class="h-8 w-8 rounded-full bg-red-600 text-white font-bold text-[10px] flex items-center justify-center ring-2 ring-white">
-                            +1k
-                        </div>
+                <!-- 3 Inline Mini Feature Badges (FastBite Style) -->
+                <div class="pt-4 border-t border-[#E8DDD0]/80 flex flex-wrap items-center gap-5 sm:gap-7 text-xs font-semibold text-zinc-700">
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-full bg-red-50 text-red-600 flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </span>
+                        <span class="leading-tight">{{ \App\Models\SiteSetting::get('badge_1_title', 'Same-Day Delivery') }}</span>
                     </div>
-                    <div class="text-xs">
-                        <div class="font-extrabold text-zinc-900">
-                            {{ \App\Models\SiteSetting::get('social_proof_count', '1,500+ Happy Food Lovers in Dar es Salaam') }}
-                        </div>
-                        <div class="text-zinc-500 text-[11px] flex items-center gap-1">
-                            <span class="text-amber-500">★★★★★</span>
-                            <span>Buguruni Malapa Butchery</span>
-                        </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-full bg-red-50 text-red-600 flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                        </span>
+                        <span class="leading-tight">{{ \App\Models\SiteSetting::get('badge_2_title', '100% Pure Beef') }}</span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-full bg-red-50 text-red-600 flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </span>
+                        <span class="leading-tight">Premium Quality</span>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Hero Right: Food Photography Showcase with Floating Dish Card (Exact TasteHouse layout) -->
-            <div class="lg:col-span-5 relative flex items-center justify-center h-[340px] sm:h-[400px] lg:h-[450px]">
+            <!-- Hero Right: Glowing Red/Cream Arc + Unconstrained Product Slider -->
+            <div class="lg:col-span-6 relative flex items-center justify-center h-[320px] sm:h-[390px] lg:h-[440px]">
                 
-                <!-- Ambient Warm Halo Disc (Behind Food) -->
-                <div class="absolute w-64 h-64 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-full bg-gradient-to-tr from-orange-200/50 via-amber-100/40 to-transparent pointer-events-none"></div>
+                <!-- Glowing Circular Red/Cream Arc Behind Product (FastBite Ring) -->
+                <div class="absolute w-64 h-64 sm:w-80 sm:h-80 lg:w-[410px] lg:h-[410px] rounded-full border-[3px] border-red-500/45 shadow-[0_0_60px_rgba(220,38,38,0.16)] bg-gradient-to-tr from-red-100/40 via-[#FFF8F2] to-transparent pointer-events-none"></div>
 
-                <!-- Unconstrained Food Images (Sitting naturally with deep realistic drop-shadow) -->
+                <!-- Spark Accent Lines (Top-left of Ring) -->
+                <svg class="absolute top-6 left-10 sm:left-16 w-10 h-10 text-red-500/70 pointer-events-none hidden sm:block" viewBox="0 0 40 40" fill="none">
+                    <path d="M8 28L2 22M14 16L10 6M26 10L28 2" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+
+                <!-- Pre-rendered Unconstrained Product Slides -->
                 @foreach($heroSlides as $idx => $s)
                     <div class="absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out"
                          :class="activeSlide === {{ $idx }} ? 'opacity-100 scale-100 z-10 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none z-0'"
                          @if($idx === 0) style="opacity: 1;" @else style="opacity: 0;" @endif>
                         <img src="{{ $s['image'] }}" 
                              alt="{{ $s['dishName'] }}" 
-                             class="max-h-[300px] sm:max-h-[360px] lg:max-h-[410px] w-auto max-w-full object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.18)] hover:scale-105 transition-transform duration-500 rounded-2xl">
+                             class="max-h-[280px] sm:max-h-[340px] lg:max-h-[395px] w-auto max-w-full object-contain filter drop-shadow-[0_22px_30px_rgba(0,0,0,0.2)] hover:scale-105 transition-transform duration-500 rounded-2xl">
                     </div>
                 @endforeach
 
-                <!-- Floating Dish Card (Exact TasteHouse positioning: middle-left of food visual) -->
-                <div class="absolute top-1/2 -translate-y-1/2 left-0 sm:-left-4 lg:-left-6 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 border border-stone-200/80 shadow-2xl max-w-[210px] text-left transition transform hover:scale-105">
+                <!-- Floating Dish Price Pill -->
+                <div class="absolute bottom-3 left-2 sm:bottom-6 sm:left-0 z-20 bg-white/95 backdrop-blur-md rounded-2xl px-4 py-3 border border-[#E8DDD0] shadow-xl max-w-[205px] text-left">
                     <div class="text-[10px] font-black uppercase tracking-wider text-red-600" x-text="slides[activeSlide]?.tag">{{ $heroSlides[0]['tag'] }}</div>
                     <h4 class="font-extrabold text-xs sm:text-sm text-zinc-900 truncate" x-text="slides[activeSlide]?.dishName">{{ $heroSlides[0]['dishName'] }}</h4>
-                    <p class="text-[10px] sm:text-[11px] text-zinc-500 truncate" x-text="slides[activeSlide]?.dishSub">{{ $heroSlides[0]['dishSub'] }}</p>
-                    <div class="mt-1.5 font-black text-xs sm:text-sm text-red-600" x-text="slides[activeSlide]?.dishPrice">{{ $heroSlides[0]['dishPrice'] }}</div>
+                    <div class="mt-0.5 font-black text-xs sm:text-sm text-red-600" x-text="slides[activeSlide]?.dishPrice">{{ $heroSlides[0]['dishPrice'] }}</div>
                 </div>
 
-            </div>
-
-        </div>
-
-        <!-- Carousel Navigation Controls (Exact TasteHouse bottom-right placement) -->
-        <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 flex items-center gap-3 z-20">
-            <button @click="prev()" 
-                    class="w-9 h-9 rounded-full bg-white hover:bg-red-600 hover:text-white text-zinc-700 flex items-center justify-center shadow-md border border-stone-200/80 transition transform hover:scale-110 cursor-pointer"
-                    aria-label="Previous">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
-            </button>
-            
-            <!-- Progress Dots -->
-            <div class="flex items-center gap-2 px-1">
-                @foreach($heroSlides as $i => $s)
-                    <span class="rounded-full transition-all duration-300"
-                          :class="activeSlide === {{ $i }} ? 'w-5 h-2 bg-red-600' : 'w-2 h-2 bg-stone-300'"
-                          @if($i === 0) style="width: 1.25rem; height: 0.5rem; background-color: #dc2626;" @endif></span>
-                @endforeach
-            </div>
-
-            <button @click="next()" 
-                    class="w-9 h-9 rounded-full bg-white hover:bg-red-600 hover:text-white text-zinc-700 flex items-center justify-center shadow-md border border-stone-200/80 transition transform hover:scale-110 cursor-pointer"
-                    aria-label="Next">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-            </button>
-        </div>
-
-    </section>
-
-        </div>
-
-    </section>
-
-
-    <!-- 2. FOUR FEATURE BADGES STRIP (Exact TasteHouse Horizontal 4-Card Row) -->
-    <section class="mt-8">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            <!-- Badge 1: Free Delivery -->
-            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200/70 shadow-sm flex items-center gap-3.5 hover:shadow-md transition">
-                <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+                <!-- Carousel Controls -->
+                <div class="absolute bottom-3 right-2 sm:bottom-6 sm:right-0 flex items-center gap-2 z-20">
+                    <button @click="prev()" 
+                            class="w-8 h-8 rounded-full bg-white hover:bg-red-600 hover:text-white text-zinc-700 flex items-center justify-center shadow-md border border-[#E8DDD0] transition cursor-pointer"
+                            aria-label="Previous">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button @click="next()" 
+                            class="w-8 h-8 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-md transition cursor-pointer"
+                            aria-label="Next">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    </button>
                 </div>
-                <div>
-                    <h4 class="font-bold text-xs text-zinc-900">{{ \App\Models\SiteSetting::get('badge_1_title', 'Free Delivery') }}</h4>
-                    <p class="text-[11px] text-zinc-500">{{ \App\Models\SiteSetting::get('badge_1_sub', 'On orders over TZS 50,000') }}</p>
-                </div>
-            </div>
 
-            <!-- Badge 2: 100% Halal & Fresh -->
-            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200/70 shadow-sm flex items-center gap-3.5 hover:shadow-md transition">
-                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-bold text-xs text-zinc-900">{{ \App\Models\SiteSetting::get('badge_2_title', '100% Halal & Pure') }}</h4>
-                    <p class="text-[11px] text-zinc-500">{{ \App\Models\SiteSetting::get('badge_2_sub', 'Zero nitrates & no MSG') }}</p>
-                </div>
-            </div>
-
-            <!-- Badge 3: Secure Payment -->
-            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200/70 shadow-sm flex items-center gap-3.5 hover:shadow-md transition">
-                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-bold text-xs text-zinc-900">{{ \App\Models\SiteSetting::get('badge_3_title', 'Secure Payment') }}</h4>
-                    <p class="text-[11px] text-zinc-500">{{ \App\Models\SiteSetting::get('badge_3_sub', 'M-Pesa, Tigo, Airtel, Halopesa') }}</p>
-                </div>
-            </div>
-
-            <!-- Badge 4: 24/7 Support -->
-            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200/70 shadow-sm flex items-center gap-3.5 hover:shadow-md transition">
-                <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-bold text-xs text-zinc-900">{{ \App\Models\SiteSetting::get('badge_4_title', '24/7 Support') }}</h4>
-                    <p class="text-[11px] text-zinc-500">{{ \App\Models\SiteSetting::get('badge_4_sub', '+255 682 869 629') }}</p>
-                </div>
             </div>
 
         </div>
     </section>
 
 
-    <!-- 3. EXPLORE BY CUISINE / CATEGORIES (Exact TasteHouse 5 Pastel Cards) -->
-    <section class="mt-12">
-        <div class="flex items-center justify-between mb-6">
-            <div>
-                <h3 class="text-xl sm:text-2xl font-black text-zinc-900 tracking-tight">
-                    {{ app()->getLocale() === 'sw' ? 'Chagua Aina ya Biltong' : 'Explore by Cut & Craft' }}
-                </h3>
-                <p class="text-xs text-zinc-500 mt-0.5">
-                    {{ app()->getLocale() === 'sw' ? 'Vyakula bora vya nyama iliyokaushwa kwa asili' : 'Hand-curated prime pasture cuts and artisanal specialties' }}
-                </p>
-            </div>
-            <a href="{{ route('shop') }}" class="inline-flex items-center gap-1 text-xs font-bold text-red-600 hover:text-red-700 transition">
-                <span>View All</span>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-            </a>
-        </div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            @forelse($categories as $category)
-                <a href="{{ route('shop', ['category' => $category->slug]) }}" 
-                   class="group bg-white hover:bg-red-50/40 border border-stone-200 hover:border-red-300 shadow-sm rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3 transition duration-200">
-                    <div class="w-24 h-24 rounded-full overflow-hidden shadow-md group-hover:scale-105 transition transform duration-300 border-2 border-white">
-                        <img src="{{ $category->image_url }}" alt="{{ $category->name }}" class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-red-600 transition">{{ $category->name }}</h4>
-                        <span class="text-[11px] text-zinc-500 font-medium">{{ $category->description ?? 'Prime Cured Cuts' }}</span>
-                    </div>
-                </a>
-            @empty
-                <!-- Fallback defaults if no categories in database -->
-                <a href="{{ route('shop') }}" class="group bg-white border border-stone-200 rounded-3xl p-5 text-center flex flex-col items-center justify-between space-y-3">
-                    <div class="w-24 h-24 rounded-full overflow-hidden shadow-md border-2 border-white">
-                        <img src="{{ asset('images/biltong-original-1.jpg') }}" alt="Traditional" class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h4 class="font-extrabold text-sm text-zinc-900">Traditional</h4>
-                        <span class="text-[11px] text-zinc-500 font-medium">100g & 250g Cuts</span>
-                    </div>
-                </a>
-            @endforelse
-        </div>
-    </section>
-
-
-    <!-- 4. POPULAR DISHES / POPULAR PRODUCTS (Exact TasteHouse Product Cards Grid) -->
-    <section class="mt-14">
-        <div class="flex items-center justify-between mb-6">
-            <div>
-                <h3 class="text-xl sm:text-2xl font-black text-zinc-900 tracking-tight">
-                    {{ app()->getLocale() === 'sw' ? 'Vyakula Maarufu Zaidi' : 'Popular Dishes' }}
-                </h3>
-                <p class="text-xs text-zinc-500 mt-0.5">
-                    {{ app()->getLocale() === 'sw' ? 'Biltong zilizopendwa zaidi na wateja wetu Dar es Salaam' : 'Our highest-rated artisanal cuts and chef-curated beef biltong packs' }}
-                </p>
-            </div>
-            <a href="{{ route('shop') }}" class="inline-flex items-center gap-1 text-xs font-bold text-red-600 hover:text-red-700 transition">
-                <span>View All</span>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-            </a>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-            @forelse($featuredProducts as $product)
-                <div class="bg-white rounded-3xl p-4 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative">
-                    
-                    <!-- Dynamic Badge -->
-                    <div class="absolute top-4 left-4 z-10">
-                        @if($product->promo_price && $product->promo_price < $product->price)
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-600 text-white shadow-sm">
-                                {{ round((($product->price - $product->promo_price) / $product->price) * 100) }}% OFF
-                            </span>
-                        @elseif($product->is_featured)
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500 text-white shadow-sm">
-                                Bestseller
-                            </span>
-                        @else
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-zinc-800 text-white shadow-sm">
-                                Chef's Choice
-                            </span>
-                        @endif
-                    </div>
-
-                    <!-- Product Image (Circular Plate with zoom) -->
-                    <a href="{{ route('product.show', $product->slug) }}" class="pt-4 pb-2 flex items-center justify-center">
-                        <div class="w-32 h-32 rounded-full overflow-hidden shadow-md group-hover:scale-105 transition transform duration-300 border border-stone-100">
-                            <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+    <!-- 2. HORIZONTAL CATEGORY BAR (FastBite Clean Category Strip) -->
+    <section class="-mt-4 relative z-20 px-2 sm:px-6">
+        <div class="bg-white rounded-3xl border border-[#E8DDD0] shadow-lg p-3 sm:p-4">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                @forelse($categories as $index => $category)
+                    <a href="{{ route('shop', ['category' => $category->slug]) }}" 
+                       class="group flex flex-col items-center justify-center text-center p-3.5 rounded-2xl transition-all duration-200 {{ $index === 0 ? 'border-2 border-red-600 bg-[#FFF5F5] shadow-sm' : 'border border-transparent hover:border-red-300 hover:bg-[#FAF5EE]' }}">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden mb-2.5 shadow-sm group-hover:scale-105 transition duration-300 bg-[#FAF5EE]">
+                            <img src="{{ $category->image_url }}" alt="{{ $category->name }}" class="w-full h-full object-cover">
                         </div>
+                        <span class="font-extrabold text-xs sm:text-sm {{ $index === 0 ? 'text-red-600' : 'text-zinc-800 group-hover:text-red-600' }} transition">
+                            {{ $category->name }}
+                        </span>
                     </a>
+                @empty
+                    <a href="{{ route('shop') }}" class="flex flex-col items-center justify-center text-center p-3.5 rounded-2xl border-2 border-red-600 bg-[#FFF5F5]">
+                        <div class="w-16 h-16 rounded-2xl overflow-hidden mb-2.5">
+                            <img src="{{ asset('images/biltong-original-1.jpg') }}" alt="Traditional" class="w-full h-full object-cover">
+                        </div>
+                        <span class="font-extrabold text-xs sm:text-sm text-red-600">Traditional Biltong</span>
+                    </a>
+                @endforelse
+            </div>
+        </div>
+    </section>
 
-                    <!-- Title & Meta -->
-                    <div class="space-y-1 text-left pt-2">
-                        <a href="{{ route('product.show', $product->slug) }}">
-                            <h4 class="font-extrabold text-sm text-zinc-900 group-hover:text-red-600 transition truncate">
-                                {{ $product->name }}
-                            </h4>
-                        </a>
-                        <p class="text-[11px] text-zinc-500 truncate">
-                            {{ $product->short_description ?? ($product->category ? $product->category->name : 'Artisanal Tanzanian Beef') }}
-                        </p>
-                    </div>
 
-                    <!-- Price + Rating + Add to Cart (+) Button -->
-                    <div class="pt-4 flex items-center justify-between border-t border-stone-100 mt-3">
-                        <div>
-                            <span class="block font-black text-sm text-zinc-900">{{ $product->formatted_price }}</span>
-                            @if($product->formatted_original_price)
-                                <span class="line-through text-[10px] text-zinc-400 block">{{ $product->formatted_original_price }}</span>
+    <!-- 3. SPECIAL COMBO DEALS / FEATURED CUTS (FastBite Left Intro + 3 White Cards) -->
+    <section class="mt-10 rounded-[32px] bg-[#F4ECE1]/90 border border-[#E8DDD0] p-6 sm:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Column: Intro & CTA -->
+            <div class="lg:col-span-3 space-y-4 text-left">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-red-600 text-white text-[11px] font-extrabold uppercase tracking-wider shadow-xs">
+                    {{ app()->getLocale() === 'sw' ? 'Wiki Hii Tu' : 'This Week Only' }}
+                </span>
+
+                <h2 class="text-3xl sm:text-4xl font-black text-zinc-900 leading-[1.1] tracking-tight">
+                    {{ app()->getLocale() === 'sw' ? 'Ofa Maalum za Biltong' : 'Special' }}<br>
+                    <span class="text-red-600">{{ app()->getLocale() === 'sw' ? 'Na Punguzo' : 'Combo Deals' }}</span>
+                </h2>
+
+                <p class="text-xs sm:text-sm text-zinc-600 leading-relaxed">
+                    {{ app()->getLocale() === 'sw' ? 'Okoa zaidi na pakiti zetu bora za nyama iliyokaushwa.' : 'Save more with our handcrafted biltong packs & combo offers!' }}
+                </p>
+
+                <div class="pt-1">
+                    <a href="{{ route('shop') }}" 
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md shadow-red-600/25 transition transform hover:scale-105">
+                        <span>{{ app()->getLocale() === 'sw' ? 'Angalia Ofa Zote' : 'View All Deals' }}</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Columns: 3 Crisp White Product Cards -->
+            <div class="lg:col-span-9 grid grid-cols-1 sm:grid-cols-3 gap-5">
+                @forelse($featuredProducts->take(3) as $pIndex => $product)
+                    <div class="bg-white rounded-3xl p-5 border border-[#E8DDD0] shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative">
+                        
+                        <!-- Top Badge (Save % or Most Popular) -->
+                        <div class="mb-3">
+                            @if($product->promo_price && $product->promo_price < $product->price)
+                                <span class="inline-block px-3 py-1 rounded-full text-[11px] font-extrabold bg-red-600 text-white">
+                                    Save {{ round((($product->price - $product->promo_price) / $product->price) * 100) }}%
+                                </span>
+                            @elseif($pIndex === 1)
+                                <span class="inline-block px-3 py-1 rounded-full text-[11px] font-extrabold bg-amber-100 text-red-700 border border-amber-300">
+                                    ★ Most Popular
+                                </span>
+                            @else
+                                <span class="inline-block px-3 py-1 rounded-full text-[11px] font-extrabold bg-red-600 text-white">
+                                    Best Seller
+                                </span>
                             @endif
-                            <span class="text-[10px] text-amber-500 font-bold flex items-center gap-0.5">
-                                ★ <span class="text-zinc-600">4.9</span>
-                            </span>
                         </div>
 
-                        <button @click="$store.cart.add({ id: {{ $product->id }}, name: '{{ addslashes($product->name) }}', price: {{ (int)$product->effective_price }}, weight: '{{ $product->pack_size ?? '100g' }}', image: '{{ $product->image_url }}', quantity: 1 })"
-                                class="w-8 h-8 rounded-xl bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-md shadow-red-600/30 transition transform hover:scale-110 cursor-pointer"
-                                aria-label="Add to cart">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                        </button>
+                        <!-- Product Image -->
+                        <a href="{{ route('product.show', $product->slug) }}" class="block h-36 sm:h-40 rounded-2xl overflow-hidden bg-[#FAF5EE] mb-4">
+                            <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </a>
+
+                        <!-- Product Info -->
+                        <div class="space-y-1 text-left">
+                            <a href="{{ route('product.show', $product->slug) }}">
+                                <h3 class="font-extrabold text-base text-zinc-900 group-hover:text-red-600 transition truncate">
+                                    {{ $product->name }}
+                                </h3>
+                            </a>
+                            <p class="text-xs text-zinc-500 truncate">
+                                {{ $product->short_description ?? ($product->category ? $product->category->name : '100% Pure Tanzanian Beef') }}
+                            </p>
+                        </div>
+
+                        <!-- Price + Add (+) Button -->
+                        <div class="pt-4 mt-3 border-t border-stone-100 flex items-center justify-between">
+                            <div class="flex items-baseline gap-2">
+                                <span class="font-black text-base text-red-600">{{ $product->formatted_price }}</span>
+                                @if($product->formatted_original_price)
+                                    <span class="line-through text-xs text-zinc-400">{{ $product->formatted_original_price }}</span>
+                                @endif
+                            </div>
+
+                            <button @click="$store.cart.add({ id: {{ $product->id }}, name: '{{ addslashes($product->name) }}', price: {{ (int)$product->effective_price }}, weight: '{{ $product->pack_size ?? '100g' }}', image: '{{ $product->image_url }}', quantity: 1 })"
+                                    class="w-9 h-9 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-md shadow-red-600/30 transition transform hover:scale-110 cursor-pointer"
+                                    aria-label="Add to cart">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                            </button>
+                        </div>
+
                     </div>
+                @empty
+                    <div class="col-span-full py-10 text-center text-zinc-500">
+                        No products available yet.
+                    </div>
+                @endforelse
+            </div>
 
-                </div>
-            @empty
-                <div class="col-span-full py-12 text-center text-zinc-500">
-                    No products found. Please add products via the Admin panel.
-                </div>
-            @endforelse
         </div>
     </section>
 
 
-    <!-- 5. DUAL PROMO BANNERS (Managed from Admin Settings) -->
-    <section class="mt-14">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- 4. FAST & RELIABLE DELIVERY BANNER (Crisp White Split Card) -->
+    <section class="mt-10 rounded-[32px] bg-white border border-[#E8DDD0] p-6 sm:p-8 lg:p-10 shadow-sm">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             
-            <!-- Banner 1: Limited Time Offer -->
-            <div class="bg-white border border-red-200 rounded-3xl p-6 sm:p-8 flex items-center justify-between overflow-hidden shadow-sm hover:shadow-md transition">
-                <div class="space-y-3 max-w-xs text-left">
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-600 text-white">
-                        {{ \App\Models\SiteSetting::get('promo_1_tag', 'Limited Time Offer') }}
-                    </span>
-                    <h3 class="font-extrabold text-xl sm:text-2xl text-zinc-900 leading-tight">
-                        {!! nl2br(e(\App\Models\SiteSetting::get('promo_1_title', "Flat 10% OFF\nOn Your First Order!"))) !!}
-                    </h3>
-                    <p class="text-xs text-zinc-600 leading-relaxed">
-                        {{ \App\Models\SiteSetting::get('promo_1_desc', 'Use code INAS10 at checkout and enjoy real artisanal biltong.') }}
-                    </p>
-                    <a href="{{ \App\Models\SiteSetting::get('promo_1_link', route('shop')) }}" 
-                       class="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-red-700 hover:bg-red-800 text-white font-bold text-xs shadow-md transition transform hover:scale-105">
-                        <span>Order Now</span>
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </a>
-                </div>
-
-                <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden shadow-xl border-4 border-white flex-shrink-0">
-                    <img src="{{ asset('images/bbq-biltong.jpg') }}" alt="Promo Dish" class="w-full h-full object-cover">
+            <!-- Left: Red & Cream Delivery Illustration -->
+            <div class="lg:col-span-3 flex items-center justify-center">
+                <div class="w-44 h-36 rounded-2xl bg-[#FAF5EE] border border-red-100 flex items-center justify-center p-4">
+                    <svg class="w-28 h-28 text-red-600" viewBox="0 0 120 120" fill="none">
+                        <!-- Stylized Red & Cream Delivery Scooter -->
+                        <circle cx="32" cy="90" r="14" stroke="#18181B" stroke-width="5" fill="#FAF5EE"/>
+                        <circle cx="88" cy="90" r="14" stroke="#18181B" stroke-width="5" fill="#FAF5EE"/>
+                        <path d="M18 68H48L58 84H86C90 84 94 80 92 74L84 52H68" stroke="#DC2626" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="16" y="42" width="28" height="24" rx="5" fill="#DC2626"/>
+                        <path d="M24 54H36M30 48V60" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="72" cy="34" r="9" fill="#DC2626"/>
+                        <path d="M58 56L72 44L82 54" stroke="#18181B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 80H14M6 90H12" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Banner 2: Weekend Special / Family Combos -->
-            <div class="bg-white border border-stone-200 rounded-3xl p-6 sm:p-8 flex items-center justify-between overflow-hidden shadow-sm hover:shadow-md transition">
-                <div class="space-y-3 max-w-xs text-left">
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-600 text-white">
-                        {{ \App\Models\SiteSetting::get('promo_2_tag', 'Weekend Special') }}
+            <!-- Middle: Headline & Description -->
+            <div class="lg:col-span-5 text-center lg:text-left space-y-2">
+                <h2 class="text-2xl sm:text-3xl font-black text-zinc-900 leading-tight tracking-tight">
+                    Fast &amp; Reliable<br>
+                    <span class="text-red-600">Biltong Delivery</span>
+                </h2>
+                <p class="text-xs sm:text-sm text-zinc-600 max-w-md mx-auto lg:mx-0">
+                    Freshly sliced and vacuum-sealed in Buguruni Malapa — delivered fast to your home, office, or gym across Dar es Salaam.
+                </p>
+            </div>
+
+            <!-- Right: 3 Feature Pillars -->
+            <div class="lg:col-span-4 grid grid-cols-3 gap-3 text-center">
+                <div class="p-3 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] flex flex-col items-center justify-center space-y-1.5">
+                    <span class="w-9 h-9 rounded-full bg-white text-red-600 flex items-center justify-center shadow-xs">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </span>
-                    <h3 class="font-extrabold text-xl sm:text-2xl text-zinc-900 leading-tight">
-                        {!! nl2br(e(\App\Models\SiteSetting::get('promo_2_title', "Family & Party\nCombo Packs"))) !!}
-                    </h3>
-                    <p class="text-xs text-zinc-600 leading-relaxed">
-                        {{ \App\Models\SiteSetting::get('promo_2_desc', 'Feed your gathering or stock your bar with our 10-pack cartons.') }}
-                    </p>
-                    <a href="{{ \App\Models\SiteSetting::get('promo_2_link', route('wholesale')) }}" 
-                       class="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md transition transform hover:scale-105">
-                        <span>Order Now</span>
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </a>
+                    <span class="text-[11px] font-bold text-zinc-800 leading-tight">Same-Day<br>Delivery</span>
                 </div>
 
-                <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden shadow-xl border-4 border-white flex-shrink-0">
-                    <img src="{{ asset('images/hero-steak.jpg') }}" alt="Combo Pack" class="w-full h-full object-cover">
+                <div class="p-3 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] flex flex-col items-center justify-center space-y-1.5">
+                    <span class="w-9 h-9 rounded-full bg-white text-red-600 flex items-center justify-center shadow-xs">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </span>
+                    <span class="text-[11px] font-bold text-zinc-800 leading-tight">WhatsApp<br>Tracking</span>
+                </div>
+
+                <div class="p-3 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0] flex flex-col items-center justify-center space-y-1.5">
+                    <span class="w-9 h-9 rounded-full bg-white text-red-600 flex items-center justify-center shadow-xs">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </span>
+                    <span class="text-[11px] font-bold text-zinc-800 leading-tight">100% Halal<br>&amp; Secure</span>
                 </div>
             </div>
 
@@ -450,29 +422,71 @@
     </section>
 
 
-    <!-- 6. TRUSTED BY / PARTNERS & TANZANIAN PAYMENT METHODS -->
-    <section class="mt-14 pt-8 border-t border-stone-200">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-            <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">
-                {{ app()->getLocale() === 'sw' ? 'Malipo Salama Tanzania:' : 'Supported Tanzanian Payments:' }}
-            </span>
-            <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-bold text-zinc-600">
-                <span class="px-3.5 py-1.5 rounded-xl bg-white border border-stone-200 shadow-sm flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-red-600"></span> M-Pesa: {{ \App\Models\SiteSetting::get('mpesa_till', '5544321') }}
-                </span>
-                <span class="px-3.5 py-1.5 rounded-xl bg-white border border-stone-200 shadow-sm flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-blue-600"></span> Tigo Pesa: {{ \App\Models\SiteSetting::get('tigopesa_till', '6677889') }}
-                </span>
-                <span class="px-3.5 py-1.5 rounded-xl bg-white border border-stone-200 shadow-sm flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-red-500"></span> Airtel Money: {{ \App\Models\SiteSetting::get('airtel_till', '3322110') }}
-                </span>
-                <span class="px-3.5 py-1.5 rounded-xl bg-white border border-stone-200 shadow-sm flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-amber-500"></span> Halopesa: {{ \App\Models\SiteSetting::get('halopesa_till', '8899001') }}
-                </span>
-                <span class="px-3.5 py-1.5 rounded-xl bg-white border border-stone-200 shadow-sm flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span> 100% Halal Certified
-                </span>
+    <!-- 5. WHAT OUR CUSTOMERS SAY (Testimonials Carousel in Red, White & Cream) -->
+    <section class="mt-10 rounded-[32px] bg-gradient-to-r from-[#F4ECE1] to-[#FAF5EE] border border-[#E8DDD0] p-6 sm:p-10"
+             x-data="{
+                 activeReview: 0,
+                 reviews: {{ \Illuminate\Support\Js::from($testimonials) }},
+                 nextReview() {
+                     this.activeReview = (this.activeReview + 1) % this.reviews.length;
+                 },
+                 prevReview() {
+                     this.activeReview = (this.activeReview - 1 + this.reviews.length) % this.reviews.length;
+                 }
+             }">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            
+            <!-- Left Rating Summary -->
+            <div class="lg:col-span-4 space-y-2 text-left">
+                <h2 class="text-2xl sm:text-3xl font-black text-zinc-900 leading-tight">
+                    What Our<br>
+                    <span class="text-red-600">Customers Say</span>
+                </h2>
+                <div class="flex items-center gap-2 pt-1">
+                    <span class="text-amber-500 text-base tracking-tight">★★★★★</span>
+                    <span class="font-black text-zinc-900 text-sm">4.9/5</span>
+                </div>
+                <p class="text-xs text-zinc-500 font-medium">
+                    {{ \App\Models\SiteSetting::get('social_proof_count', 'from 1,500+ happy customers in Dar es Salaam') }}
+                </p>
             </div>
+
+            <!-- Middle Testimonial Card -->
+            <div class="lg:col-span-6">
+                <div class="bg-white rounded-2xl p-6 border border-red-100 shadow-md flex items-start gap-4">
+                    <img :src="reviews[activeReview].avatar" 
+                         :alt="reviews[activeReview].name" 
+                         class="w-14 h-14 rounded-full object-cover border-2 border-red-100 flex-shrink-0">
+                    <div class="space-y-2 text-left">
+                        <p class="text-xs sm:text-sm text-zinc-700 leading-relaxed italic">
+                            <span class="text-red-600 font-black text-lg leading-none mr-1">“</span>
+                            <span x-text="reviews[activeReview].quote"></span>
+                        </p>
+                        <div class="flex items-center justify-between pt-1">
+                            <div>
+                                <div class="font-bold text-xs text-zinc-900" x-text="reviews[activeReview].name"></div>
+                                <div class="text-[10px] text-zinc-400" x-text="reviews[activeReview].role"></div>
+                            </div>
+                            <span class="text-amber-500 text-xs">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Arrow Controls -->
+            <div class="lg:col-span-2 flex items-center justify-start lg:justify-end gap-3">
+                <button @click="prevReview()" 
+                        class="w-10 h-10 rounded-full bg-white hover:bg-stone-100 text-zinc-700 border border-[#E8DDD0] shadow-sm flex items-center justify-center transition cursor-pointer"
+                        aria-label="Previous Review">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button @click="nextReview()" 
+                        class="w-10 h-10 rounded-full bg-red-600 hover:bg-red-700 text-white shadow-md shadow-red-600/25 flex items-center justify-center transition cursor-pointer"
+                        aria-label="Next Review">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+
         </div>
     </section>
 

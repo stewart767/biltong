@@ -72,15 +72,14 @@
         </div>
     </div>
 
-    <!-- Main Clean Header (Matching TasteHouse Modern Layout) -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200/80 transition-all duration-300">
+    <!-- Main Clean Header (FastBite Layout in Red, White & Cream) -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EDE4D8] shadow-xs transition-all duration-300" x-data="{ searchOpen: false }">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20 gap-4">
                 
-                <!-- Brand Logo (TasteHouse style with Orange Icon) -->
+                <!-- Brand Logo -->
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group flex-shrink-0">
                     <div class="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md shadow-red-600/25 group-hover:scale-105 transition duration-200">
-                        <!-- Fork / Knife butchery emblem -->
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                             <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
                         </svg>
@@ -95,41 +94,61 @@
                     </div>
                 </a>
 
-                <!-- Wide Search Bar (Exact TasteHouse center search bar) -->
-                <form action="{{ route('shop') }}" method="GET" class="hidden md:flex flex-1 max-w-xl mx-2 lg:mx-8">
-                    <div class="relative w-full">
-                        <input type="text" 
-                               name="q" 
-                               value="{{ request('q') }}" 
-                               placeholder="{{ app()->getLocale() === 'sw' ? 'Tafuta aina za biltong, vitafunio, viungo...' : 'Search for dishes, cuts, biltong snacks...' }}" 
-                               class="w-full pl-11 pr-12 py-2.5 rounded-full bg-stone-100 hover:bg-stone-50/80 border border-stone-200/80 focus:border-red-500 focus:bg-white text-xs sm:text-sm text-zinc-800 placeholder-zinc-400 focus:outline-none transition shadow-inner">
-                        <svg class="w-4 h-4 text-stone-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
-                        <button type="submit" 
-                                class="w-8 h-8 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center absolute right-1.5 top-1/2 -translate-y-1/2 transition shadow-sm cursor-pointer"
-                                aria-label="Search">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </form>
+                <!-- Center Horizontal Navigation Links (FastBite Single-Row Clean Style) -->
+                <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
+                    <a href="{{ route('home') }}" 
+                       class="py-2 transition border-b-2 {{ request()->routeIs('home') ? 'border-red-600 text-red-600 font-bold' : 'border-transparent text-zinc-700 hover:text-red-600' }}">
+                        {{ app()->getLocale() === 'sw' ? 'Nyumbani' : 'Home' }}
+                    </a>
+                    <a href="{{ route('shop') }}" 
+                       class="py-2 transition border-b-2 {{ request()->routeIs('shop*') ? 'border-red-600 text-red-600 font-bold' : 'border-transparent text-zinc-700 hover:text-red-600' }}">
+                        {{ app()->getLocale() === 'sw' ? 'Menyu' : 'Menu' }}
+                    </a>
+                    <a href="{{ route('shop') }}#offers" 
+                       class="py-2 transition border-b-2 border-transparent text-zinc-700 hover:text-red-600">
+                        {{ app()->getLocale() === 'sw' ? 'Ofa' : 'Offers' }}
+                    </a>
+                    <a href="{{ route('wholesale') }}" 
+                       class="py-2 transition border-b-2 {{ request()->routeIs('wholesale') ? 'border-red-600 text-red-600 font-bold' : 'border-transparent text-zinc-700 hover:text-red-600' }}">
+                        {{ app()->getLocale() === 'sw' ? 'Jumla' : 'Wholesale' }}
+                    </a>
+                    <a href="{{ route('track') }}" 
+                       class="py-2 transition border-b-2 {{ request()->routeIs('track') ? 'border-red-600 text-red-600 font-bold' : 'border-transparent text-zinc-700 hover:text-red-600' }}">
+                        {{ app()->getLocale() === 'sw' ? 'Oda' : 'Orders' }}
+                    </a>
+                    <a href="{{ route('about') }}" 
+                       class="py-2 transition border-b-2 {{ request()->routeIs('about') ? 'border-red-600 text-red-600 font-bold' : 'border-transparent text-zinc-700 hover:text-red-600' }}">
+                        {{ app()->getLocale() === 'sw' ? 'Kuhusu' : 'About' }}
+                    </a>
+                    <a href="{{ route('contact') }}" 
+                       class="py-2 transition border-b-2 {{ request()->routeIs('contact') ? 'border-red-600 text-red-600 font-bold' : 'border-transparent text-zinc-700 hover:text-red-600' }}">
+                        {{ app()->getLocale() === 'sw' ? 'Mawasiliano' : 'Contact' }}
+                    </a>
+                </nav>
 
-                <!-- Right Utility Icons (Language Switcher, Favorites, Cart, Account) -->
-                <div class="flex items-center gap-2 sm:gap-4">
+                <!-- Right Utility Icons + Order Now CTA -->
+                <div class="flex items-center gap-2 sm:gap-3">
                     
+                    <!-- Search Toggle -->
+                    <button @click="searchOpen = !searchOpen" 
+                            class="hidden md:flex items-center justify-center w-10 h-10 rounded-full text-zinc-600 hover:text-red-600 hover:bg-[#FAF5EE] transition cursor-pointer"
+                            aria-label="Search">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </button>
+
                     <!-- Language Switcher Pill -->
                     <div class="relative" x-data="{ langMenuOpen: false }">
                         <button @click="langMenuOpen = !langMenuOpen" 
-                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-stone-100 hover:bg-stone-200/70 text-zinc-700 border border-stone-200 transition cursor-pointer">
+                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#FAF5EE] hover:bg-[#F3E9DC] text-zinc-700 border border-[#E8DDD0] transition cursor-pointer">
                             <span>{{ app()->getLocale() === 'sw' ? '🇹🇿 SW' : '🇬🇧 EN' }}</span>
                             <svg class="w-3 h-3 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </button>
 
                         <div x-show="langMenuOpen" 
                              @click.away="langMenuOpen = false"
-                             class="absolute right-0 mt-2 w-48 rounded-2xl bg-white shadow-xl border border-stone-200 py-2 z-50 text-xs font-semibold"
+                             class="absolute right-0 mt-2 w-44 rounded-2xl bg-white shadow-xl border border-[#E8DDD0] py-2 z-50 text-xs font-semibold"
                              style="display: none;">
                             <a href="{{ route('locale.switch', 'sw') }}" 
                                @click="localStorage.setItem('inas_lang_chosen', 'sw')" 
@@ -146,46 +165,39 @@
                         </div>
                     </div>
 
-                    <!-- Favorites (Heart Icon) -->
-                    <a href="{{ route('shop') }}" 
-                       class="hidden sm:flex flex-col items-center justify-center p-2 rounded-xl text-zinc-600 hover:text-red-600 hover:bg-red-50 transition"
-                       title="Favorites">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                        </svg>
-                        <span class="text-[10px] font-medium text-zinc-500 mt-0.5">Favorites</span>
-                    </a>
-
-                    <!-- Shopping Cart Button with Badge (Matching TasteHouse) -->
+                    <!-- Shopping Cart Button with Red Badge -->
                     <button @click="$store.cart.toggle()" 
-                            class="relative flex flex-col items-center justify-center p-2 rounded-xl text-zinc-700 hover:text-red-600 hover:bg-red-50 transition cursor-pointer"
+                            class="relative flex items-center justify-center w-10 h-10 rounded-full text-zinc-700 hover:text-red-600 hover:bg-[#FAF5EE] transition cursor-pointer"
                             aria-label="Open Shopping Cart">
-                        <div class="relative">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                            </svg>
-                            <span x-show="$store.cart.count > 0" 
-                                  x-text="$store.cart.count"
-                                  class="absolute -top-1 -right-2 bg-red-600 text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow"
-                                  style="display: none;">
-                            </span>
-                        </div>
-                        <span class="text-[10px] font-medium text-zinc-500 mt-0.5">Cart</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span x-show="$store.cart.count > 0" 
+                              x-text="$store.cart.count"
+                              class="absolute -top-0.5 -right-0.5 bg-red-600 text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow"
+                              style="display: none;">
+                        </span>
                     </button>
 
-                    <!-- Account / Staff Access -->
+                    <!-- Staff Account -->
                     <a href="{{ route('admin.login') }}" 
-                       class="flex flex-col items-center justify-center p-2 rounded-xl text-zinc-600 hover:text-red-600 hover:bg-red-50 transition"
+                       class="hidden sm:flex items-center justify-center w-10 h-10 rounded-full text-zinc-600 hover:text-red-600 hover:bg-[#FAF5EE] transition"
                        title="Staff Account">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
-                        <span class="text-[10px] font-medium text-zinc-500 mt-0.5">Account</span>
+                    </a>
+
+                    <!-- Order Now CTA Pill (FastBite Top-Right Red CTA) -->
+                    <a href="{{ route('shop') }}" 
+                       class="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md shadow-red-600/25 transition transform hover:scale-105">
+                        <span>{{ app()->getLocale() === 'sw' ? 'Agiza Sasa' : 'Order Now' }}</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
 
                     <!-- Mobile Menu Hamburger -->
                     <button @click="mobileMenuOpen = !mobileMenuOpen" 
-                            class="lg:hidden p-2 rounded-xl text-zinc-700 hover:bg-stone-100 focus:outline-none">
+                            class="lg:hidden p-2 rounded-xl text-zinc-700 hover:bg-[#FAF5EE] focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
@@ -195,80 +207,23 @@
 
             </div>
 
-            <!-- TOP HORIZONTAL NAVIGATION (Visible on Desktop) -->
-            <nav class="hidden lg:flex items-center gap-1.5 py-2.5 border-t border-stone-100 overflow-x-auto text-xs font-bold">
-                <!-- Home -->
-                <a href="{{ route('home') }}" 
-                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('home') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            <!-- Expandable Search Bar -->
+            <div x-show="searchOpen" x-collapse class="pb-4 border-t border-[#F0E6D8] pt-3" style="display: none;">
+                <form action="{{ route('shop') }}" method="GET" class="max-w-2xl mx-auto relative">
+                    <input type="text" 
+                           name="q" 
+                           value="{{ request('q') }}" 
+                           placeholder="{{ app()->getLocale() === 'sw' ? 'Tafuta aina za biltong, vitafunio, viungo...' : 'Search for biltong cuts, chilli bites, droëwors...' }}" 
+                           class="w-full pl-11 pr-24 py-2.5 rounded-full bg-[#FAF5EE] border border-[#E8DDD0] focus:border-red-500 focus:bg-white text-xs sm:text-sm text-zinc-800 placeholder-zinc-400 focus:outline-none transition">
+                    <svg class="w-4 h-4 text-stone-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
-                    <span>{{ app()->getLocale() === 'sw' ? 'Nyumbani' : 'Home' }}</span>
-                </a>
-
-                <!-- Menu / Shop Cuts -->
-                <a href="{{ route('shop') }}" 
-                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('shop*') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-                    </svg>
-                    <span>{{ app()->getLocale() === 'sw' ? 'Menyu ya Biltong' : 'Menu' }}</span>
-                </a>
-
-                <!-- Offers / Specials -->
-                <a href="{{ route('shop') }}#offers" 
-                   class="flex items-center gap-2 px-4 py-2 rounded-full transition text-zinc-600 hover:bg-stone-100 hover:text-red-600">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                    </svg>
-                    <span>{{ app()->getLocale() === 'sw' ? 'Punguzo & Ofa' : 'Offers' }}</span>
-                </a>
-
-                <!-- Track Orders -->
-                <a href="{{ route('track') }}" 
-                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('track') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                    </svg>
-                    <span>{{ app()->getLocale() === 'sw' ? 'Fuatilia Oda' : 'Orders' }}</span>
-                </a>
-
-                <!-- Wholesale -->
-                <a href="{{ route('wholesale') }}" 
-                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('wholesale') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                    </svg>
-                    <span>{{ app()->getLocale() === 'sw' ? 'Uuzaji wa Jumla' : 'Wholesale' }}</span>
-                </a>
-
-                <!-- The Craft -->
-                <a href="{{ route('craft') }}" 
-                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('craft') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                    <span>{{ app()->getLocale() === 'sw' ? 'Ukaushaji Wetu' : 'The Craft' }}</span>
-                </a>
-
-                <!-- About Us -->
-                <a href="{{ route('about') }}" 
-                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('about') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>{{ app()->getLocale() === 'sw' ? 'Kuhusu Sisi' : 'About Us' }}</span>
-                </a>
-
-                <!-- Support / Contact -->
-                <a href="{{ route('contact') }}" 
-                   class="flex items-center gap-2 px-4 py-2 rounded-full transition {{ request()->routeIs('contact') ? 'bg-red-600 text-white shadow-md shadow-red-600/25' : 'text-zinc-600 hover:bg-stone-100 hover:text-red-600' }}">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
-                    </svg>
-                    <span>{{ app()->getLocale() === 'sw' ? 'Mawasiliano' : 'Support' }}</span>
-                </a>
-            </nav>
+                    <button type="submit" 
+                            class="px-4 py-1.5 rounded-full bg-red-600 hover:bg-red-700 text-white text-xs font-bold absolute right-1.5 top-1/2 -translate-y-1/2 transition cursor-pointer">
+                        Search
+                    </button>
+                </form>
+            </div>
         </div>
 
         <!-- Mobile Drawer Navigation -->
@@ -279,7 +234,7 @@
             
             <!-- Mobile Search -->
             <form action="{{ route('shop') }}" method="GET" class="pb-2">
-                <input type="text" name="q" placeholder="Search biltong cuts..." class="w-full px-4 py-2 rounded-xl bg-stone-100 text-xs text-zinc-800 border border-stone-200">
+                <input type="text" name="q" placeholder="Search biltong cuts..." class="w-full px-4 py-2 rounded-xl bg-[#FAF5EE] text-xs text-zinc-800 border border-[#E8DDD0]">
             </form>
 
             <a href="{{ route('home') }}" class="block px-3 py-2 rounded-xl text-sm font-bold {{ request()->routeIs('home') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Home</a>
@@ -292,7 +247,7 @@
             <a href="{{ route('contact') }}" class="block px-3 py-2 rounded-xl text-sm font-semibold {{ request()->routeIs('contact') ? 'bg-red-600 text-white' : 'text-zinc-700 hover:bg-red-50' }}">Support / Contact</a>
             
             <div class="pt-2">
-                <a href="https://wa.me/255682869629" target="_blank" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-bold text-xs">
+                <a href="https://wa.me/255682869629" target="_blank" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-red-600 text-white font-bold text-xs">
                     Order via WhatsApp Desk
                 </a>
             </div>
