@@ -19,7 +19,30 @@
             <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 shadow-xl">
                 <div class="flex items-center gap-3 pb-3 border-b border-brand-border/60">
                     <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
-                    <h3 class="font-editorial text-xl font-bold text-brand-cream">1. Company & Butchery Contact Details</h3>
+                    <h3 class="font-editorial text-xl font-bold text-brand-cream">1. Brand Logo, Company &amp; Butchery Contact Details</h3>
+                </div>
+
+                <!-- Brand Logo Upload & Preview -->
+                <div class="p-5 rounded-xl bg-brand-dark/70 border border-brand-border flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                    <div class="w-24 h-24 rounded-2xl bg-white border border-brand-border flex items-center justify-center overflow-hidden flex-shrink-0 p-2">
+                        @if(!empty($settings['site_logo']))
+                            <img src="{{ asset($settings['site_logo']) }}" alt="Current Brand Logo" class="max-w-full max-h-full object-contain">
+                        @else
+                            <div class="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center text-white font-black text-lg">INAS</div>
+                        @endif
+                    </div>
+                    <div class="flex-1 space-y-2">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-brand-cream">Website Logo (Header &amp; Footer)</label>
+                        <input type="file" name="site_logo" accept="image/*"
+                               class="block w-full text-xs text-brand-muted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-brand-red file:text-white hover:file:bg-red-700 cursor-pointer">
+                        <p class="text-[11px] text-brand-muted">Upload your PNG/JPG/SVG logo (transparent PNG recommended). Appears immediately in the storefront header and footer.</p>
+                        @if(!empty($settings['site_logo']))
+                            <label class="inline-flex items-center gap-2 text-xs text-red-400 cursor-pointer pt-1">
+                                <input type="checkbox" name="remove_site_logo" value="1" class="rounded border-brand-border bg-brand-dark text-brand-red">
+                                <span>Reset to default INAS emblem</span>
+                            </label>
+                        @endif
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -77,21 +77,26 @@
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20 gap-4">
                 
-                <!-- Brand Logo -->
+                <!-- Brand Logo (Managed via Admin Settings -> site_logo) -->
+                @php $siteLogo = \App\Models\SiteSetting::get('site_logo'); @endphp
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group flex-shrink-0">
-                    <div class="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md shadow-red-600/25 group-hover:scale-105 transition duration-200">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                            <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
-                        </svg>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-extrabold text-xl sm:text-2xl tracking-tight text-zinc-900 group-hover:text-red-600 transition">
-                            INAS<span class="text-red-600 font-black">.</span>
-                        </span>
-                        <span class="text-[9px] tracking-widest text-zinc-400 font-bold uppercase -mt-1">
-                            Beef Biltong
-                        </span>
-                    </div>
+                    @if(!empty($siteLogo))
+                        <img src="{{ asset($siteLogo) }}" alt="INAS Beef Biltong Logo" class="h-11 sm:h-12 w-auto max-w-[160px] object-contain rounded-lg group-hover:scale-105 transition duration-200">
+                    @else
+                        <div class="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md shadow-red-600/25 group-hover:scale-105 transition duration-200">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
+                            </svg>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-extrabold text-xl sm:text-2xl tracking-tight text-zinc-900 group-hover:text-red-600 transition">
+                                INAS<span class="text-red-600 font-black">.</span>
+                            </span>
+                            <span class="text-[9px] tracking-widest text-zinc-400 font-bold uppercase -mt-1">
+                                Beef Biltong
+                            </span>
+                        </div>
+                    @endif
                 </a>
 
                 <!-- Center Horizontal Navigation Links (FastBite Single-Row Clean Style) -->
@@ -186,6 +191,12 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
+                    </a>
+
+                    <!-- Partnership CTA Pill -->
+                    <a href="{{ route('wholesale') }}#enquiry-form" 
+                       class="hidden md:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#FAF5EE] hover:bg-red-50 text-red-600 border border-red-200 font-bold text-xs transition transform hover:scale-105">
+                        <span>{{ app()->getLocale() === 'sw' ? 'Ubia' : 'Partnership' }}</span>
                     </a>
 
                     <!-- Order Now CTA Pill (FastBite Top-Right Red CTA) -->
@@ -448,14 +459,18 @@
                 <!-- Brand Column -->
                 <div class="lg:col-span-2 space-y-4">
                     <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white shadow-sm">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                                <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
-                            </svg>
-                        </div>
-                        <span class="font-black text-xl tracking-tight text-zinc-900">
-                            INAS<span class="text-red-600">.</span>
-                        </span>
+                        @if(!empty($siteLogo))
+                            <img src="{{ asset($siteLogo) }}" alt="INAS Beef Biltong Logo" class="h-10 w-auto max-w-[150px] object-contain rounded-lg">
+                        @else
+                            <div class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white shadow-sm">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                    <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
+                                </svg>
+                            </div>
+                            <span class="font-black text-xl tracking-tight text-zinc-900">
+                                INAS<span class="text-red-600">.</span>
+                            </span>
+                        @endif
                     </a>
                     
                     <p class="text-xs text-zinc-500 max-w-sm leading-relaxed">

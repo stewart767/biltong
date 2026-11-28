@@ -18,7 +18,18 @@ class AdminSettingsController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
-        // Handle file uploads for hero carousel & promo images
+        // Handle file uploads for brand logo, hero carousel & promo images
+        if ($request->boolean('remove_site_logo')) {
+            SiteSetting::set('site_logo', '');
+        }
+
+        if ($request->hasFile('site_logo')) {
+            $file = $request->file('site_logo');
+            $filename = 'logo_' . time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
+            $file->move(public_path('images/brand'), $filename);
+            SiteSetting::set('site_logo', 'images/brand/' . $filename);
+        }
+
         $imageFields = [
             'hero_slide_1_image',
             'hero_slide_2_image',
@@ -36,7 +47,7 @@ class AdminSettingsController extends Controller
             }
         }
 
-        $data = $request->except(array_merge(['_token'], $imageFields));
+        $data = $request->except(array_merge(['_token', 'site_logo', 'remove_site_logo'], $imageFields));
 
         foreach ($data as $key => $val) {
             SiteSetting::set($key, $val);

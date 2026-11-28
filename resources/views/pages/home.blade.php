@@ -555,9 +555,12 @@
                     <div class="text-[11px] text-red-100">'Mpoki' &bull; 3.1M IG</div>
                 </div>
             </div>
-            <div class="pt-2 border-t border-white/20 flex flex-wrap items-center justify-between gap-2 text-[11px] text-red-50 font-semibold">
-                <span>SGR &bull; Air Tanzania &bull; Precision Air</span>
-                <a href="{{ route('about') }}" class="underline hover:text-white">Company Profile &rarr;</a>
+            <div class="pt-2 border-t border-white/20 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <span class="text-[11px] text-red-50 font-semibold">SGR &bull; Air Tanzania &bull; Precision Air</span>
+                <a href="{{ route('wholesale') }}#enquiry-form" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-red-600 hover:bg-[#FAF5EE] font-extrabold text-xs shadow-sm transition">
+                    <span>Partnership</span>
+                    <span>&rarr;</span>
+                </a>
             </div>
         </div>
 
