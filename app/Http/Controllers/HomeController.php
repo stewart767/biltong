@@ -12,26 +12,22 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $featuredProducts = Cache::remember('home_featured_products', 1800, function () {
-            $products = Product::with(['category', 'images'])
+        $featuredProducts = Product::with(['category', 'images'])
+            ->where('is_active', true)
+            ->where('is_featured', true)
+            ->take(6)
+            ->get();
+
+        if ($featuredProducts->count() < 5) {
+            $extra = Product::with(['category', 'images'])
                 ->where('is_active', true)
-                ->where('is_featured', true)
-                ->take(6)
+                ->whereNotIn('id', $featuredProducts->pluck('id'))
+                ->take(5 - $featuredProducts->count())
                 ->get();
+            $featuredProducts = $featuredProducts->concat($extra);
+        }
 
-            if ($products->count() < 5) {
-                $extra = Product::with(['category', 'images'])
-                    ->where('is_active', true)
-                    ->whereNotIn('id', $products->pluck('id'))
-                    ->take(5 - $products->count())
-                    ->get();
-                $products = $products->concat($extra);
-            }
-
-            return $products;
-        });
-
-        $originalProduct = $featuredProducts->firstWhere('slug', 'biltong-original-100g') 
+        $originalProduct = $featuredProducts->firstWhere('slug', 'biltong-original-100g')
             ?? $featuredProducts->first();
 
         $categories = Category::getActiveCategories();
