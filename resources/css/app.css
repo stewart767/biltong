@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-    --font-serif: 'Playfair Display', serif;
+    --font-serif: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
     /* Red, Black, and White Color Palette matching the user's reference */
@@ -21,10 +21,14 @@
     --color-brand-muted: #94a3b8;
 }
 
-/* Custom smooth transitions and typography accents */
+/* Unified typography across the entire system */
+html, body, h1, h2, h3, h4, h5, h6, button, input, select, textarea {
+    font-family: var(--font-sans);
+}
+
 .font-editorial {
-    font-family: var(--font-serif);
-    letter-spacing: -0.015em;
+    font-family: var(--font-sans);
+    letter-spacing: -0.02em;
 }
 
 .text-red-gradient {
