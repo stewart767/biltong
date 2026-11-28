@@ -99,15 +99,15 @@
                     <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
                     <span>
                         @if(app()->getLocale() === 'sw')
-                            Nyama Halisi Iliyokaushwa • Dar es Salaam
+                            Tafuna nyama, Kula maisha! • Est. 2016
                         @else
-                            {{ \App\Models\SiteSetting::get('hero_badge', 'Hot & Fresh Artisanal Biltong') }}
+                            {{ \App\Models\SiteSetting::get('hero_badge', 'Est. 2016 • Tafuna nyama, Kula maisha!') }}
                         @endif
                     </span>
                 </div>
 
                 <!-- 3-Line Bold Stacked Headline -->
-                <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-black text-zinc-900 tracking-tight leading-[1.06]">
+                <h1 class="text-4xl sm:text-5xl lg:text-[54px] font-black text-zinc-900 tracking-tight leading-[1.06]">
                     @if(app()->getLocale() === 'sw')
                         <span class="block">NYAMA HALISI.</span>
                         <span class="block">LADHA HALISI.</span>
@@ -117,7 +117,7 @@
                         </span>
                     @else
                         @php
-                            $headline = \App\Models\SiteSetting::get('hero_headline', 'Crave It. Order It. Get It Fast!');
+                            $headline = \App\Models\SiteSetting::get('hero_headline', 'REAL BEEF. REAL FLAVOUR. Delivered Fast!');
                             $parts = preg_split('/(?<=[.!])\s+/', trim($headline), -1, PREG_SPLIT_NO_EMPTY);
                         @endphp
                         @if(count($parts) >= 3)
@@ -142,9 +142,9 @@
                 <!-- Subtitle -->
                 <p class="text-zinc-600 text-sm sm:text-base font-normal max-w-md leading-relaxed">
                     @if(app()->getLocale() === 'sw')
-                        Imetengenezwa kwa ufundi stadi Buguruni Malapa, Dar es Salaam. Nyama halisi ya ng'ombe iliyokaushwa kwa asili na viungo bora.
+                        Biltong East Africa Corporation (BEAC) — Nyama halisi ya ng'ombe iliyokaushwa kwa saa 72–84 Buguruni Malapa, Dar es Salaam.
                     @else
-                        {{ \App\Models\SiteSetting::get('hero_subheadline', 'Handcrafted biltong, spicy chilli bites, traditional droëwors and more — delivered fresh to your doorstep in Dar es Salaam.') }}
+                        {{ \App\Models\SiteSetting::get('hero_subheadline', 'Biltong East Africa Corporation (BEAC) — 72–84 hour air-cured silverside & topside beef snacks from Dar es Salaam, delivered fast to your doorstep.') }}
                     @endif
                 </p>
 
@@ -152,7 +152,7 @@
                 <div class="flex flex-wrap items-center gap-4 pt-1">
                     <a href="{{ route('shop') }}" 
                        class="px-7 py-3.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-red-600/30 hover:scale-105 transition transform duration-200 flex items-center gap-2 cursor-pointer">
-                        <span>{{ app()->getLocale() === 'sw' ? 'Agiza Mtandaoni' : 'Order Online' }}</span>
+                        <span>{{ app()->getLocale() === 'sw' ? 'Duka la Biltong' : 'Order Online' }}</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
 
@@ -488,6 +488,79 @@
             </div>
 
         </div>
+    </section>
+
+    <!-- 6. USES OF BEEF BILTONG & BRAND INFLUENCERS (BEAC Company Profile Highlights) -->
+    <section class="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Culinary & Lifestyle Uses of Beef Biltong -->
+        <div class="lg:col-span-7 bg-white rounded-[32px] border border-[#E8DDD0] p-6 sm:p-8 shadow-sm space-y-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-black uppercase tracking-wider text-red-600">Versatile Protein</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-zinc-900">Uses of Beef Biltong</h2>
+                </div>
+                <a href="{{ route('craft') }}" class="text-xs font-bold text-red-600 hover:underline">Learn More &rarr;</a>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                <div class="p-3.5 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0]">
+                    <span class="font-extrabold text-zinc-900 block">High-Protein Snack</span>
+                    <span class="text-[11px] text-zinc-500">Chewy, flavorful fuel between meals or outdoors.</span>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0]">
+                    <span class="font-extrabold text-zinc-900 block">Salads &amp; Wraps</span>
+                    <span class="text-[11px] text-zinc-500">Sprinkle over fresh salads, sandwiches, or rolls.</span>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0]">
+                    <span class="font-extrabold text-zinc-900 block">Pizza &amp; Stews</span>
+                    <span class="text-[11px] text-zinc-500">Savory gourmet topping or rich stew enhancer.</span>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0]">
+                    <span class="font-extrabold text-zinc-900 block">Charcuterie Boards</span>
+                    <span class="text-[11px] text-zinc-500">Pair with cheeses, fruits, nuts, wine &amp; spirits.</span>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0]">
+                    <span class="font-extrabold text-zinc-900 block">Travel &amp; Camping</span>
+                    <span class="text-[11px] text-zinc-500">Natural preservation with zero refrigeration needed.</span>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-[#FAF5EE] border border-[#E8DDD0]">
+                    <span class="font-extrabold text-zinc-900 block">Gourmet Gifts</span>
+                    <span class="text-[11px] text-zinc-500">Curated ribboned gift hampers for special occasions.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Our Brand Influencers & Strategic Outlook -->
+        <div class="lg:col-span-5 bg-red-600 text-white rounded-[32px] p-6 sm:p-8 shadow-md space-y-5 flex flex-col justify-between">
+            <div>
+                <span class="text-[11px] font-black uppercase tracking-wider text-red-100">BEAC Community</span>
+                <h2 class="text-xl sm:text-2xl font-black text-white">Our Brand Influencers</h2>
+                <p class="text-xs text-red-100 mt-1">Trusted by Tanzania's leading voices &amp; expanding across SGR, Air Tanzania &amp; Precision Air.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-3 text-xs">
+                <div class="p-3 rounded-2xl bg-white/15 backdrop-blur-xs border border-white/20">
+                    <div class="font-extrabold text-white">Hanaiya Ramadhani</div>
+                    <div class="text-[11px] text-red-100">'Official Nai' &bull; 3.7M IG</div>
+                </div>
+                <div class="p-3 rounded-2xl bg-white/15 backdrop-blur-xs border border-white/20">
+                    <div class="font-extrabold text-white">Zuwena Mohammed</div>
+                    <div class="text-[11px] text-red-100">'Shilole' &bull; 12M IG</div>
+                </div>
+                <div class="p-3 rounded-2xl bg-white/15 backdrop-blur-xs border border-white/20">
+                    <div class="font-extrabold text-white">Burton Mwemba</div>
+                    <div class="text-[11px] text-red-100">'Mwijaku' &bull; 2.2M IG</div>
+                </div>
+                <div class="p-3 rounded-2xl bg-white/15 backdrop-blur-xs border border-white/20">
+                    <div class="font-extrabold text-white">Sylvester Mujuni</div>
+                    <div class="text-[11px] text-red-100">'Mpoki' &bull; 3.1M IG</div>
+                </div>
+            </div>
+            <div class="pt-2 border-t border-white/20 flex flex-wrap items-center justify-between gap-2 text-[11px] text-red-50 font-semibold">
+                <span>SGR &bull; Air Tanzania &bull; Precision Air</span>
+                <a href="{{ route('about') }}" class="underline hover:text-white">Company Profile &rarr;</a>
+            </div>
+        </div>
+
     </section>
 
 @endsection
